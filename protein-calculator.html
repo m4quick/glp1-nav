@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GLP-1 Protein Calculator - Calculate protein needs for GLP-1 medication users. Find high-protein foods and meal ideas.">
+    <meta name="keywords" content="GLP-1 protein calculator, Ozempic protein, Wegovy nutrition, Mounjaro diet, protein for weight loss">
+    <title>GLP-1 Protein Calculator - Protein Tracker for GLP-1 Users</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        header p { font-size: 1.2em; opacity: 0.9; }
+        .tool-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+        .input-group { margin-bottom: 20px; }
+        label {
+            display: block;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .results {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 15px;
+            border-left: 5px solid #4caf50;
+        }
+        .results.show { display: block; }
+        .protein-display {
+            font-size: 3em;
+            font-weight: bold;
+            color: #4caf50;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .result-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .result-value { font-size: 2em; font-weight: bold; color: #667eea; }
+        .result-label { font-size: 12px; color: #666; text-transform: uppercase; margin-top: 5px; }
+        .food-database { margin-top: 30px; }
+        .food-category { margin-bottom: 25px; }
+        .food-category h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .food-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .food-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .food-info { flex: 1; }
+        .food-name { font-weight: 600; color: #333; }
+        .food-portion { font-size: 12px; color: #666; }
+        .protein-badge {
+            background: #4caf50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-link a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+        }
+        .back-link a:hover { opacity: 1; }
+        .food-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 12px;
+            display: block;
+            margin-top: 5px;
+        }
+        .food-item a:hover { text-decoration: underline; }
+        .affiliate-disclosure {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        .nav-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            text-align: center;
+        }
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+        .nav-bar a:hover { background: rgba(255,255,255,0.2); }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8em; }
+            .protein-display { font-size: 2em; }
+            .nav-bar a { margin: 0 5px; padding: 6px 12px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <a href="/">Home</a>
+        <a href="/protein-calculator.html">Protein Calculator</a>
+        <a href="/medications.html">Medications</a>
+        <a href="/nutrition.html">Nutrition</a>
+        <a href="/faq.html">FAQ</a>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>🎯 GLP-1 Protein Calculator</h1>
+            <p>Calculate your protein needs while on GLP-1 medications</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tool-box">
+            <h2 style="text-align: center; margin-bottom: 25px; color: #333;">Your Information</h2>
+            
+            <div class="input-group">
+                <label for="weight">Current Weight (lbs)</label>
+                <input type="number" id="weight" placeholder="e.g., 180" min="50" max="500">
+            </div>
+
+            <div class="input-group">
+                <label for="medication">GLP-1 Medication</label>
+                <select id="medication">
+                    <option value="ozempic">Ozempic (Semaglutide)</option>
+                    <option value="wegovy">Wegovy (Semaglutide)</option>
+                    <option value="mounjaro">Mounjaro (Tirzepatide)</option>
+                    <option value="zepbound">Zepbound (Tirzepatide)</option>
+                    <option value="trulicity">Trulicity (Dulaglutide)</option>
+                    <option value="victoza">Victoza (Liraglutide)</option>
+                    <option value="saxenda">Saxenda (Liraglutide)</option>
+                    <option value="rybelsus">Rybelsus (Oral Semaglutide)</option>
+                    <option value="other">Other GLP-1</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="phase">Treatment Phase</label>
+                <select id="phase">
+                    <option value="titration">Titration (Starting/Dose Escalation)</option>
+                    <option value="maintenance">Maintenance (Stable Dose)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="activity">Activity Level</label>
+                <select id="activity">
+                    <option value="1.2">Sedentary (Little to no exercise)</option>
+                    <option value="1.375">Light (Exercise 1-3 days/week)</option>
+                    <option value="1.55">Moderate (Exercise 3-5 days/week)</option>
+                    <option value="1.725">Active (Exercise 6-7 days/week)</option>
+                    <option value="1.9">Very Active (Physical job or intense training)</option>
+                </select>
+            </div>
+
+            <button onclick="calculateProtein()">Calculate My Protein Needs</button>
+
+            <div id="results" class="results">
+                <div class="protein-display"><span id="protein-target">0</span><span style="font-size: 0.5em;"> g/day</span></div>
+                <p style="text-align: center; color: #666; margin-bottom: 20px;">Your Daily Protein Target</p>
+                
+                <div class="result-grid">
+                    <div class="result-card">
+                        <div class="result-value" id="protein-per-meal">0g</div>
+                        <div class="result-label">Per Meal (3 meals)</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="protein-per-snack">0g</div>
+                        <div class="result-label">Per Snack (2 snacks)</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="calorie-target">0</div>
+                        <div class="result-label">Calorie Target</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="min-calories">0</div>
+                        <div class="result-label">Min Calories</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 10px; border-left: 4px solid #ff9800;">
+                    <strong>💡 GLP-1 Tip:</strong> <span id="glp1-tip">Start with protein at each meal to maintain muscle mass while losing weight.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-box food-database">
+            <h2 style="text-align: center; margin-bottom: 25px; color: #333;">🥩 High-Protein Foods Database</h2>
+            
+            <div class="food-category">
+                <h3>🥩 Lean Meats & Fish (30g+ protein per serving)</h3>
+                <div class="food-grid">
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Chicken Breast</div>
+                            <div class="food-portion">4 oz (113g)</div>
+                        </div>
+                        <div class="protein-badge">35g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Salmon</div>
+                            <div class="food-portion">4 oz (113g)</div>
+                        </div>
+                        <div class="protein-badge">23g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Ground Turkey (93% lean)</div>
+                            <div class="food-portion">4 oz (113g)</div>
+                        </div>
+                        <div class="protein-badge">22g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Tuna (canned)</div>
+                            <div class="food-portion">1 can (5 oz)</div>
+                        </div>
+                        <div class="protein-badge">26g</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="food-category">
+                <h3>🥚 Dairy & Eggs (20-30g protein per serving)</h3>
+                <div class="food-grid">
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Greek Yogurt (plain)</div>
+                            <div class="food-portion">1 cup (227g)</div>
+                        </div>
+                        <div class="protein-badge">20g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Cottage Cheese</div>
+                            <div class="food-portion">1 cup (226g)</div>
+                        </div>
+                        <div class="protein-badge">25g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Egg Whites</div>
+                            <div class="food-portion">6 large</div>
+                        </div>
+                        <div class="protein-badge">21g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Whole Eggs</div>
+                            <div class="food-portion">3 large</div>
+                        </div>
+                        <div class="protein-badge">18g</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="food-category">
+                <h3>🌱 Plant-Based Proteins (15-25g protein per serving)</h3>
+                <div class="food-grid">
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Firm Tofu</div>
+                            <div class="food-portion">1/2 block (170g)</div>
+                        </div>
+                        <div class="protein-badge">15g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Tempeh</div>
+                            <div class="food-portion">4 oz (113g)</div>
+                        </div>
+                        <div class="protein-badge">20g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Lentils (cooked)</div>
+                            <div class="food-portion">1 cup (198g)</div>
+                        </div>
+                        <div class="protein-badge">18g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Chickpeas (cooked)</div>
+                            <div class="food-portion">1 cup (164g)</div>
+                        </div>
+                        <div class="protein-badge">15g</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="food-category">
+                <h3>🥤 Protein Powders & Bars (20-30g protein per serving)</h3>
+                <div class="food-grid">
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Whey Protein Powder</div>
+                            <div class="food-portion">1 scoop</div>
+                            <a href="https://www.amazon.com/dp/B000QSNYGI?tag=m4quickquail-20" target="_blank" rel="nofollow">Buy on Amazon →</a>
+                        </div>
+                        <div class="protein-badge">25g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Quest Protein Bars</div>
+                            <div class="food-portion">1 bar</div>
+                            <a href="https://www.amazon.com/dp/B07DJ3KGMV?tag=m4quickquail-20" target="_blank" rel="nofollow">Buy on Amazon →</a>
+                        </div>
+                        <div class="protein-badge">20g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Fairlife Core Power</div>
+                            <div class="food-portion">14oz bottle</div>
+                            <a href="https://www.amazon.com/dp/B07CJBW1S7?tag=m4quickquail-20" target="_blank" rel="nofollow">Buy on Amazon →</a>
+                        </div>
+                        <div class="protein-badge">26g</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-info">
+                            <div class="food-name">Premier Protein Shakes</div>
+                            <div class="food-portion">11.5oz bottle</div>
+                            <a href="https://www.amazon.com/dp/B08P5K4PG6?tag=m4quickquail-20" target="_blank" rel="nofollow">Buy on Amazon →</a>
+                        </div>
+                        <div class="protein-badge">30g</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="affiliate-disclosure">
+                💰 <strong>Affiliate Disclosure:</strong> Some product links are Amazon affiliate links. 
+                We earn a small commission at no extra cost to you. This helps support the free tools we provide.
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        function calculateProtein() {
+            const weightLbs = parseFloat(document.getElementById('weight').value);
+            const medication = document.getElementById('medication').value;
+            const phase = document.getElementById('phase').value;
+            const activity = parseFloat(document.getElementById('activity').value);
+
+            if (!weightLbs || weightLbs < 50 || weightLbs > 500) {
+                alert('Please enter a valid weight (50-500 lbs)');
+                return;
+            }
+
+            const weightKg = weightLbs * 0.453592;
+            let proteinMultiplier = phase === 'titration' ? 1.6 : 1.8;
+            if (activity >= 1.55) proteinMultiplier += 0.2;
+            
+            const proteinTarget = Math.round(weightKg * proteinMultiplier);
+            const proteinPerMeal = Math.round(proteinTarget / 3);
+            const proteinPerSnack = Math.round(proteinTarget / 6);
+
+            const bmr = 10 * weightKg + 1300;
+            const tdee = Math.round(bmr * activity);
+            
+            let calorieReduction = phase === 'titration' ? 0.75 : 0.85;
+            const calorieTarget = Math.round(tdee * calorieReduction);
+            const minCalories = Math.max(1200, Math.round(tdee * 0.6));
+
+            document.getElementById('protein-target').textContent = proteinTarget;
+            document.getElementById('protein-per-meal').textContent = proteinPerMeal + 'g';
+            document.getElementById('protein-per-snack').textContent = proteinPerSnack + 'g';
+            document.getElementById('calorie-target').textContent = calorieTarget.toLocaleString();
+            document.getElementById('min-calories').textContent = minCalories.toLocaleString();
+
+            const tips = {
+                titration: `On ${medication} during titration, start your day with protein to minimize nausea and maintain muscle. Aim for 20-30g per meal.`,
+                maintenance: `In maintenance phase, prioritize protein within your reduced appetite window. Consider protein shakes if solid food is difficult.`
+            };
+            document.getElementById('glp1-tip').textContent = tips[phase];
+
+            document.getElementById('results').classList.add('show');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') calculateProtein();
+            });
+        });
+    </script>
+</body>
+</html>
