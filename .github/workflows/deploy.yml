@@ -1,0 +1,85 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  contents: read
+  deployments: write
+  pages: write
+  id-token: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Validate HTML
+      run: |
+        # Check index.html exists and has content
+        if [ ! -f "index.html" ]; then
+          echo "❌ index.html missing"
+          exit 1
+        fi
+        
+        # Check file size (must have substantial content)
+        FILE_SIZE=$(stat -c%s "index.html")
+        if [ $FILE_SIZE -lt 5000 ]; then
+          echo "❌ index.html too small ($FILE_SIZE bytes), likely thin content"
+          exit 1
+        fi
+        
+        echo "✅ HTML validation passed"
+    
+    - name: Check for required policy files
+      run: |
+        # Required files for Google AdSense
+        for file in privacy.html terms.html; do
+          if [ ! -f "$file" ]; then
+            echo "❌ Missing $file (required for AdSense)"
+            exit 1
+          fi
+        done
+        
+        echo "✅ Policy files validated"
+
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Deploy to Cloudflare Pages
+      uses: cloudflare/pages-action@v1
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        projectName: glp1-nav
+        directory: .
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Verify Deployment
+      run: |
+        echo "✅ Deployed to Cloudflare Pages"
+        echo "Site URL: https://glp1-nav.pages.dev"
+
+  notify:
+    needs: [validate, deploy]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Notify Status
+      run: |
+        if [ "${{ needs.deploy.result }}" == "success" ]; then
+          echo "🚀 Deployment successful!"
+        else
+          echo "❌ Deployment failed"
+          exit 1
+        fi
