@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GLP-1 Navigator - Your guide to GLP-1 medications, protein needs, nutrition, and support for weight loss success.">
-    <meta name="keywords" content="GLP-1 navigator, Ozempic guide, Wegovy support, Mounjaro nutrition, GLP-1 protein calculator, weight loss medications">
-    <title>GLP-1 Navigator - Your Guide to GLP-1 Success</title>
+    <meta name="description" content="GLP-1 Navigator - Your comprehensive guide to GLP-1 medications including Ozempic, Wegovy, and Mounjaro. Learn about protein needs, nutrition, side effects, and tips for weight loss success.">
+    <meta name="keywords" content="GLP-1 navigator, Ozempic guide, Wegovy support, Mounjaro nutrition, GLP-1 protein calculator, weight loss medications, semaglutide, tirzepatide">
+    <title>GLP-1 Navigator - Your Complete Guide to GLP-1 Success</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -108,6 +108,89 @@
             color: #666;
             font-size: 0.95em;
         }
+        .content-section {
+            margin: 40px 0;
+        }
+        .content-section h2 {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        .content-section h3 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin: 25px 0 15px;
+        }
+        .content-section p {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        .content-section ul {
+            margin: 15px 0 15px 30px;
+            color: #555;
+        }
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .medication-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .medication-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .faq-item {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .faq-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .faq-item p {
+            color: #555;
+            line-height: 1.7;
+        }
+        .tip-box {
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .tip-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .nutrition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .nutrition-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        .nutrition-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        .nutrition-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -135,9 +218,9 @@
             <p>Your comprehensive guide to navigating GLP-1 medications for successful weight loss and improved health</p>
             <div class="nav-links">
                 <a href="/protein-calculator.html">Protein Calculator</a>
-                <a href="/medications.html">Medications Guide</a>
-                <a href="/nutrition.html">Nutrition Tips</a>
-                <a href="/faq.html">FAQ</a>
+                <a href="#medications">Medications Guide</a>
+                <a href="#nutrition">Nutrition Tips</a>
+                <a href="#faq">FAQ</a>
             </div>
         </div>
     </header>
@@ -174,16 +257,258 @@
             </div>
         </div>
 
-        <div class="tool-box">
-            <h2 style="text-align: center; margin-bottom: 30px; color: #333;">Why Protein Matters on GLP-1s</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px; color: #666; line-height: 1.8;">
-                GLP-1 medications work by reducing appetite and slowing gastric emptying. While this helps with weight loss, 
-                it can also lead to inadequate protein intake and muscle loss. Our tools help you maintain optimal nutrition 
-                throughout your journey.
-            </p>
-            <div style="text-align: center;">
-                <a href="/protein-calculator.html" class="cta-button">Start Now</a>
+        <div class="tool-box content-section" id="how-it-works">
+            <h2>How GLP-1 Medications Work</h2>
+            
+            <p>GLP-1 (Glucagon-Like Peptide-1) receptor agonists are revolutionary medications that have transformed weight loss treatment. These medications work by mimicking a natural hormone your body produces after eating, but with enhanced and prolonged effects.</p>
+            
+            <h3>The Science Behind GLP-1</h3>
+            <p>GLP-1 is a hormone naturally released by your gut after meals. It performs several important functions:</p>
+            <ul>
+                <li><strong>Appetite Suppression:</strong> Acts on the brain's appetite centers to reduce hunger and increase feelings of fullness</li>
+                <li><strong>Slowed Gastric Emptying:</strong> Delays the movement of food from your stomach to your intestines, keeping you satisfied longer</li>
+                <li><strong>Blood Sugar Regulation:</strong> Stimulates insulin release when blood sugar is high and reduces glucagon secretion</li>
+                <li><strong>Reduced Food Noise:</strong> Diminishes constant thoughts about food and cravings</li>
+            </ul>
+
+            <h3>Clinical Results</h3>
+            <p>Clinical trials have demonstrated remarkable effectiveness:</p>
+            <ul>
+                <li>Average weight loss of 15-20% of body weight over 68 weeks</li>
+                <li>Significant improvements in A1C levels for diabetic patients</li>
+                <li>Reduced risk of cardiovascular events</li>
+                <li>Improved blood pressure and cholesterol levels</li>
+            </ul>
+
+            <div class="tip-box">
+                <h4>💡 Important Note</h4>
+                <p>GLP-1 medications are most effective when combined with lifestyle changes including proper nutrition, regular exercise, and adequate sleep. These medications are tools to support your journey, not magic solutions.</p>
             </div>
+        </div>
+
+        <div class="tool-box content-section" id="medications">
+            <h2>GLP-1 Medication Comparison Guide</h2>
+            
+            <p>Several GLP-1 medications are available, each with unique characteristics. Understanding the differences helps you work with your healthcare provider to choose the best option for your needs.</p>
+
+            <div class="medication-card">
+                <h4>Ozempic (Semaglutide) - Novo Nordisk</h4>
+                <p><strong>FDA Approved:</strong> Type 2 Diabetes (2017), Weight Management (2021 as Wegovy)</p>
+                <p><strong>Dosing:</strong> Weekly injection, starting at 0.25mg and titrating up to 2.0mg</p>
+                <p><strong>Average Weight Loss:</strong> 15% of body weight in clinical trials</p>
+                <p><strong>Key Benefits:</strong> Strong cardiovascular outcome data, once-weekly dosing, established safety profile</p>
+            </div>
+
+            <div class="medication-card">
+                <h4>Wegovy (Semaglutide) - Novo Nordisk</h4>
+                <p><strong>FDA Approved:</strong> Chronic weight management (2021)</p>
+                <p><strong>Dosing:</strong> Weekly injection, starting at 0.25mg and titrating up to 2.4mg</p>
+                <p><strong>Average Weight Loss:</strong> 15-17% of body weight</p>
+                <p><strong>Key Benefits:</strong> Higher dose than Ozempic specifically for weight loss, pediatric approval (12+ years)</p>
+            </div>
+
+            <div class="medication-card">
+                <h4>Mounjaro (Tirzepatide) - Eli Lilly</h4>
+                <p><strong>FDA Approved:</strong> Type 2 Diabetes (2022), Weight Management (2023 as Zepbound)</p>
+                <p><strong>Dosing:</strong> Weekly injection, starting at 2.5mg and titrating up to 15mg</p>
+                <p><strong>Average Weight Loss:</strong> Up to 22% of body weight</p>
+                <p><strong>Key Benefits:</strong> Dual GIP/GLP-1 mechanism, highest average weight loss, improved blood sugar control</p>
+            </div>
+
+            <div class="medication-card">
+                <h4>Trulicity (Dulaglutide) - Eli Lilly</h4>
+                <p><strong>FDA Approved:</strong> Type 2 Diabetes (2014)</p>
+                <p><strong>Dosing:</strong> Weekly injection, available in 0.75mg, 1.5mg, 3mg, and 4.5mg</p>
+                <p><strong>Average Weight Loss:</strong> 3-5% of body weight (modest compared to others)</p>
+                <p><strong>Key Benefits:</strong> Easier injection device, good cardiovascular outcomes, well-tolerated</p>
+            </div>
+
+            <div class="medication-card">
+                <h4>Victoza (Liraglutide) - Novo Nordisk</h4>
+                <p><strong>FDA Approved:</strong> Type 2 Diabetes (2010), Weight Management (2014 as Saxenda)</p>
+                <p><strong>Dosing:</strong> Daily injection (not weekly)</p>
+                <p><strong>Average Weight Loss:</strong> 10-12% of body weight (Saxenda)</p>
+                <p><strong>Key Benefits:</strong> Longest track record, established safety data, weight loss indication</p>
+            </div>
+
+            <div class="tip-box">
+                <h4>🔄 Titration is Key</h4>
+                <p>All GLP-1 medications require gradual dose escalation over several weeks or months. This approach minimizes side effects and helps your body adjust. Never rush the titration schedule set by your healthcare provider.</p>
+            </div>
+        </div>
+
+        <div class="tool-box content-section" id="nutrition">
+            <h2>Nutrition Guide for GLP-1 Users</h2>
+            
+            <p>Proper nutrition is crucial when taking GLP-1 medications. While these drugs reduce appetite, ensuring adequate protein intake and balanced nutrition prevents muscle loss and supports long-term success.</p>
+
+            <h3>Why Protein Matters on GLP-1s</h3>
+            <p>When you lose weight rapidly, your body can break down muscle tissue along with fat. Adequate protein intake helps:</p>
+            
+            <ul>
+                <li><strong>Preserve Muscle Mass:</strong> Maintain strength and metabolism during weight loss</li>
+                <li><strong>Satiety:</strong> Protein helps you feel full longer, complementing the medication's effects</li>
+                <li><strong>Recovery:</strong> Supports tissue repair after exercise</li>
+                <li><strong>Nutritional Adequacy:</strong> Prevents protein deficiency when eating less</li>
+            </ul>
+
+            <h3>Protein Recommendations</h3>
+            
+            <p>General guidelines for GLP-1 users:</p>
+            
+            <ul>
+                <li><strong>Minimum:</strong> 0.8g per kg body weight (RDA baseline)</li>
+                <li><strong>Recommended:</strong> 1.2-1.6g per kg ideal body weight for weight loss</li>
+                <li><strong>Athletes/Active:</strong> 1.6-2.0g per kg body weight</li>
+                <li><strong>Older Adults (65+):</strong> 1.2-1.5g per kg to preserve muscle</li>
+            </ul>
+
+            <h3>High-Protein Foods for GLP-1 Users</h3>
+            
+            <table class="nutrition-table">
+                <tr>
+                    <th>Food</th>
+                    <th>Serving</th>
+                    <th>Protein</th>
+                    <th>Best For</th>
+                </tr>
+                <tr>
+                    <td>Chicken Breast</td>
+                    <td>4 oz</td>
+                    <td>35g</td>
+                    <td>Easy to digest</td>
+                </tr>
+                <tr>
+                    <td>Greek Yogurt</td>
+                    <td>1 cup</td>
+                    <td>20g</td>
+                    <td>Gentle on stomach</td>
+                </tr>
+                <tr>
+                    <td>Eggs</td>
+                    <td>2 large</td>
+                    <td>12g</td>
+                    <td>Breakfast option</td>
+                </tr>
+                <tr>
+                    <td>Salmon</td>
+                    <td>4 oz</td>
+                    <td>25g>
+                    <td>Omega-3 fats</td>
+                </tr>
+                <tr>
+                    <td>Lentils</td>
+                    <td>1 cup cooked</td>
+                    <td>18g</td>
+                    <td>Plant-based</td>
+                </tr>
+                <tr>
+                    <td>Cottage Cheese</td>
+                    <td>1/2 cup</td>
+                    <td>14g</td>
+                    <td>Slow-digesting</td>
+                </tr>
+                <tr>
+                    <td>Protein Shake</td>
+                    <td>1 scoop</td>
+                    <td>20-30g</td>
+                    <td>Supplement</td>
+                </tr>
+            </table>
+
+            <h3>Managing Side Effects Through Nutrition</h3>
+            
+            <p>Common GLP-1 side effects and dietary strategies:</p>
+            
+            <ul>
+                <li><strong>Nausea:</strong> Eat smaller, more frequent meals; avoid high-fat foods; stay hydrated; eat slowly</li>
+                <li><strong>Vomiting:> Focus on bland, easy-to-digest foods; oral rehydration solutions; avoid strong smells</li>
+                <li><strong>Constipation:</strong> Increase fiber gradually; drink plenty of water; include prunes or kiwi; stay active</li>
+                <li><strong>Diarrhea:</strong> BRAT diet (bananas, rice, applesauce, toast); avoid caffeine and dairy temporarily</li>
+                <li><strong>Heartburn:</strong> Avoid trigger foods; smaller meals; don't lie down immediately after eating</li>
+            </ul>
+
+            <div class="tip-box">
+                <h4>🍽️ Meal Timing Tip</h4>
+                <p>Since GLP-1 medications slow gastric emptying, many users find they feel full longer and naturally eat less. Focus on protein-rich foods first at meals, then vegetables, then carbohydrates if room remains. This ensures you get adequate nutrition even with smaller portions.</p>
+            </div>
+        </div>
+
+        <div class="tool-box content-section" id="faq">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h4>How long does it take to see results with GLP-1 medications?</h4>
+                <p>Most users begin noticing appetite reduction within the first week, but significant weight loss typically begins after 4-8 weeks of treatment. Clinical trials show continued weight loss over 68 weeks, with average results of 15-20% body weight loss depending on the medication and dose.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Will I regain weight if I stop taking GLP-1 medications?</h4>
+                <p>Studies show that most people regain a significant portion of lost weight within 12 months of discontinuing GLP-1 medications. This is why these medications are considered long-term treatments for chronic weight management, similar to how blood pressure or cholesterol medications work. Sustainable lifestyle changes and ongoing medical support are crucial for maintaining results.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I exercise while taking GLP-1 medications?</h4>
+                <p>Absolutely! Exercise is highly recommended and complements GLP-1 treatment. Aim for 150 minutes of moderate aerobic activity per week plus strength training 2-3 times weekly. Strength training is particularly important to preserve muscle mass during weight loss. Start gradually if you're new to exercise, and listen to your body, especially if experiencing nausea or fatigue.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What's the difference between Ozempic and Wegovy?</h4>
+                <p>Both contain semaglutide, but Wegovy is specifically FDA-approved for chronic weight management and comes in higher doses (up to 2.4mg vs Ozempic's 2.0mg). Ozempic is primarily approved for type 2 diabetes, though it's often prescribed off-label for weight loss. Wegovy also has approval for adolescents ages 12 and up.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How do I handle social situations like restaurants and holidays?</h4>
+                <p>Planning is key. Preview menus in advance, focus on protein and vegetables, eat slowly, and don't be afraid to take leftovers home. Consider eating a smaller portion of the meal and prioritizing protein. Remember, one special occasion won't derail your progress—consistency over time matters most.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Are there any foods I should completely avoid?</h4>
+                <p>There are no absolute prohibitions, but many users find high-fat, fried, or very rich foods trigger nausea or discomfort. Alcohol may hit harder and faster. Carbonated beverages can worsen bloating. Pay attention to your body's signals and adjust accordingly. Focus on nutrient-dense whole foods that agree with your stomach.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What should I do if I miss a dose?</h4>
+                <p>If you miss a dose and it's within 5 days of your scheduled dose, take it as soon as you remember. If more than 5 days have passed, skip the missed dose and take your next dose on your regular schedule. Never take two doses to make up for a missed one. Contact your healthcare provider if you're unsure.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Will insurance cover GLP-1 medications?</h4>
+                <p>Coverage varies significantly by insurance plan and indication. For diabetes (Ozempic, Mounjaro), coverage is generally better. For weight management (Wegovy, Zepbound), coverage can be limited. Many plans require prior authorization, step therapy (trying other options first), or documentation of BMI &#8805; 30 (or &#8805; 27 with comorbidities). Manufacturer savings programs may help if insurance denies coverage.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I take GLP-1 medications if I'm not diabetic?</h4>
+                <p>Yes! Wegovy and Zepbound are specifically FDA-approved for chronic weight management in adults with obesity (BMI &#8805; 30) or overweight (BMI &#8805; 27) with at least one weight-related comorbidity. These are appropriate for non-diabetic patients meeting criteria.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How do I know if I'm losing muscle vs. fat?</h4>
+                <p>Signs of muscle loss include decreased strength, fatigue, and stalled metabolism. To minimize muscle loss: consume adequate protein (use our calculator), engage in regular strength training, ensure you're not losing weight too rapidly (&gt; 2 lbs/week consistently), and consider body composition testing if available. Working with a healthcare provider or dietitian can help monitor your progress.</p>
+            </div>
+        </div>
+
+        <div class="tool-box content-section">
+            <h2>Tips for Long-Term Success</h2>
+            
+            <ul>
+                <li><strong>Track your food intake:</strong> Even if you're not counting calories, logging meals helps ensure adequate protein and identifies eating patterns</li>
+                <li><strong>Stay hydrated:</strong> Aim for 8-10 glasses of water daily; dehydration can worsen side effects and mimic hunger</li>
+                <li><strong>Prioritize sleep:</strong> 7-9 hours supports hormone balance, reduces cravings, and improves energy for exercise</li>
+                <li><strong>Plan your meals:</strong> Meal prep reduces decision fatigue and ensures protein-rich options are always available</li>
+                <li><strong>Build a support system:</strong> Share your journey with friends, family, or support groups for accountability and encouragement</li>
+                <li><strong>Celebrate non-scale victories:</strong> Energy levels, clothing fit, lab improvements, and mood matter as much as pounds lost</li>
+                <li><strong>Be patient with side effects:</strong> Most diminish within weeks as your body adjusts; communicate with your provider about persistent issues</li>
+                <li><strong>Don't skip doses:</strong> Consistency is key for maintaining medication levels and effectiveness</li>
+                <li><strong>Regular check-ins:</strong> Schedule follow-ups with your healthcare provider to monitor progress and adjust as needed</li>
+                <li><strong>Focus on health, not just weight:</strong> Improved energy, blood sugar, blood pressure, and mobility are major wins</li>
+            </ul>
+        </div>
+
+        <div class="tool-box" style="text-align: center;">
+            <h2 style="margin-bottom: 20px;">Ready to Optimize Your GLP-1 Journey?</h2>
+            <p style="color: #666; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">Use our protein calculator to ensure you're getting adequate nutrition while losing weight on your GLP-1 medication.</p>
+            <a href="/protein-calculator.html" class="cta-button">Calculate Your Protein Needs</a>
         </div>
     </div>
 
@@ -193,7 +518,11 @@
             <p style="margin-top: 15px;">
                 <a href="/privacy.html">Privacy Policy</a>
                 <a href="/terms.html">Terms of Service</a>
-                <a href="/contact.html">Contact</a>
+                <a href="/ads.txt">Ads.txt</a>
+            </p>
+            <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">
+                Disclaimer: This website is for informational purposes only and does not constitute medical advice. 
+                Always consult with your healthcare provider before starting any medication or making changes to your health regimen.
             </p>
         </div>
     </footer>
