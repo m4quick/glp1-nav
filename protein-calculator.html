@@ -469,7 +469,137 @@
             document.getElementById('glp1-tip').textContent = tips[phase];
 
             document.getElementById('results').classList.add('show');
+            generateMealIdeas(proteinTarget);
             document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function generateMealIdeas(proteinTarget) {
+            const mealIdeasDiv = document.getElementById('meal-ideas');
+            if (!mealIdeasDiv) {
+                const resultsDiv = document.getElementById('results');
+                const mealSection = document.createElement('div');
+                mealSection.id = 'meal-ideas';
+                mealSection.className = 'meal-ideas-section';
+                mealSection.style.cssText = 'margin-top: 30px; padding: 20px; background: #fff; border-radius: 15px; border: 2px solid #667eea;';
+                resultsDiv.appendChild(mealSection);
+            }
+
+            const mealIdeas = document.getElementById('meal-ideas');
+            
+            // Food database with protein content
+            const foodCategories = {
+                'Dairy & Eggs': [
+                    { name: 'Greek Yogurt', protein: 20, portion: '1 cup' },
+                    { name: 'Cottage Cheese', protein: 25, portion: '1 cup' },
+                    { name: 'Whole Eggs', protein: 18, portion: '3 large' },
+                    { name: 'Egg Whites', protein: 21, portion: '6 large' }
+                ],
+                'Lean Meats & Fish': [
+                    { name: 'Chicken Breast', protein: 35, portion: '4 oz' },
+                    { name: 'Salmon', protein: 23, portion: '4 oz' },
+                    { name: 'Tuna (canned)', protein: 26, portion: '1 can' },
+                    { name: 'Ground Turkey (93% lean)', protein: 22, portion: '4 oz' }
+                ],
+                'Plant-Based Proteins': [
+                    { name: 'Tempeh', protein: 20, portion: '4 oz' },
+                    { name: 'Lentils (cooked)', protein: 18, portion: '1 cup' },
+                    { name: 'Firm Tofu', protein: 15, portion: '1/2 block' },
+                    { name: 'Chickpeas (cooked)', protein: 15, portion: '1 cup' }
+                ],
+                'Quick Protein Options': [
+                    { name: 'Whey Protein Shake', protein: 25, portion: '1 scoop' },
+                    { name: 'Quest Protein Bar', protein: 20, portion: '1 bar' },
+                    { name: 'Fairlife Core Power', protein: 26, portion: '14oz bottle' },
+                    { name: 'Premier Protein Shake', protein: 30, portion: '11.5oz bottle' }
+                ]
+            };
+
+            let html = '<h3 style="color: #667eea; margin-bottom: 20px; text-align: center;">🍽️ How to Reach ' + proteinTarget + 'g Protein Daily</h3>';
+            html += '<p style="text-align: center; color: #666; margin-bottom: 25px;">Here are practical food combinations from each category to help you hit your protein target:</p>';
+            
+            for (const [category, foods] of Object.entries(foodCategories)) {
+                const combination = findBestCombination(foods, proteinTarget);
+                if (combination) {
+                    html += generateCategoryHtml(category, combination, proteinTarget);
+                }
+            }
+            
+            html += '<div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 10px; font-size: 14px; color: #555;">';
+            html += '<strong>💡 Pro Tip:</strong> Mix and match from different categories throughout the day. Aim for 20-30g protein per meal and 10-15g per snack.';
+            html += '</div>';
+            
+            mealIdeas.innerHTML = html;
+        }
+
+        function findBestCombination(foods, target) {
+            // Sort foods by protein content (highest first)
+            const sortedFoods = [...foods].sort((a, b) => b.protein - a.protein);
+            
+            // Try to find a combination that gets close to target
+            let total = 0;
+            const selected = [];
+            
+            // First, try to get close with high-protein items
+            for (const food of sortedFoods) {
+                if (total + food.protein <= target + 10) {
+                    selected.push(food);
+                    total += food.protein;
+                }
+                if (total >= target - 5) break;
+            }
+            
+            // If we haven't reached near target, add more
+            if (total < target - 10) {
+                for (const food of sortedFoods) {
+                    const alreadySelected = selected.find(s => s.name === food.name);
+                    if (!alreadySelected) {
+                        selected.push(food);
+                        total += food.protein;
+                        if (total >= target - 10) break;
+                    }
+                }
+            }
+            
+            return { foods: selected, total: total };
+        }
+
+        function generateCategoryHtml(category, combination, target) {
+            const icons = {
+                'Dairy & Eggs': '🥛',
+                'Lean Meats & Fish': '🥩',
+                'Plant-Based Proteins': '🌱',
+                'Quick Protein Options': '⚡'
+            };
+            
+            let html = '<div style="margin-bottom: 25px; padding: 20px; background: #f8f9fa; border-radius: 12px;">';
+            html += '<h4 style="color: #333; margin-bottom: 15px;">' + icons[category] + ' ' + category + '</h4>';
+            html += '<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">';
+            
+            combination.foods.forEach((food, index) => {
+                html += '<div style="flex: 1; min-width: 150px; padding: 12px; background: white; border-radius: 8px; border-left: 4px solid #667eea;">';
+                html += '<div style="font-weight: 600; color: #333;">' + food.name + '</div>';
+                html += '<div style="font-size: 12px; color: #666;">' + food.portion + '</div>';
+                html += '<div style="font-size: 18px; font-weight: bold; color: #4caf50; margin-top: 5px;">' + food.protein + 'g</div>';
+                html += '</div>';
+            });
+            
+            html += '</div>';
+            html += '<div style="text-align: center; padding: 15px; background: white; border-radius: 8px; border: 2px solid #4caf50;">';
+            
+            // Show the math
+            const foodNames = combination.foods.map(f => f.name + ' (' + f.protein + 'g)');
+            html += '<div style="font-size: 14px; color: #666; margin-bottom: 8px;">' + foodNames.join(' + ') + '</div>';
+            html += '<div style="font-size: 24px; font-weight: bold; color: #4caf50;">= ' + combination.total + 'g protein</div>';
+            
+            if (combination.total >= target - 10) {
+                html += '<div style="margin-top: 8px; color: #4caf50; font-size: 14px;">✓ Reaches your daily target!</div>';
+            } else {
+                const remaining = target - combination.total;
+                html += '<div style="margin-top: 8px; color: #ff9800; font-size: 14px;">Add ~' + remaining + 'g more from snacks</div>';
+            }
+            
+            html += '</div></div>';
+            return html;
         }
 
         document.querySelectorAll('input').forEach(input => {
