@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# AdSense / ad-serving crawlers (explicitly welcomed)
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+Sitemap: https://glp1-nav.com/sitemap.xml
