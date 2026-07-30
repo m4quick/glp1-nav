@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://glp1-nav.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://glp1-nav.com/privacy.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://glp1-nav.com/protein-calculator.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://glp1-nav.com/terms.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://glp1-nav.com/</loc><lastmod>2026-07-30</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://glp1-nav.com/protein-foods.html</loc><lastmod>2026-07-30</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://glp1-nav.com/protein-calculator.html</loc><lastmod>2026-07-30</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://glp1-nav.com/nutrition.html</loc><lastmod>2026-07-30</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://glp1-nav.com/medications.html</loc><lastmod>2026-07-30</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://glp1-nav.com/faq.html</loc><lastmod>2026-07-30</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://glp1-nav.com/about.html</loc><lastmod>2026-07-30</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://glp1-nav.com/contact.html</loc><lastmod>2026-07-30</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://glp1-nav.com/privacy.html</loc><lastmod>2026-07-30</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://glp1-nav.com/terms.html</loc><lastmod>2026-07-30</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
 </urlset>
