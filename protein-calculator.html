@@ -160,6 +160,26 @@
             margin-top: 5px;
         }
         .food-item a:hover { text-decoration: underline; }
+        .pp-row {
+            display: flex; align-items: center; gap: 12px;
+            padding: 11px 0; border-bottom: 1px solid #f0f0f0;
+        }
+        .pp-row:last-child { border-bottom: none; }
+        .pp-name { flex: 1 1 auto; font-size: 14px; color: #333; font-weight: 600; }
+        .pp-sub  { font-size: 12px; color: #888; font-weight: 400; display: block; margin-top: 2px; }
+        .pp-pct  {
+            flex: 0 0 auto; font-size: 13px; font-weight: 700; color: #4caf50;
+            background: #edf7ee; border-radius: 6px; padding: 4px 9px; white-space: nowrap;
+        }
+        .pp-buy  {
+            flex: 0 0 auto; font-size: 12.5px; font-weight: 600; color: #667eea;
+            text-decoration: none; white-space: nowrap;
+        }
+        .pp-buy:hover { text-decoration: underline; }
+        @media (max-width: 560px) {
+            .pp-row { flex-wrap: wrap; gap: 8px; }
+            .pp-name { flex: 1 1 100%; }
+        }
         .affiliate-disclosure {
             margin-top: 20px;
             padding: 15px;
@@ -324,6 +344,17 @@
                     </div>
                 </div>
 
+                <div id="protein-products" style="display:none; margin-top:22px; padding:18px; background:#fff; border-radius:12px; border:1px solid #e0e0e0;">
+                    <div style="font-weight:700; color:#333; margin-bottom:4px;">Hitting <span id="pp-target">0</span>&nbsp;g a day</div>
+                    <p style="font-size:12.5px; color:#777; margin:0 0 14px; line-height:1.55;">
+                        Shelf-stable options, with what each one covers of <em>your</em> target.
+                        <br><strong>Affiliate disclosure:</strong> these are Amazon affiliate links &mdash; we may earn a small
+                        commission at no extra cost to you. It never changes what we list.
+                    </p>
+                    <div id="pp-list"></div>
+                    <p id="pp-combo" style="font-size:12.5px; color:#555; margin:12px 0 0; padding-top:12px; border-top:1px solid #eee;"></p>
+                </div>
+
                 <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 10px; border-left: 4px solid #ff9800;">
                     <strong>💡 GLP-1 Tip:</strong> <span id="glp1-tip">Start with protein at each meal to maintain muscle mass while losing weight.</span>
                 </div>
@@ -443,7 +474,7 @@
                         <div class="food-info">
                             <div class="food-name">Whey Protein Powder</div>
                             <div class="food-portion">1 scoop</div>
-                            <a href="https://www.amazon.com/dp/B000QSNYGI?tag=m4quickquail-20" target="_blank" rel="nofollow">Buy on Amazon →</a>
+                            <a href="https://www.amazon.com/dp/B000QSNYGI?tag=m4quickquail-20" target="_blank" rel="sponsored nofollow noopener">Buy on Amazon →</a>
                         </div>
                         <div class="protein-badge">25g</div>
                     </div>
@@ -451,7 +482,7 @@
                         <div class="food-info">
                             <div class="food-name">Quest Protein Bars</div>
                             <div class="food-portion">1 bar</div>
-                            <a href="https://www.amazon.com/dp/B07DJ3KGMV?tag=m4quickquail-20" target="_blank" rel="nofollow">Buy on Amazon →</a>
+                            <a href="https://www.amazon.com/dp/B07DJ3KGMV?tag=m4quickquail-20" target="_blank" rel="sponsored nofollow noopener">Buy on Amazon →</a>
                         </div>
                         <div class="protein-badge">20g</div>
                     </div>
@@ -459,7 +490,7 @@
                         <div class="food-info">
                             <div class="food-name">Fairlife Core Power</div>
                             <div class="food-portion">14oz bottle</div>
-                            <a href="https://www.amazon.com/dp/B07CJBW1S7?tag=m4quickquail-20" target="_blank" rel="nofollow">Buy on Amazon →</a>
+                            <a href="https://www.amazon.com/dp/B07CJBW1S7?tag=m4quickquail-20" target="_blank" rel="sponsored nofollow noopener">Buy on Amazon →</a>
                         </div>
                         <div class="protein-badge">26g</div>
                     </div>
@@ -467,7 +498,7 @@
                         <div class="food-info">
                             <div class="food-name">Premier Protein Shakes</div>
                             <div class="food-portion">11.5oz bottle</div>
-                            <a href="https://www.amazon.com/dp/B08P5K4PG6?tag=m4quickquail-20" target="_blank" rel="nofollow">Buy on Amazon →</a>
+                            <a href="https://www.amazon.com/dp/B08P5K4PG6?tag=m4quickquail-20" target="_blank" rel="sponsored nofollow noopener">Buy on Amazon →</a>
                         </div>
                         <div class="protein-badge">30g</div>
                     </div>
@@ -486,6 +517,44 @@
     </div>
 
     <script>
+
+        // Product suggestions shown at the moment the target appears — the point
+        // where "how do I actually eat this much" becomes a real question.
+        // Percentages are computed against the user's own number so the list is
+        // useful information first and a purchase option second.
+        const PROTEIN_PRODUCTS = [
+            { name: 'Premier Protein shake',  serving: '11.5 oz bottle', g: 30, asin: 'B08P5K4PG6' },
+            { name: 'Fairlife Core Power',    serving: '14 oz bottle',   g: 26, asin: 'B07CJBW1S7' },
+            { name: 'Whey protein powder',    serving: '1 scoop',        g: 25, asin: 'B000QSNYGI' },
+            { name: 'Quest protein bar',      serving: '1 bar',          g: 20, asin: 'B07DJ3KGMV' },
+        ];
+
+        function renderProteinProducts(target) {
+            if (!target || target <= 0) return;
+            document.getElementById('pp-target').textContent = target;
+            const list = document.getElementById('pp-list');
+            list.innerHTML = PROTEIN_PRODUCTS.map(function (p) {
+                const pct = Math.round((p.g / target) * 100);
+                const url = 'https://www.amazon.com/dp/' + p.asin + '?tag=m4quickquail-20';
+                return '<div class="pp-row">' +
+                    '<div class="pp-name">' + p.name +
+                        '<span class="pp-sub">' + p.serving + ' &middot; ' + p.g + ' g protein</span></div>' +
+                    '<div class="pp-pct">' + pct + '% of your target</div>' +
+                    '<a class="pp-buy" href="' + url + '" target="_blank" rel="sponsored nofollow noopener">View on Amazon &rarr;</a>' +
+                    '</div>';
+            }).join('');
+
+            // Make the target feel reachable rather than abstract.
+            const best = PROTEIN_PRODUCTS[0];
+            const n = Math.max(1, Math.round((target * 0.4) / best.g));
+            document.getElementById('pp-combo').innerHTML =
+                'On a day when food is unappealing, <strong>' + n + '&nbsp;\u00d7 ' + best.name + '</strong> covers about ' +
+                Math.round(((n * best.g) / target) * 100) + '% of your target on its own \u2014 the rest is easier to make up. ' +
+                'See the full <a href="/protein-foods.html" style="color:#667eea;font-weight:600;">everyday food guide</a>.';
+
+            document.getElementById('protein-products').style.display = 'block';
+        }
+
         function toggleUnits() {
             const unit = document.querySelector('input[name="unit"]:checked').value;
             document.getElementById('imperial-inputs').style.display = unit === 'imperial' ? '' : 'none';
@@ -569,6 +638,7 @@
             };
             document.getElementById('glp1-tip').textContent = tips[phase];
 
+            renderProteinProducts(proteinTarget);
             document.getElementById('results').classList.add('show');
             generateMealIdeas(proteinTarget);
             document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
