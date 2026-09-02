@@ -1,10 +1,14 @@
 name: Deploy to Cloudflare Pages
 
 on:
+  # Every branch builds. Cloudflare Pages treats the project's production
+  # branch as production and every other branch as a preview deployment, so a
+  # feature branch gets its own URL to check on a phone before it goes live.
   push:
-    branches: [ main, master ]
+    branches: [ '**' ]
   pull_request:
     branches: [ main, master ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -50,24 +54,37 @@ jobs:
   deploy:
     needs: validate
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    if: github.event_name == 'push'
     
     steps:
     - uses: actions/checkout@v3
     
     - name: Deploy to Cloudflare Pages
+      id: cf
       uses: cloudflare/pages-action@v1
       with:
+        branch: ${{ github.ref_name }}
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         projectName: glp1-nav
         directory: .
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Verify Deployment
+    - name: Report deployment URL
       run: |
-        echo "✅ Deployed to Cloudflare Pages"
-        echo "Site URL: https://glp1-nav.pages.dev"
+        BRANCH="${{ github.ref_name }}"
+        if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then
+          echo "### Production deploy" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "https://glp1-nav.com" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "### Preview deploy - branch \`$BRANCH\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Open on your phone before merging:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.cf.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+        fi
+        cat $GITHUB_STEP_SUMMARY
 
   notify:
     needs: [validate, deploy]
@@ -77,9 +94,12 @@ jobs:
     steps:
     - name: Notify Status
       run: |
-        if [ "${{ needs.deploy.result }}" == "success" ]; then
-          echo "🚀 Deployment successful!"
+        RESULT="${{ needs.deploy.result }}"
+        if [ "$RESULT" = "success" ]; then
+          echo "Deployment successful"
+        elif [ "$RESULT" = "skipped" ]; then
+          echo "Deploy skipped (validation-only run) - not a failure"
         else
-          echo "❌ Deployment failed"
+          echo "Deployment failed"
           exit 1
         fi
