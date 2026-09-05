@@ -22,6 +22,32 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: Set up Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    # The calculator's arithmetic used to ship unverified — a dietitian was
+    # catching wrong numbers by eye. These are golden-value tests: known
+    # inputs, known outputs. A changed formula fails here, before review.
+    - name: Test the calculator maths
+      run: node --test tests/protein-math.test.js
+
+    # A page that recomputes the maths inline would make the tests meaningless,
+    # because they would be checking a copy rather than what ships.
+    - name: Refuse a page that bypasses the tested module
+      run: |
+        if ! grep -q 'src="/js/protein-math.js"' protein-calculator.html; then
+          echo "::error::protein-calculator.html no longer loads the tested module."
+          exit 1
+        fi
+        if grep -qE '6\.25 \* heightCm|10 \* weightKg' protein-calculator.html; then
+          echo "::error::Mifflin-St Jeor has been reimplemented inline in the page."
+          echo "The maths belongs in js/protein-math.js so the tests cover what ships."
+          exit 1
+        fi
+        echo "Page uses the tested module"
+
     - name: Validate HTML
       run: |
         # Check index.html exists and has content

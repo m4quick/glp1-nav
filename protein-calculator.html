@@ -269,6 +269,7 @@
             .nav-bar a { margin: 0 5px; padding: 6px 12px; font-size: 14px; }
         }
     </style>
+    <script src="/js/protein-math.js"></script>
 </head>
 <body>
     <div class="nav-bar">
@@ -629,61 +630,40 @@
             const phase = document.getElementById('phase').value;
             const activity = parseFloat(document.getElementById('activity').value);
 
-            if (!age || age < 15 || age > 100) {
-                alert('Please enter a valid age (15-100)');
-                return;
-            }
+            // Every number below comes from js/protein-math.js, which is
+            // covered by tests/protein-math.test.js. Do not reimplement any of
+            // it here: the tests would then be checking a copy of the maths
+            // rather than the maths that ships.
+            const raw = {
+                unit: unit, age: age,
+                lbs:  parseFloat(document.getElementById('weight-lbs').value),
+                ft:   parseFloat(document.getElementById('height-ft').value),
+                inch: parseFloat(document.getElementById('height-in').value) || 0,
+                kg:   parseFloat(document.getElementById('weight-kg').value),
+                cm:   parseFloat(document.getElementById('height-cm').value)
+            };
+            const problem = ProteinMath.validate(raw);
+            if (problem) { alert(problem); return; }
+            const metric = ProteinMath.toMetric(raw);
+            const weightKg = metric.weightKg, heightCm = metric.heightCm;
 
-            // Normalise every input to metric before calculating.
-            let weightKg, heightCm;
-            if (unit === 'imperial') {
-                const lbs = parseFloat(document.getElementById('weight-lbs').value);
-                const ft  = parseFloat(document.getElementById('height-ft').value);
-                const inch = parseFloat(document.getElementById('height-in').value) || 0;
-                if (!lbs || lbs < 50 || lbs > 700) { alert('Please enter a valid weight (50-700 lbs)'); return; }
-                if (!ft || ft < 3 || ft > 8)       { alert('Please enter a valid height (3-8 ft)');     return; }
-                weightKg = lbs * 0.453592;
-                heightCm = (ft * 12 + inch) * 2.54;
-            } else {
-                weightKg = parseFloat(document.getElementById('weight-kg').value);
-                heightCm = parseFloat(document.getElementById('height-cm').value);
-                if (!weightKg || weightKg < 25 || weightKg > 320) { alert('Please enter a valid weight (25-320 kg)'); return; }
-                if (!heightCm || heightCm < 90 || heightCm > 250) { alert('Please enter a valid height (90-250 cm)'); return; }
-            }
+            const who = { sex: sex, age: age, weightKg: weightKg, heightCm: heightCm,
+                          activity: activity, phase: phase };
+            const p = ProteinMath.protein(who);
+            const e = ProteinMath.energy(who);
 
-            // Ideal body weight — Devine formula. Needs height, which is why we ask.
-            const heightIn = heightCm / 2.54;
-            const inchesOver5ft = Math.max(0, heightIn - 60);
-            const idealKg = (sex === 'male' ? 50 : 45.5) + 2.3 * inchesOver5ft;
+            const idealKg = p.idealKg, basisKg = p.basisKg;
+            const proteinMultiplier = p.multiplier;
+            const proteinTarget = p.grams;
+            const proteinPerMeal = p.perMeal;
+            const proteinPerSnack = p.perSnack;
+            const bmr = e.bmr, tdee = e.tdee;
+            const calorieTarget = e.calorieTarget, minCalories = e.minCalories;
 
-            // Protein is dosed on ideal body weight (per the published 1.2-1.6 g/kg
-            // guidance) — using current weight over-estimates for anyone above ideal.
-            // If actual weight is below ideal, use actual so we never over-shoot.
-            const basisKg = Math.min(weightKg, idealKg);
-
-            let proteinMultiplier = 1.4;                       // middle of the 1.2-1.6 range
-            if (activity >= 1.55) proteinMultiplier = 1.7;     // active: 1.6-2.0 range
-            if (age >= 65) proteinMultiplier = Math.max(proteinMultiplier, 1.5);
-            if (phase === 'titration') proteinMultiplier += 0.1; // rapid-loss phase
-            proteinMultiplier = Math.min(proteinMultiplier, 2.0);
-
-            const proteinTarget = Math.round(basisKg * proteinMultiplier);
-            const proteinPerMeal = Math.round(proteinTarget / 3);
-            const proteinPerSnack = Math.round(proteinTarget / 6);
-
-            // BMR — Mifflin-St Jeor, on ACTUAL weight, which is what it is defined on.
-            const bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + (sex === 'male' ? 5 : -161);
-            const tdee = Math.round(bmr * activity);
-
-            let calorieReduction = phase === 'titration' ? 0.80 : 0.85;
-            const calorieTarget = Math.round(tdee * calorieReduction);
-            const floor = sex === 'male' ? 1500 : 1200;
-            const minCalories = Math.max(floor, Math.round(tdee * 0.65));
-
-            const idealLbs = Math.round(idealKg / 0.453592);
+            const idealLbs = Math.round(idealKg / ProteinMath.LB_TO_KG);
             document.getElementById('basis-note').textContent =
                 proteinMultiplier.toFixed(1) + ' g per kg of ' +
-                (basisKg === idealKg ? 'ideal body weight (~' + idealLbs + ' lbs)' : 'current body weight') +
+                (p.basisIsIdeal ? 'ideal body weight (~' + idealLbs + ' lbs)' : 'current body weight') +
                 ' · BMR ' + Math.round(bmr) + ' kcal (Mifflin-St Jeor)';
 
             document.getElementById('protein-target').textContent = proteinTarget;
