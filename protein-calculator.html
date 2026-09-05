@@ -482,7 +482,7 @@
                         <div class="food-info">
                             <div class="food-name">Quest Protein Bars</div>
                             <div class="food-portion">1 bar</div>
-                            <a href="https://www.amazon.com/dp/B07DJ3KGMV?tag=m4quickquail-20" target="_blank" rel="sponsored nofollow noopener">Buy on Amazon →</a>
+                            <a href="https://www.amazon.com/dp/B00DLDH1N2?tag=m4quickquail-20" target="_blank" rel="sponsored nofollow noopener">Buy on Amazon →</a>
                         </div>
                         <div class="protein-badge">20g</div>
                     </div>
@@ -490,7 +490,7 @@
                         <div class="food-info">
                             <div class="food-name">Fairlife Core Power</div>
                             <div class="food-portion">14oz bottle</div>
-                            <a href="https://www.amazon.com/dp/B07CJBW1S7?tag=m4quickquail-20" target="_blank" rel="sponsored nofollow noopener">Buy on Amazon →</a>
+                            <a href="https://www.amazon.com/dp/B01DDIRDZA?tag=m4quickquail-20" target="_blank" rel="sponsored nofollow noopener">Buy on Amazon →</a>
                         </div>
                         <div class="protein-badge">26g</div>
                     </div>
@@ -498,7 +498,7 @@
                         <div class="food-info">
                             <div class="food-name">Premier Protein Shakes</div>
                             <div class="food-portion">11.5oz bottle</div>
-                            <a href="https://www.amazon.com/dp/B08P5K4PG6?tag=m4quickquail-20" target="_blank" rel="sponsored nofollow noopener">Buy on Amazon →</a>
+                            <a href="https://www.amazon.com/dp/B008JGIZGS?tag=m4quickquail-20" target="_blank" rel="sponsored nofollow noopener">Buy on Amazon →</a>
                         </div>
                         <div class="protein-badge">30g</div>
                     </div>
@@ -523,10 +523,10 @@
         // Percentages are computed against the user's own number so the list is
         // useful information first and a purchase option second.
         const PROTEIN_PRODUCTS = [
-            { name: 'Premier Protein shake',  serving: '11.5 oz bottle', g: 30, asin: 'B08P5K4PG6' },
-            { name: 'Fairlife Core Power',    serving: '14 oz bottle',   g: 26, asin: 'B07CJBW1S7' },
+            { name: 'Premier Protein shake',  serving: '11.5 oz bottle', g: 30, asin: 'B008JGIZGS' },
+            { name: 'Fairlife Core Power',    serving: '14 oz bottle',   g: 26, asin: 'B01DDIRDZA' },
             { name: 'Whey protein powder',    serving: '1 scoop',        g: 25, asin: 'B000QSNYGI' },
-            { name: 'Quest protein bar',      serving: '1 bar',          g: 20, asin: 'B07DJ3KGMV' },
+            { name: 'Quest protein bar',      serving: '1 bar',          g: 20, asin: 'B00DLDH1N2' },
         ];
 
         function renderProteinProducts(target) {
@@ -734,6 +734,66 @@
             return { foods: selected, total: total };
         }
 
+        // ---- Amazon links -------------------------------------------------
+        // Branded packaged goods get a specific ASIN: the recommendation IS
+        // that product. Whole foods get a tagged search instead - there is no
+        // single correct "chicken breast", availability is regional, and a
+        // search cannot 404 the way a delisted ASIN does. Every ASIN below was
+        // fetched and its product title read back before being written here;
+        // three earlier ones were invented and returned 404 to every visitor.
+        const AMZ_TAG = 'm4quickquail-20';
+        const AMZ = {
+            'Whey Protein Powder':      { asin: 'B000QSNYGI' },
+            'Whey Protein Shake':       { asin: 'B000QSNYGI' },
+            'Quest Protein Bars':       { asin: 'B00DLDH1N2' },
+            'Quest Protein Bar':        { asin: 'B00DLDH1N2' },
+            'Fairlife Core Power':      { asin: 'B01DDIRDZA' },
+            'Premier Protein Shakes':   { asin: 'B008JGIZGS' },
+            'Premier Protein Shake':    { asin: 'B008JGIZGS' },
+            'Greek Yogurt':             { q: 'greek yogurt plain nonfat high protein' },
+            'Greek Yogurt (plain)':     { q: 'greek yogurt plain nonfat high protein' },
+            'Cottage Cheese':           { q: 'cottage cheese low fat' },
+            'Egg Whites':               { q: 'liquid egg whites carton' },
+            'Whole Eggs':               { q: 'eggs grade a large' },
+            'Chicken Breast':           { q: 'boneless skinless chicken breast' },
+            'Salmon':                   { q: 'salmon fillet' },
+            'Tuna (canned)':            { q: 'canned tuna in water' },
+            'Ground Turkey (93% lean)': { q: 'ground turkey 93 percent lean' },
+            'Firm Tofu':                { q: 'firm tofu' },
+            'Tempeh':                   { q: 'tempeh' },
+            'Lentils (cooked)':         { q: 'dried lentils' },
+            'Chickpeas (cooked)':       { q: 'canned chickpeas garbanzo beans' }
+        };
+        const AMZ_LC = {};
+        Object.keys(AMZ).forEach(function (k) { AMZ_LC[k.toLowerCase()] = AMZ[k]; });
+        function amzUrl(name) {
+            const e = AMZ[name] || AMZ_LC[String(name || '').toLowerCase()];
+            if (!e) return null;
+            return e.asin
+                ? 'https://www.amazon.com/dp/' + e.asin + '?tag=' + AMZ_TAG
+                : 'https://www.amazon.com/s?k=' + encodeURIComponent(e.q) + '&tag=' + AMZ_TAG;
+        }
+        function amzAnchor(name, style) {
+            const u = amzUrl(name);
+            if (!u) return '';
+            return '<a href="' + u + '" target="_blank" rel="sponsored nofollow noopener"'
+                 + (style ? ' style="' + style + '"' : '') + '>Buy on Amazon \u2192</a>';
+        }
+
+        // The reference tables above the calculator are static markup. Rather
+        // than hand-maintain a link inside each card, decorate them from the
+        // same map, skipping any that already carries one.
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.food-item').forEach(function (card) {
+                if (card.querySelector('a')) return;
+                var nameEl = card.querySelector('.food-name');
+                var info = card.querySelector('.food-info');
+                if (!nameEl || !info) return;
+                var html = amzAnchor(nameEl.textContent.trim());
+                if (html) info.insertAdjacentHTML('beforeend', html);
+            });
+        });
+
         function generateCategoryHtml(category, combination, target) {
             const icons = {
                 'Dairy & Eggs': '🥛',
@@ -751,6 +811,7 @@
                 html += '<div style="font-weight: 600; color: #333;">' + food.name + '</div>';
                 html += '<div style="font-size: 12px; color: #666;">' + food.portion + '</div>';
                 html += '<div style="font-size: 18px; font-weight: bold; color: #4caf50; margin-top: 5px;">' + food.protein + 'g</div>';
+                html += amzAnchor(food.name, 'display:inline-block;margin-top:6px;font-size:12px;font-weight:600;color:#667eea;text-decoration:none;');
                 html += '</div>';
             });
             
