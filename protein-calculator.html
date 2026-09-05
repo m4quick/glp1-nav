@@ -171,6 +171,7 @@
             box-shadow: 0 -6px 24px rgba(40,30,90,.18);
             padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
             font-size: 14px;
+            max-height: 42vh; overflow-y: auto;
         }
         .tray[hidden] { display: none; }
         .tray-top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
@@ -183,6 +184,12 @@
             color: #3b3b57; border-radius: 20px; padding: 5px 6px 5px 11px; font-size: 12.5px; }
         .chip button { border: 0; background: #d7dbf5; color: #4a4a6a; width: 17px; height: 17px;
             border-radius: 50%; font-size: 11px; line-height: 1; cursor: pointer; padding: 0; }
+        .tray-searches { display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+            margin: 10px 0; font-size: 13px; }
+        .tray-searches span { color: #7b7b8d; }
+        .tray-searches a { background: #eef0fd; color: #4a4bb8; text-decoration: none;
+            padding: 7px 12px; border-radius: 8px; font-weight: 600; font-size: 12.5px; }
+        button.chip { border: 1px dashed #b9bfe4; cursor: pointer; font: inherit; }
         .tray-actions { display: flex; gap: 10px; flex-wrap: wrap; }
         .tray-actions a, .tray-actions button.cart {
             flex: 1 1 220px; text-align: center; text-decoration: none; border: 0; cursor: pointer;
@@ -877,6 +884,7 @@
         // instead. Both keep the affiliate tag.
         const LIST_KEY = 'glp1nav.list.v1';
         let picked = [];
+        let trayExpanded = false;
         try { picked = JSON.parse(localStorage.getItem(LIST_KEY) || '[]'); } catch (e) { picked = []; }
 
         function saveList() {
@@ -913,7 +921,10 @@
                 document.body.appendChild(tray);
             }
             if (!picked.length) {
-                tray.hidden = true; document.body.classList.remove('has-tray'); return;
+                tray.hidden = true;
+                document.body.classList.remove('has-tray');
+                document.body.style.paddingBottom = '';
+                return;
             }
             tray.hidden = false; document.body.classList.add('has-tray');
 
@@ -932,10 +943,18 @@
                   + '<span class="goal">' + goal + '</span>'
                   + '<button class="clear" type="button" data-clear>Clear</button></div>';
             h += '<div class="tray-items">';
-            picked.forEach(function (i) {
+            // A long list used to wrap for as many rows as it liked and eat
+            // the screen. Show five, hide the rest behind a toggle.
+            const SHOW = trayExpanded ? picked.length : 5;
+            picked.slice(0, SHOW).forEach(function (i) {
                 h += '<span class="chip">' + i.name + ' <button type="button" data-drop="'
                    + i.name.replace(/"/g, '&quot;') + '" aria-label="Remove ' + i.name + '">\u00d7</button></span>';
             });
+            if (picked.length > SHOW) {
+                h += '<button type="button" class="chip" data-expand>and ' + (picked.length - SHOW) + ' more</button>';
+            } else if (trayExpanded && picked.length > 5) {
+                h += '<button type="button" class="chip" data-expand>show fewer</button>';
+            }
             h += '</div><div class="tray-actions">';
             if (cart) {
                 const nAsin = picked.length - searches.length;
@@ -943,13 +962,22 @@
                    + (nAsin === 1 ? '' : 's') + ' to Amazon cart</button>';
             }
             if (searches.length) {
-                h += '<button type="button" class="search" data-search>Shop ' + searches.length
-                   + ' food' + (searches.length === 1 ? '' : 's') + ' on Amazon</button>';
+                // One link each, clicked deliberately. Opening a tab per item
+                // trips every popup blocker and buries the visitor in windows.
+                h += '</div><div class="tray-searches"><span>Fresh food, open when ready:</span>';
+                searches.forEach(function (i) {
+                    h += '<a href="' + amzUrl(i.name) + '" target="_blank" rel="sponsored nofollow noopener">'
+                       + i.name + '</a>';
+                });
+                h += '</div><div class="tray-actions">';
             }
             h += '</div>';
             h += '<p class="tray-note">Your list stays on this device. Links are Amazon affiliate '
                + 'links \u2014 we may earn a small commission at no extra cost to you.</p>';
             tray.innerHTML = h;
+            requestAnimationFrame(function () {
+                document.body.style.paddingBottom = (tray.offsetHeight + 16) + 'px';
+            });
         }
         function syncButtons() {
             document.querySelectorAll('.pick').forEach(function (b) {
@@ -970,9 +998,7 @@
             if (d) { togglePick(d.dataset.drop, 0); return; }
             if (ev.target.closest('[data-clear]')) { picked = []; saveList(); renderTray(); syncButtons(); return; }
             if (ev.target.closest('[data-cart]')) { window.open(cartUrl(), '_blank', 'noopener'); return; }
-            if (ev.target.closest('[data-search]')) {
-                searchOnly().forEach(function (i) { window.open(amzUrl(i.name), '_blank', 'noopener'); });
-            }
+            if (ev.target.closest('[data-expand]')) { trayExpanded = !trayExpanded; renderTray(); }
         });
 
         function generateCategoryHtml(category, combination, target) {
