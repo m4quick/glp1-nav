@@ -30,8 +30,14 @@ jobs:
     # The calculator's arithmetic used to ship unverified — a dietitian was
     # catching wrong numbers by eye. These are golden-value tests: known
     # inputs, known outputs. A changed formula fails here, before review.
-    - name: Test the calculator maths
-      run: node --test tests/protein-math.test.js
+    - name: Test the maths, the links and the dishes
+      run: node --test tests/protein-math.test.js tests/dishes.test.js
+
+    # dishes.json is the source of truth; the pages are generated from it.
+    # An edit that is not rebuilt would ship a page that disagrees with the
+    # data every other check is reading.
+    - name: Refuse stale dish pages
+      run: python3 ops/build-dishes.py --check
 
     # A page that recomputes the maths inline would make the tests meaningless,
     # because they would be checking a copy rather than what ships.

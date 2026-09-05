@@ -280,10 +280,13 @@
         }
     </style>
     <script src="/js/protein-math.js"></script>
+    <script src="/js/amazon-links.js"></script>
+    <script src="/js/shopping-list.js"></script>
 </head>
 <body>
     <div class="nav-bar">
         <a href="/">Home</a>
+                <a href="/dishes.html">Dishes</a>
         <a href="/medications.html">Medications</a>
         <a href="/nutrition.html">Nutrition</a>
         <a href="/protein-foods.html">Protein Foods</a>
@@ -787,87 +790,33 @@
             return { foods: selected, total: total };
         }
 
-        // ---- Amazon links -------------------------------------------------
-        // Branded packaged goods get a specific ASIN: the recommendation IS
-        // that product. Whole foods get a tagged search instead - there is no
-        // single correct "chicken breast", availability is regional, and a
-        // search cannot 404 the way a delisted ASIN does. Every ASIN below was
-        // fetched and its product title read back before being written here;
-        // three earlier ones were invented and returned 404 to every visitor.
-        const AMZ_TAG = 'm4quickquail-20';
-        const AMZ = {
-            'Whey Protein Powder':      { asin: 'B000QSNYGI' },
-            'Whey Protein Shake':       { asin: 'B000QSNYGI' },
-            'Quest Protein Bars':       { asin: 'B00DLDH1N2' },
-            'Quest Protein Bar':        { asin: 'B00DLDH1N2' },
-            'Fairlife Core Power':      { asin: 'B01DDIRDZA' },
-            'Premier Protein Shakes':   { asin: 'B008JGIZGS' },
-            'Premier Protein Shake':    { asin: 'B008JGIZGS' },
-            'Greek Yogurt':             { q: 'greek yogurt plain nonfat high protein', img: 'greek-yogurt' },
-            'Greek Yogurt (plain)':     { q: 'greek yogurt plain nonfat high protein', img: 'greek-yogurt' },
-            'Cottage Cheese':           { q: 'cottage cheese low fat', img: 'cottage-cheese' },
-            'Egg Whites':               { q: 'liquid egg whites carton', img: 'egg-whites' },
-            'Whole Eggs':               { q: 'eggs grade a large', img: 'whole-eggs' },
-            'Chicken Breast':           { q: 'boneless skinless chicken breast', img: 'chicken-breast' },
-            'Salmon':                   { q: 'salmon fillet', img: 'salmon' },
-            'Tuna (canned)':            { q: 'canned tuna in water', img: 'tuna-canned' },
-            'Ground Turkey (93% lean)': { q: 'ground turkey 93 percent lean', img: 'ground-turkey' },
-            'Firm Tofu':                { q: 'firm tofu', img: 'firm-tofu' },
-            'Tempeh':                   { q: 'tempeh', img: 'tempeh' },
-            'Lentils (cooked)':         { q: 'dried lentils', img: 'lentils' },
-            'Chickpeas (cooked)':       { q: 'canned chickpeas garbanzo beans', img: 'chickpeas' }
-        };
-        const AMZ_LC = {};
-        Object.keys(AMZ).forEach(function (k) { AMZ_LC[k.toLowerCase()] = AMZ[k]; });
-        function amzUrl(name) {
-            const e = AMZ[name] || AMZ_LC[String(name || '').toLowerCase()];
-            if (!e) return null;
-            return e.asin
-                ? 'https://www.amazon.com/dp/' + e.asin + '?tag=' + AMZ_TAG
-                : 'https://www.amazon.com/s?k=' + encodeURIComponent(e.q) + '&tag=' + AMZ_TAG;
-        }
-        // Whole foods only. Branded goods deliberately have no generated photo:
-        // an invented picture of a product someone is about to buy would
-        // misrepresent it, and Amazon expects its own product imagery.
-        function foodImg(name, cls) {
-            const e = AMZ[name] || AMZ_LC[String(name || '').toLowerCase()];
-            if (!e || !e.img) return '';
-            return '<img class="' + (cls || 'food-photo') + '" src="/images/foods/' + e.img
-                 + '.webp" alt="" loading="lazy" width="400" height="400">';
-        }
-        // Branded goods carry no photograph. Amazon withdrew image links from
-        // SiteStripe in the 2026 redesign — the panel now offers only Store ID,
-        // Tracking ID and a link — so there is no licensed way to show their
-        // product shots, and inventing one would misrepresent a product someone
-        // is about to buy. A typographic tile keeps the grid looking deliberate
-        // instead of half-finished.
-        function foodTile(name, grams) {
-            if (!amzUrl(name)) return '';
-            const e = AMZ[name] || AMZ_LC[String(name || '').toLowerCase()];
-            if (e && e.img) return '';                    // it has a photo already
-            const g = parseInt(grams, 10);
-            if (!g) return '';
-            return '<span class="food-tile"><b>' + g + '</b><i>g protein</i></span>';
-        }
-        function amzAnchor(name, style) {
-            const u = amzUrl(name);
-            if (!u) return '';
-            return '<a href="' + u + '" target="_blank" rel="sponsored nofollow noopener"'
-                 + (style ? ' style="' + style + '"' : '') + '>Buy on Amazon \u2192</a>';
-        }
+        // The link map, the shopping tray and their helpers now live in
+        // js/amazon-links.js and js/shopping-list.js, shared with the dish
+        // pages. A second copy here is exactly how the two would drift apart.
+        const AMZ_TAG   = AmazonLinks.TAG;
+        const amzUrl    = AmazonLinks.url;
+        const amzAnchor = AmazonLinks.anchor;
+        const foodImg   = AmazonLinks.photo;
+        const foodTile  = AmazonLinks.tile;
 
-        // The reference tables above the calculator are static markup. Rather
-        // than hand-maintain a link inside each card, decorate them from the
-        // same map, skipping any that already carries one.
+        function pickButton(name, grams) {
+            return '<button type="button" class="pick" data-pick="' + name.replace(/"/g, '&quot;')
+                 + '" data-protein="' + (grams || 0) + '" aria-pressed="false">+</button>';
+        }
+        function syncButtons() { ShoppingList.sync(); }
+        function renderTray()  { ShoppingList.render(); }
+
+        // The reference tables above the calculator are static markup. Decorate
+        // them from the shared map rather than hand-maintaining each card.
+        // Each piece is added independently: an earlier version bailed out of a
+        // whole card when it already had a link, which silently denied the four
+        // branded products both a tile and a picker.
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.food-item').forEach(function (card) {
                 var nameEl = card.querySelector('.food-name');
                 var info = card.querySelector('.food-info');
                 if (!nameEl || !info) return;
                 var nm = nameEl.textContent.trim();
-                // Each piece is added independently. An earlier version bailed
-                // out of the whole card when it already had a link, which
-                // silently denied the four branded products a picker.
                 var badgeEl = card.querySelector('.protein-badge');
                 var grams = badgeEl ? parseInt(badgeEl.textContent, 10) || 0 : 0;
                 if (!card.querySelector('img.food-photo') && !card.querySelector('.food-tile')) {
@@ -882,132 +831,7 @@
                     card.insertAdjacentHTML('beforeend', pickButton(nm, grams));
                 }
             });
-            syncButtons();
-            renderTray();
-        });
-
-
-        // ---- shopping list ------------------------------------------------
-        // Amazon can only take several ASINs in one cart URL; whole foods are
-        // search terms and have no ASIN, so they open as a small set of tabs
-        // instead. Both keep the affiliate tag.
-        const LIST_KEY = 'glp1nav.list.v1';
-        let picked = [];
-        let trayExpanded = false;
-        try { picked = JSON.parse(localStorage.getItem(LIST_KEY) || '[]'); } catch (e) { picked = []; }
-
-        function saveList() {
-            try { localStorage.setItem(LIST_KEY, JSON.stringify(picked)); } catch (e) {}
-        }
-        function isPicked(name) { return picked.some(function (i) { return i.name === name; }); }
-        function togglePick(name, grams) {
-            const at = picked.findIndex(function (i) { return i.name === name; });
-            if (at >= 0) picked.splice(at, 1);
-            else picked.push({ name: name, g: Number(grams) || 0 });
-            saveList(); renderTray(); syncButtons();
-        }
-        function cartUrl() {
-            const asins = picked.map(function (i) {
-                const e = AMZ[i.name] || AMZ_LC[i.name.toLowerCase()];
-                return e && e.asin;
-            }).filter(Boolean);
-            if (!asins.length) return null;
-            let u = 'https://www.amazon.com/gp/aws/cart/add.html?AssociateTag=' + AMZ_TAG;
-            asins.forEach(function (a, k) { u += '&ASIN.' + (k + 1) + '=' + a + '&Quantity.' + (k + 1) + '=1'; });
-            return u;
-        }
-        function searchOnly() {
-            return picked.filter(function (i) {
-                const e = AMZ[i.name] || AMZ_LC[i.name.toLowerCase()];
-                return e && !e.asin;
-            });
-        }
-        function renderTray() {
-            let tray = document.getElementById('shop-tray');
-            if (!tray) {
-                tray = document.createElement('div');
-                tray.id = 'shop-tray'; tray.className = 'tray';
-                document.body.appendChild(tray);
-            }
-            if (!picked.length) {
-                tray.hidden = true;
-                document.body.classList.remove('has-tray');
-                document.body.style.paddingBottom = '';
-                return;
-            }
-            tray.hidden = false; document.body.classList.add('has-tray');
-
-            const total = picked.reduce(function (a, i) { return a + i.g; }, 0);
-            const target = window.__proteinTarget || 0;
-            const goal = target
-                ? (total >= target
-                    ? ' \u2713 covers your ' + target + 'g target'
-                    : ' \u2014 ' + (target - total) + 'g short of ' + target + 'g')
-                : '';
-            const cart = cartUrl();
-            const searches = searchOnly();
-
-            let h = '<div class="tray-top"><b>Your list \u00b7 ' + picked.length + ' item'
-                  + (picked.length === 1 ? '' : 's') + ' \u00b7 ' + total + 'g protein</b>'
-                  + '<span class="goal">' + goal + '</span>'
-                  + '<button class="clear" type="button" data-clear>Clear</button></div>';
-            h += '<div class="tray-items">';
-            // A long list used to wrap for as many rows as it liked and eat
-            // the screen. Show five, hide the rest behind a toggle.
-            const SHOW = trayExpanded ? picked.length : 5;
-            picked.slice(0, SHOW).forEach(function (i) {
-                h += '<span class="chip">' + i.name + ' <button type="button" data-drop="'
-                   + i.name.replace(/"/g, '&quot;') + '" aria-label="Remove ' + i.name + '">\u00d7</button></span>';
-            });
-            if (picked.length > SHOW) {
-                h += '<button type="button" class="chip" data-expand>and ' + (picked.length - SHOW) + ' more</button>';
-            } else if (trayExpanded && picked.length > 5) {
-                h += '<button type="button" class="chip" data-expand>show fewer</button>';
-            }
-            h += '</div><div class="tray-actions">';
-            if (cart) {
-                const nAsin = picked.length - searches.length;
-                h += '<button type="button" class="cart" data-cart>Add ' + nAsin + ' product'
-                   + (nAsin === 1 ? '' : 's') + ' to Amazon cart</button>';
-            }
-            if (searches.length) {
-                // One link each, clicked deliberately. Opening a tab per item
-                // trips every popup blocker and buries the visitor in windows.
-                h += '</div><div class="tray-searches"><span>Fresh food, open when ready:</span>';
-                searches.forEach(function (i) {
-                    h += '<a href="' + amzUrl(i.name) + '" target="_blank" rel="sponsored nofollow noopener">'
-                       + i.name + '</a>';
-                });
-                h += '</div><div class="tray-actions">';
-            }
-            h += '</div>';
-            h += '<p class="tray-note">Your list stays on this device. Links are Amazon affiliate '
-               + 'links \u2014 we may earn a small commission at no extra cost to you.</p>';
-            tray.innerHTML = h;
-            requestAnimationFrame(function () {
-                document.body.style.paddingBottom = (tray.offsetHeight + 16) + 'px';
-            });
-        }
-        function syncButtons() {
-            document.querySelectorAll('.pick').forEach(function (b) {
-                const on = isPicked(b.dataset.name);
-                b.setAttribute('aria-pressed', String(on));
-                b.textContent = on ? '\u2713' : '+';
-                b.title = (on ? 'Remove ' : 'Add ') + b.dataset.name;
-            });
-        }
-        function pickButton(name, grams) {
-            return '<button type="button" class="pick" data-name="' + name.replace(/"/g, '&quot;')
-                 + '" data-g="' + (grams || 0) + '" aria-pressed="false" title="Add ' + name + '">+</button>';
-        }
-        document.addEventListener('click', function (ev) {
-            const p = ev.target.closest('.pick');
-            if (p) { togglePick(p.dataset.name, p.dataset.g); return; }
-            const d = ev.target.closest('[data-drop]');
-            if (d) { togglePick(d.dataset.drop, 0); return; }
-            if (ev.target.closest('[data-clear]')) { picked = []; saveList(); renderTray(); syncButtons(); return; }
-            if (ev.target.closest('[data-cart]')) { window.open(cartUrl(), '_blank', 'noopener'); return; }
-            if (ev.target.closest('[data-expand]')) { trayExpanded = !trayExpanded; renderTray(); }
+            ShoppingList.mount();
         });
 
         function generateCategoryHtml(category, combination, target) {
