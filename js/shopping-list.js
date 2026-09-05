@@ -42,6 +42,11 @@
   function withAsin() { return items.filter(function (i) { return A.hasAsin(i.name); }); }
   function searchOnly() { return items.filter(function (i) { return !A.hasAsin(i.name); }); }
 
+  function setTrayHeight(px) {
+    if (typeof document === 'undefined') return;
+    document.documentElement.style.setProperty('--tray-h', px ? px + 'px' : '0px');
+  }
+
   function tray() {
     var t = document.getElementById('shop-tray');
     if (!t) {
@@ -57,7 +62,7 @@
     if (!items.length) {
       t.hidden = true;
       document.body.classList.remove('has-tray');
-      document.body.style.paddingBottom = '';
+      setTrayHeight(0);
       syncButtons();
       return;
     }
@@ -113,9 +118,13 @@
 
     t.innerHTML = h;
     // Reserve exactly the space the tray occupies, measured after paint.
-    requestAnimationFrame(function () {
-      document.body.style.paddingBottom = (t.offsetHeight + 16) + 'px';
-    });
+    // On phones the tray is not the only fixed thing down there, so it
+    // publishes its height and styles.css adds the tab bar to it.
+    // Once synchronously so the page never reflows a frame late, and again
+    // after paint in case wrapping changed the height. rAF is throttled in a
+    // background tab; the synchronous call is what makes this correct there.
+    setTrayHeight(t.offsetHeight + 16);
+    requestAnimationFrame(function () { setTrayHeight(t.offsetHeight + 16); });
     syncButtons();
   }
 

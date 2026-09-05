@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "glp1-nav",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "ops/devserve.py",
+        "8123"
+      ],
+      "port": 8123
+    }
+  ]
+}

@@ -12,10 +12,20 @@ description and canonical.
 A dish with "reviewed": null renders an amber banner saying so and is left
 out of sitemap.xml. Nothing here claims a review that has not happened.
 """
-import html, json, os, re, sys
+import html, importlib.util, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "dishes.json")
+
+# The mobile app shell (viewport-fit, tab bar, mobile.js, footer index) is
+# owned by apply-shell.py. Generated pages run through the same function the
+# hand-written pages do, so `--check` compares like with like and there is
+# exactly one definition of the tab bar.
+_shell_spec = importlib.util.spec_from_file_location(
+    "apply_shell", os.path.join(os.path.dirname(os.path.abspath(__file__)), "apply-shell.py"))
+shell = importlib.util.module_from_spec(_shell_spec)
+_shell_spec.loader.exec_module(shell)
+
 
 NAV = [("/", "Home"), ("/dishes.html", "Dishes"), ("/medications.html", "Medications"),
        ("/nutrition.html", "Nutrition"), ("/protein-foods.html", "Protein Foods"),
@@ -70,7 +80,7 @@ TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="{desc}">
     <title>{title} | GLP-1 Navigator</title>
     <link rel="canonical" href="https://glp1-nav.com/dish-{slug}.html">
@@ -159,6 +169,10 @@ TEMPLATE = """<!DOCTYPE html>
 
 
 def render(d):
+    return shell.apply(_render(d), f'dish-{d["slug"]}.html')
+
+
+def _render(d):
     return TEMPLATE.format(
         slug=d["slug"], title=e(d["title"]), short=e(d["short"]),
         desc=e(f'{d["title"]} — {d["protein"]} g protein, {d["calories"]} calories, '
@@ -177,7 +191,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="High-protein meals for GLP-1 appetites. Every dish can be made from fresh ingredients or swapped for a no-cooking shortcut, with the protein counted either way.">
     <title>What to Eat on a GLP-1 &mdash; Dishes You Can Buy or Make</title>
     <link rel="canonical" href="https://glp1-nav.com/dishes.html">
@@ -258,8 +272,9 @@ def card(d):
 
 
 def render_index(dishes):
-    return INDEX_TEMPLATE.format(navlinks=nav("/dishes.html"),
+    body = INDEX_TEMPLATE.format(navlinks=nav("/dishes.html"),
                                  cards="\n".join(card(d) for d in dishes))
+    return shell.apply(body, "dishes.html")
 
 
 def update_sitemap(dishes):
