@@ -124,8 +124,31 @@ jobs:
         fi
         cat $GITHUB_STEP_SUMMARY
 
+  # Everything in `validate` reads files off disk, which is blind to anything
+  # that happens between the repository and the browser. Cloudflare's email
+  # obfuscation rewrote the contact address on the live site while the file
+  # test asserting that address was green. This job checks what a visitor
+  # actually receives, and only things a file test cannot see.
+  smoke:
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'main' || github.ref_name == 'master'
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Smoke test the live site
+      env:
+        SMOKE_BASE_URL: https://glp1-nav.com
+      run: node --test tests/smoke.test.js
+
   notify:
-    needs: [validate, deploy]
+    needs: [validate, deploy, smoke]
     runs-on: ubuntu-latest
     if: always()
     
@@ -133,6 +156,12 @@ jobs:
     - name: Notify Status
       run: |
         RESULT="${{ needs.deploy.result }}"
+        SMOKE="${{ needs.smoke.result }}"
+        if [ "$SMOKE" = "failure" ]; then
+          echo "::error::Deployed, but the live site failed its smoke test."
+          echo "The build is on the CDN; something about what visitors receive is wrong."
+          exit 1
+        fi
         if [ "$RESULT" = "success" ]; then
           echo "Deployment successful"
         elif [ "$RESULT" = "skipped" ]; then
