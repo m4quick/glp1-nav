@@ -281,6 +281,7 @@ button.chip { border: 1px dashed #b9bfe4; cursor: pointer; font: inherit; }
 .food-item { position: relative; }
 .food-item .pick { position: absolute; top: 8px; right: 8px; }
 .pick {
+    position: relative;
     width: 26px; height: 26px;
     border-radius: 50%; border: 2px solid #c9cddb; background: #fff;
     color: #667eea; font-size: 15px; font-weight: 700; line-height: 1;
@@ -288,6 +289,20 @@ button.chip { border: 1px dashed #b9bfe4; cursor: pointer; font: inherit; }
 }
 .pick:hover { border-color: #667eea; }
 .pick[aria-pressed="true"] { background: #4caf50; border-color: #4caf50; color: #fff; }
+
+/* Tap area, not paint area.
+   The pickers measured 26x26 and the "Buy on Amazon" links 19px tall. That
+   clears WCAG 2.2 SC 2.5.8 (24x24 CSS px, AA) for the buttons but not the
+   links, and neither comes near Apple's 44pt. Growing the visuals would wreck
+   a dense grid, so the finger target grows and the drawing does not. */
+.pick::after {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: 44px; height: 44px; transform: translate(-50%, -50%);
+}
+.food-item a {
+    position: relative; display: inline-block;
+    padding: 9px 4px; margin: -5px -4px -7px;
+}
 
 .food-tile {
     width: 56px; height: 56px; border-radius: 8px; margin-right: 12px;

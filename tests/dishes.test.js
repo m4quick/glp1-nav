@@ -149,3 +149,87 @@ test('generated pages are not stale', () => {
                 + String(err.stdout || ''));
   }
 });
+
+/* -------------------------------------------------- the ready-made shelf */
+
+/* The calculator's product panel used to carry its own array with a second
+ * copy of all four ASINs. Three invented ASINs once shipped and 404'd on
+ * every click; a second copy of the list is how a fourth gets in. These
+ * tests exist to keep there being exactly one list.
+ */
+
+const CALC = fs.readFileSync(path.join(ROOT, 'protein-calculator.html'), 'utf8');
+
+test('the shelf is not empty and every product resolves to a real ASIN', () => {
+  assert.ok(A.PRODUCTS.length >= 4, 'expected the shelf to have products');
+  for (const p of A.PRODUCTS) {
+    assert.ok(A.MAP[p.key], `${p.brand}: "${p.key}" is not a key in MAP`);
+    assert.ok(A.hasAsin(p.key), `${p.brand}: no ASIN — a shelf product must be a specific product`);
+    assert.match(A.url(p.key), /^https:\/\/www\.amazon\.com\/dp\/B[A-Z0-9]{9}\?tag=/,
+      `${p.brand}: link is not a tagged product URL`);
+  }
+});
+
+test('the calculator holds no second copy of the product list', () => {
+  assert.ok(!/PROTEIN_PRODUCTS/.test(CALC), 'the old duplicate array is back');
+  assert.ok(CALC.includes('AmazonLinks.PRODUCTS'), 'the panel must render from the shared list');
+});
+
+test('every ASIN written into the page agrees with the shared map', () => {
+  // The reference grid keeps its links in the HTML on purpose, so they work
+  // with JavaScript off and a crawler can see them. That is fine — what is
+  // not fine is one of them drifting away from the verified map, which is
+  // precisely how a dead link would reappear without anything looking wrong.
+  const known = new Set(Object.values(A.MAP).map((e) => e.asin).filter(Boolean));
+  for (const m of CALC.matchAll(/B[A-Z0-9]{9}/g)) {
+    assert.ok(known.has(m[0]), `${m[0]} is in the page but not in the verified map`);
+  }
+
+  // And each one must be the ASIN its own card's product name resolves to.
+  const cards = CALC.matchAll(
+    /<div class="food-name">([^<]+)<\/div>[\s\S]{0,400}?amazon\.com\/dp\/(B[A-Z0-9]{9})\?tag=([^"]+)"/g);
+  let checked = 0;
+  for (const [, name, asin, tag] of cards) {
+    const want = A.url(name.trim());
+    assert.ok(want, `"${name.trim()}" has a hard-coded link but is not in the map`);
+    assert.equal(want, `https://www.amazon.com/dp/${asin}?tag=${tag}`,
+      `"${name.trim()}" links to ${asin}, the map says ${want}`);
+    checked++;
+  }
+  assert.ok(checked >= 4, `expected to check the branded cards, checked ${checked}`);
+});
+
+test('every product carries what the panel needs to draw a row', () => {
+  for (const p of A.PRODUCTS) {
+    assert.ok(p.brand && p.kind && p.serving, `${p.key}: missing brand/kind/serving`);
+    assert.ok(Number.isFinite(p.g) && p.g > 0, `${p.key}: protein must be a positive number`);
+    assert.ok(A.SHAPES[p.shape], `${p.key}: no silhouette for shape "${p.shape}"`);
+  }
+});
+
+test('a declared brand logo must actually be on disk', () => {
+  // mark() falls back to the silhouette when logo is null, so a null is fine.
+  // A filename that does not exist is a broken image on a page about to ask
+  // someone for money.
+  for (const p of A.PRODUCTS) {
+    if (!p.logo) continue;
+    const f = path.join(ROOT, 'images', 'brands', p.logo);
+    assert.ok(fs.existsSync(f), `${p.brand}: logo declared but ${f} is missing`);
+  }
+});
+
+test('mark() renders a logo when there is one and a silhouette when there is not', () => {
+  const withLogo = { brand: 'X', shape: 'bar', logo: 'x.webp' };
+  assert.match(A.mark(withLogo), /<img src="\/images\/brands\/x\.webp"/);
+  const without = { brand: 'X', shape: 'bar', logo: null };
+  assert.match(A.mark(without), /<svg viewBox="0 0 24 24"/);
+  assert.ok(!A.mark(without).includes('<img'), 'no logo means no image tag');
+});
+
+test('every shelf row offers the list, not only the exit to Amazon', () => {
+  // The panel's whole point is that a tap no longer ejects you and loses
+  // every other option you were weighing up.
+  assert.ok(CALC.includes('data-pick="\' + p.key'), 'rows must render a picker');
+  assert.ok(CALC.includes('rel="sponsored nofollow noopener"'), 'affiliate links need rel');
+  assert.match(CALC, /Affiliate disclosure/, 'the panel must disclose');
+});

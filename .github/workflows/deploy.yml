@@ -30,8 +30,8 @@ jobs:
     # The calculator's arithmetic used to ship unverified — a dietitian was
     # catching wrong numbers by eye. These are golden-value tests: known
     # inputs, known outputs. A changed formula fails here, before review.
-    - name: Test the maths, the links, the dishes and the mobile shell
-      run: node --test tests/protein-math.test.js tests/dishes.test.js tests/shell.test.js
+    - name: Test the maths, the links, the dishes, the shell and the whole site
+      run: node --test tests/protein-math.test.js tests/dishes.test.js tests/shell.test.js tests/site.test.js
 
     # dishes.json is the source of truth; the pages are generated from it.
     # An edit that is not rebuilt would ship a page that disagrees with the

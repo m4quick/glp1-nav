@@ -143,25 +143,114 @@
             margin-top: 5px;
         }
         .food-item a:hover { text-decoration: underline; }
+        /* ---- the ready-made shelf ------------------------------------
+           Was a flat list of names with a "View on Amazon" link on each row,
+           which ejected the visitor on the first tap and lost every other
+           option. Now each row carries a product mark, the share of the
+           target, and a picker that adds to the same list the dish pages
+           use. Amazon is still one tap away, it is just no longer the only
+           thing you can do. */
+        .pp-panel {
+            margin-top: 22px; padding: 18px; background: #fff;
+            border-radius: 14px; border: 1px solid #e4e6f0;
+        }
+        .pp-head b { display: block; font-weight: 700; color: #26263a; font-size: 16px; }
+        /* Direct child only: `.pp-head span` also caught the target number
+           inside the <b>, which turned "Hitting 131 g a day" into three
+           stacked lines. */
+        .pp-head > span {
+            display: block; font-size: 12.5px; color: #777;
+            line-height: 1.55; margin: 3px 0 14px;
+        }
         .pp-row {
             display: flex; align-items: center; gap: 12px;
-            padding: 11px 0; border-bottom: 1px solid #f0f0f0;
+            padding: 11px 0; border-bottom: 1px solid #f0f0f4;
         }
         .pp-row:last-child { border-bottom: none; }
-        .pp-name { flex: 1 1 auto; font-size: 14px; color: #333; font-weight: 600; }
-        .pp-sub  { font-size: 12px; color: #888; font-weight: 400; display: block; margin-top: 2px; }
-        .pp-pct  {
-            flex: 0 0 auto; font-size: 13px; font-weight: 700; color: #4caf50;
-            background: #edf7ee; border-radius: 6px; padding: 4px 9px; white-space: nowrap;
+
+        /* One box whether it holds a real brand logo or our own silhouette,
+           so supplying logos later cannot reflow the panel. */
+        .pp-mark {
+            flex: 0 0 auto; width: 48px; height: 48px; border-radius: 11px;
+            display: grid; place-items: center;
+            background: linear-gradient(150deg, #f2f4fe, #e6eafb);
+            border: 1px solid #dde2f7;
         }
-        .pp-buy  {
-            flex: 0 0 auto; font-size: 12.5px; font-weight: 600; color: #667eea;
-            text-decoration: none; white-space: nowrap;
+        .pp-mark svg {
+            width: 26px; height: 26px; fill: none; stroke: #5a5fc7;
+            stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .pp-mark img { width: 40px; height: 40px; object-fit: contain; }
+
+        .pp-name { flex: 1 1 auto; min-width: 0; font-size: 14.5px; color: #26263a; font-weight: 700; }
+        .pp-sub  { display: block; font-size: 12px; color: #8a8a99; font-weight: 400; margin-top: 2px; }
+        .pp-pct  {
+            flex: 0 0 auto; text-align: center; font-size: 14px; font-weight: 800;
+            color: #2e7d4f; background: #edf7f0; border-radius: 8px; padding: 5px 9px;
+            line-height: 1.15;
+        }
+        .pp-pct i { display: block; font-style: normal; font-size: 9px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: .04em; color: #6b9c7f; white-space: nowrap; }
+        .pp-act { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .pp-act .pick { width: 32px; height: 32px; font-size: 17px; }
+        .pp-make a { display: inline-block; padding: 6px 0; }
+        .pp-buy {
+            font-size: 11.5px; font-weight: 700; color: #8a6a12; text-decoration: none;
+            white-space: nowrap;
+            display: inline-block; padding: 8px 4px; margin: -8px -4px;
         }
         .pp-buy:hover { text-decoration: underline; }
+
+        #pp-combo {
+            font-size: 12.5px; color: #555; margin: 12px 0 0;
+            padding-top: 12px; border-top: 1px solid #eee; line-height: 1.6;
+        }
+        #pp-combo a { color: #667eea; font-weight: 600; }
+        .pp-make {
+            margin-top: 14px; padding: 13px 15px; border-radius: 11px;
+            background: #f4f8f5; border: 1px solid #dcebe1;
+            font-size: 12.5px; color: #3f5a49; line-height: 1.6;
+        }
+        .pp-make b { color: #2d6a4a; }
+        .pp-make a { color: #2d6a4a; font-weight: 700; text-decoration: none; white-space: nowrap; }
+        .pp-make a:hover { text-decoration: underline; }
+        .pp-disc { font-size: 11.5px; color: #9a9aa8; line-height: 1.5; margin: 12px 0 0; }
+
+        /* Four nested paddings -- container 14, tool-box 18, results 25,
+           panel 18 -- left each row only 218px of a 375px screen, which is
+           what forced the wrapping. The panel spans the results card's own
+           padding on a phone instead of sitting inside it. */
         @media (max-width: 560px) {
-            .pp-row { flex-wrap: wrap; gap: 8px; }
-            .pp-name { flex: 1 1 100%; }
+            #results { padding: 16px 13px; }
+            .pp-panel {
+                margin-left: -13px; margin-right: -13px;
+                padding: 15px 13px; border-radius: 12px;
+            }
+            /* Side by side, four things competing for 278px left the product
+               name on three lines. Two rows instead: who it is on top, what
+               it costs you and what you can do with it underneath. */
+            .pp-row {
+                display: grid;
+                grid-template-columns: 42px minmax(0, 1fr) auto;
+                grid-template-areas: "mark name name" "mark pct act";
+                column-gap: 10px; row-gap: 8px; align-items: center;
+                padding: 13px 0;
+            }
+            .pp-mark {
+                grid-area: mark; align-self: start;
+                width: 42px; height: 42px; border-radius: 10px;
+            }
+            .pp-mark svg { width: 23px; height: 23px; }
+            .pp-mark img { width: 34px; height: 34px; }
+            .pp-name { grid-area: name; font-size: 14px; }
+            .pp-pct {
+                grid-area: pct; justify-self: start;
+                display: flex; align-items: baseline; gap: 5px;
+                padding: 4px 9px; font-size: 13px;
+            }
+            .pp-pct i { display: inline; font-size: 9.5px; white-space: nowrap; }
+            .pp-act { grid-area: act; flex-direction: row; align-items: center; gap: 13px; }
+            .pp-act .pick { width: 30px; height: 30px; font-size: 16px; }
         }
         .affiliate-disclosure {
             margin-top: 20px;
@@ -315,15 +404,22 @@
                     </div>
                 </div>
 
-                <div id="protein-products" style="display:none; margin-top:22px; padding:18px; background:#fff; border-radius:12px; border:1px solid #e0e0e0;">
-                    <div style="font-weight:700; color:#333; margin-bottom:4px;">Hitting <span id="pp-target">0</span>&nbsp;g a day</div>
-                    <p style="font-size:12.5px; color:#777; margin:0 0 14px; line-height:1.55;">
-                        Shelf-stable options, with what each one covers of <em>your</em> target.
-                        <br><strong>Affiliate disclosure:</strong> these are Amazon affiliate links &mdash; we may earn a small
-                        commission at no extra cost to you. It never changes what we list.
-                    </p>
+                <div id="protein-products" class="pp-panel" style="display:none;">
+                    <div class="pp-head">
+                        <b>Hitting <span id="pp-target">0</span>&nbsp;g a day</b>
+                        <span>Ready-made options, and what each covers of <em>your</em> target.
+                        Tap&nbsp;+ to build a list &mdash; nothing leaves this page until you are ready.</span>
+                    </div>
                     <div id="pp-list"></div>
-                    <p id="pp-combo" style="font-size:12.5px; color:#555; margin:12px 0 0; padding-top:12px; border-top:1px solid #eee;"></p>
+                    <p id="pp-combo"></p>
+                    <div class="pp-make">
+                        <b>Or make it.</b> Four whole meals with the protein counted, each with the
+                        ingredients ready to add to the same list.
+                        <a href="/dishes.html">Browse the dishes &rarr;</a>
+                    </div>
+                    <p class="pp-disc"><strong>Affiliate disclosure:</strong> product links are Amazon affiliate
+                    links &mdash; we may earn a small commission at no extra cost to you. It never changes
+                    what we list.</p>
                 </div>
 
                 <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 10px; border-left: 4px solid #ff9800;">
@@ -489,41 +585,50 @@
 
     <script>
 
-        // Product suggestions shown at the moment the target appears — the point
-        // where "how do I actually eat this much" becomes a real question.
-        // Percentages are computed against the user's own number so the list is
-        // useful information first and a purchase option second.
-        const PROTEIN_PRODUCTS = [
-            { name: 'Premier Protein shake',  serving: '11.5 oz bottle', g: 30, asin: 'B008JGIZGS' },
-            { name: 'Fairlife Core Power',    serving: '14 oz bottle',   g: 26, asin: 'B01DDIRDZA' },
-            { name: 'Whey protein powder',    serving: '1 scoop',        g: 25, asin: 'B000QSNYGI' },
-            { name: 'Quest protein bar',      serving: '1 bar',          g: 20, asin: 'B00DLDH1N2' },
-        ];
+        /* The ready-made shelf, shown the moment the target appears -- the point
+           where "how do I actually eat this much" becomes a real question.
+           Percentages are computed against the visitor's own number, so the
+           list is information first and a purchase second.
 
+           Products come from AmazonLinks.PRODUCTS. This function used to carry
+           its own array with a second copy of all four ASINs, which is exactly
+           how the last batch of dead links got in. */
         function renderProteinProducts(target) {
             if (!target || target <= 0) return;
+            window.__proteinTarget = target;
             document.getElementById('pp-target').textContent = target;
-            const list = document.getElementById('pp-list');
-            list.innerHTML = PROTEIN_PRODUCTS.map(function (p) {
-                const pct = Math.round((p.g / target) * 100);
-                const url = 'https://www.amazon.com/dp/' + p.asin + '?tag=m4quickquail-20';
-                return '<div class="pp-row">' +
-                    '<div class="pp-name">' + p.name +
-                        '<span class="pp-sub">' + p.serving + ' &middot; ' + p.g + ' g protein</span></div>' +
-                    '<div class="pp-pct">' + pct + '% of your target</div>' +
-                    '<a class="pp-buy" href="' + url + '" target="_blank" rel="sponsored nofollow noopener">View on Amazon &rarr;</a>' +
-                    '</div>';
+
+            document.getElementById('pp-list').innerHTML = AmazonLinks.PRODUCTS.map(function (p) {
+                var pct = Math.round((p.g / target) * 100);
+                var url = AmazonLinks.url(p.key);
+                return '<div class="pp-row">'
+                     + AmazonLinks.mark(p)
+                     + '<div class="pp-name">' + p.brand
+                     +   '<span class="pp-sub">' + p.kind + ' &middot; ' + p.serving
+                     +   ' &middot; ' + p.g + '&nbsp;g protein</span></div>'
+                     + '<div class="pp-pct">' + pct + '%<i>of target</i></div>'
+                     + '<div class="pp-act">'
+                     +   '<button type="button" class="pick" data-pick="' + p.key
+                     +     '" data-protein="' + p.g + '" aria-pressed="false">+</button>'
+                     +   '<a class="pp-buy" href="' + url + '" target="_blank"'
+                     +     ' rel="sponsored nofollow noopener">Amazon &rarr;</a>'
+                     + '</div>'
+                     + '</div>';
             }).join('');
 
             // Make the target feel reachable rather than abstract.
-            const best = PROTEIN_PRODUCTS[0];
-            const n = Math.max(1, Math.round((target * 0.4) / best.g));
+            var best = AmazonLinks.PRODUCTS[0];
+            var n = Math.max(1, Math.round((target * 0.4) / best.g));
             document.getElementById('pp-combo').innerHTML =
-                'On a day when food is unappealing, <strong>' + n + '&nbsp;\u00d7 ' + best.name + '</strong> covers about ' +
-                Math.round(((n * best.g) / target) * 100) + '% of your target on its own \u2014 the rest is easier to make up. ' +
-                'See the full <a href="/protein-foods.html" style="color:#667eea;font-weight:600;">everyday food guide</a>.';
+                'On a day when food is unappealing, <strong>' + n + '&nbsp;\u00d7 ' + best.brand
+                + '</strong> covers about ' + Math.round(((n * best.g) / target) * 100)
+                + '% of your target on its own \u2014 the rest is easier to make up. '
+                + 'See the full <a href="/protein-foods.html">everyday food guide</a>.';
 
             document.getElementById('protein-products').style.display = 'block';
+            // The tray reads the target for its running total, and the pickers
+            // need their +/checkmark set from whatever is already on the list.
+            if (window.ShoppingList) { ShoppingList.sync(); ShoppingList.render(); }
         }
 
         function toggleUnits() {
