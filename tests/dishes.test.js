@@ -17,7 +17,22 @@ const DATA = JSON.parse(fs.readFileSync(path.join(ROOT, 'dishes.json'), 'utf8'))
 const DISHES = DATA.dishes;
 const ALLOW_PLAIN = new Set(DATA.unlinkedByDesign || []);
 
-const ingredientsOf = d => [...(d.make || []), ...(d.buy || [])];
+const ROUTES = ['delivered', 'prepared', 'made'];
+const routesOf = m => ROUTES.filter(r => m[r]);
+const isLive = m => routesOf(m).some(r => m[r].reviewed);
+
+/* Every buyable line on a meal page, whichever route it came from. */
+const ingredientsOf = m => [
+  ...(m.made ? m.made.ingredients : []),
+  ...(m.prepared ? m.prepared.products : []),
+];
+
+/* Several tests below iterate a collection. If a rename empties that
+   collection they would pass by checking nothing, which is how a model change
+   silently removes coverage — so each one counts what it checked. */
+function counted(n, what) {
+  assert.ok(n > 0, `checked nothing: ${what}. A shape change has emptied the collection.`);
+}
 
 /* ------------------------------------------------------------ link map */
 
@@ -72,12 +87,51 @@ test('every ingredient is either linked or a recorded deliberate omission', () =
     'unlinked and unaccounted for — a typo, or add it to unlinkedByDesign:\n  ' + orphans.join('\n  '));
 });
 
-test('stated protein matches the sum of the ingredients', () => {
-  for (const d of DISHES) {
-    const sum = (d.make || []).reduce((a, i) => a + (i.protein || 0), 0);
-    assert.ok(Math.abs(sum - d.protein) <= 2,
-      `${d.slug}: page says ${d.protein} g, ingredients sum to ${sum} g`);
+test('a recipe\'s stated protein matches the sum of its ingredients', () => {
+  let n = 0;
+  for (const m of DISHES) {
+    if (!m.made) continue;
+    const sum = m.made.ingredients.reduce((a, i) => a + (i.protein || 0), 0);
+    assert.ok(Math.abs(m.made.protein - sum) <= 2,
+      `${m.slug}: made.protein ${m.made.protein} vs ingredients ${sum}`);
+    n++;
   }
+  counted(n, 'recipe protein sums');
+});
+
+test('a route never states a protein figure it cannot support', () => {
+  // The migration originally summed the two alternatives on the yogurt bowl
+  // and produced 51 g — a number nobody could eat, because you pick one.
+  // Alternatives carry no route total; a single named product may.
+  let n = 0;
+  for (const m of DISHES) {
+    const p = m.prepared;
+    if (!p) continue;
+    assert.ok(['substitutes', 'entree'].includes(p.kind), `${m.slug}: unknown prepared.kind`);
+    if (p.kind === 'substitutes' && p.products.length > 1) {
+      assert.equal(p.protein, null,
+        `${m.slug}: alternatives must not be summed into one protein figure`);
+    }
+    n++;
+  }
+  counted(n, 'prepared routes');
+});
+
+test('macros are either real numbers or null, never zero standing in for unknown', () => {
+  // A zero renders as a fact. Unknown renders as nothing.
+  let n = 0;
+  for (const m of DISHES) {
+    for (const r of routesOf(m)) {
+      for (const k of ['protein', 'calories', 'carbs', 'fat', 'fiber', 'sodium']) {
+        const v = m[r][k];
+        if (v === undefined || v === null) continue;
+        assert.ok(typeof v === 'number' && v > 0,
+          `${m.slug}.${r}.${k} is ${JSON.stringify(v)} — use null for unknown`);
+        n++;
+      }
+    }
+  }
+  counted(n, 'macro values');
 });
 
 test('every dish has its photograph on disk', () => {
@@ -103,41 +157,92 @@ test('slugs are unique and URL-safe', () => {
   }
 });
 
-test('a dish has at least one buy-it alternative', () => {
-  for (const d of DISHES) {
-    assert.ok((d.buy || []).length > 0,
-      `${d.slug} has no Buy it option, so the toggle shows an empty pane`);
-  }
-});
-
-/* ------------------------------------------------- review honesty */
-
-test('an unreviewed dish says so, and a reviewed one carries a real date', () => {
-  for (const d of DISHES) {
-    const html = fs.readFileSync(path.join(ROOT, `dish-${d.slug}.html`), 'utf8');
-    if (d.reviewed) {
-      assert.match(d.reviewed, /^\d{4}-\d{2}-\d{2}$/, `${d.slug}: reviewed must be a date`);
-      assert.ok(html.includes('review-banner reviewed'), `${d.slug} should show the reviewed banner`);
-    } else {
-      assert.ok(html.includes('review-banner unreviewed'),
-        `${d.slug} is unreviewed but does not say so`);
-      assert.ok(!html.includes('review-banner reviewed'),
-        `${d.slug} claims a review it has not had`);
+test('every meal offers at least one route, and names its slots', () => {
+  for (const m of DISHES) {
+    assert.ok(routesOf(m).length > 0, `${m.slug}: no delivered, prepared or made route`);
+    assert.ok(Array.isArray(m.slot) && m.slot.length,
+      `${m.slug}: no meal slot, so nothing can schedule it`);
+    for (const sl of m.slot) {
+      assert.ok(['breakfast', 'lunch', 'dinner', 'snack'].includes(sl),
+        `${m.slug}: unknown slot "${sl}"`);
     }
   }
+  counted(DISHES.length, 'meals');
 });
 
-test('no unreviewed dish is advertised in the sitemap', () => {
-  const xml = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
-  for (const d of DISHES) {
-    const url = `https://glp1-nav.com/dish-${d.slug}.html`;
-    if (d.reviewed) continue;
-    assert.ok(!xml.includes(url),
-      `${d.slug} is a draft but is in sitemap.xml — Google should not be sent an unreviewed recipe`);
+test('every preference tag is in the vocabulary', () => {
+  // A typo'd tag stops matching silently and the meal quietly vanishes from
+  // every plan — the same shape of fault as a mistyped ingredient losing its
+  // affiliate link, and just as invisible on the page.
+  const V = DATA._vocabulary;
+  const SINGLE = new Set(['temperature', 'aroma']);
+  let n = 0;
+  for (const m of DISHES) {
+    assert.ok(m.tags, `${m.slug}: no tags`);
+    for (const [axis, val] of Object.entries(m.tags)) {
+      assert.ok(V[axis], `${m.slug}: unknown preference axis "${axis}"`);
+      const vals = SINGLE.has(axis) ? [val] : val;
+      assert.ok(SINGLE.has(axis) ? typeof val === 'string' : Array.isArray(val),
+        `${m.slug}.${axis}: ${SINGLE.has(axis) ? 'expected one value' : 'expected a list'}`);
+      for (const v of vals) {
+        assert.ok(V[axis].includes(v), `${m.slug}.${axis}: "${v}" is not in the vocabulary`);
+        n++;
+      }
+    }
+    for (const axis of Object.keys(V)) {
+      assert.ok(axis in m.tags, `${m.slug}: missing the "${axis}" axis`);
+    }
   }
+  counted(n, 'preference tags');
 });
 
-/* ------------------------------------------------------ generated pages */
+test('an unreviewed route says so, and a reviewed one carries a real date', () => {
+  let n = 0;
+  for (const m of DISHES) {
+    const page = fs.readFileSync(path.join(ROOT, `dish-${m.slug}.html`), 'utf8');
+    for (const r of routesOf(m)) {
+      const d = m[r].reviewed;
+      assert.ok(d === null || typeof d === 'string',
+        `${m.slug}.${r}: reviewed must be a date string or null`);
+      if (d) assert.match(d, /^\d{4}-\d{2}-\d{2}$/, `${m.slug}.${r}: not a date`);
+      n++;
+    }
+    if (isLive(m)) {
+      assert.ok(!/review-banner unreviewed/.test(page) || routesOf(m).some(r => !m[r].reviewed),
+        `${m.slug}: has a reviewed route but the page warns about everything`);
+    } else {
+      assert.match(page, /review-banner unreviewed/,
+        `${m.slug}: nothing on it is reviewed, so it must say so`);
+      assert.ok(!/review-banner reviewed/.test(page),
+        `${m.slug}: claims a review that has not happened`);
+    }
+  }
+  counted(n, 'routes');
+});
+
+test('no meal without a reviewed route is advertised in the sitemap', () => {
+  const xml = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
+  let n = 0;
+  for (const m of DISHES) {
+    if (isLive(m)) continue;
+    assert.ok(!xml.includes(`/dish-${m.slug}.html`),
+      `${m.slug} has no reviewed route but is in the sitemap`);
+    n++;
+  }
+  counted(n, 'draft meals');
+});
+
+test('the delivered route stays dark until a programme approves', () => {
+  const P = require('../js/partners.js');
+  for (const m of DISHES) {
+    if (!m.delivered) continue;
+    assert.ok(P.isApproved(m.delivered.service),
+      `${m.slug} offers delivery from "${m.delivered.service}", which is not approved`);
+  }
+  // And the gate itself has to work, whether or not any meal uses it yet.
+  assert.equal(P.link('not-a-real-service'), null);
+  assert.equal(P.anchor('not-a-real-service'), '');
+});
 
 test('generated pages are not stale', () => {
   const { execFileSync } = require('node:child_process');

@@ -1,5 +1,61 @@
 {
-  "_note": "Source of truth for the dish pages. Run ops/build-dishes.py after editing. 'reviewed' is null until the staff dietitian has signed the dish off; unreviewed dishes render an amber banner and are left out of sitemap.xml. Never set a date here that she has not actually given.",
+  "_model": "A meal is one idea that can be obtained three ways. Each route is independently nullable and independently reviewed, because they arrive at different times and are different judgements: whether a delivery plan suits a GLP-1 appetite, whether a shelf-stable product is a sensible choice, and whether a recipe's arithmetic is right. A meal ships as soon as any one route is reviewed.",
+  "_routes": {
+    "delivered": "A subscription service ships it cooked. Highest protein, highest commission, needs an approved affiliate programme. null until one approves.",
+    "prepared": "Shelf-stable products from Amazon. Label nutrition, real ASINs, fits the existing multi-item cart.",
+    "made": "A recipe. Highest protein per pound, no commission beyond pantry items, gated on dietitian review."
+  },
+  "_macros": "carbs, fat and fiber are null until they come from a label or a sourced composition value. They are never estimated to fill the field -- a null renders as nothing, an invented number renders as a fact.",
+  "_prepared": "kind distinguishes what the products in this route are. 'substitutes' is a list of alternatives -- pick one -- carried over from the old buy[] list, and its route protein is null because summing alternatives would invent a number nobody could eat. 'entree' is a single prepared meal that stands in for the whole dish, and it carries real label nutrition. All four migrated meals are 'substitutes'; sourcing their entree twins is the next piece of work.",
+  "_preferences": "Preference is the hard problem here, and it is not the usual one. On a GLP-1, aversions move week to week -- meat aversion and metallic taste are characteristic, and cooking smells set off nausea. A one-time 'set your dietary preferences' onboarding, which is what every other meal planner does, is the wrong shape for this audience. The question is 'what can you not face today', asked every time, so a meal has to be tagged on the axes people actually reject on rather than the axes a recipe site indexes by.",
+  "_vocabulary": {
+    "protein": [
+      "chicken",
+      "turkey",
+      "beef",
+      "pork",
+      "fish",
+      "shellfish",
+      "egg",
+      "dairy",
+      "soy",
+      "legume",
+      "nut",
+      "whey"
+    ],
+    "texture": [
+      "soft",
+      "smooth",
+      "crunchy",
+      "chewy",
+      "liquid"
+    ],
+    "temperature": [
+      "hot",
+      "cold",
+      "either"
+    ],
+    "aroma": [
+      "none",
+      "low",
+      "strong"
+    ],
+    "diet": [
+      "dairy-free",
+      "gluten-free",
+      "vegetarian",
+      "vegan",
+      "pescatarian"
+    ],
+    "effort": [
+      "no-cook",
+      "one-pan",
+      "stovetop",
+      "oven",
+      "microwave"
+    ]
+  },
+  "_vocabularyNote": "temperature and aroma are single values; the rest are lists. Every value must appear in _vocabulary -- a typo'd tag silently stops matching and the meal quietly disappears from every plan, which is the same class of fault as a mistyped ingredient losing its affiliate link. A test enforces it. These are first-pass judgements and exactly the kind of thing the dietitian should correct, being a use of her time that checking arithmetic is not.",
   "_unlinkedNote": "Ingredients we deliberately do not link. Nobody needs an affiliate link for a lemon. Anything unlinked and NOT listed here fails tests/dishes.test.js, which is how a typo like 'Chicken breast' gets caught before it silently loses its link.",
   "unlinkedByDesign": [
     "Lemon",
@@ -11,196 +67,354 @@
       "title": "Seared salmon with lemony chickpeas",
       "short": "Salmon & chickpeas",
       "blurb": "A whole meal in one pan, and one of the easier things to face when appetite is low — the lemon cuts the richness that puts people off fish on a bad day.",
-      "protein": 36,
-      "calories": 480,
-      "handsOn": "15 min",
-      "serves": 1,
-      "reviewed": null,
       "image": "salmon-chickpeas",
-      "make": [
-        {
-          "name": "Salmon",
-          "qty": "1 fillet, about 140 g",
-          "protein": 28
-        },
-        {
-          "name": "Chickpeas",
-          "qty": "half a tin, drained",
-          "protein": 7
-        },
-        {
-          "name": "Baby spinach",
-          "qty": "two handfuls",
-          "protein": 1
-        },
-        {
-          "name": "Olive oil",
-          "qty": "1 tbsp",
-          "protein": 0
-        },
-        {
-          "name": "Lemon",
-          "qty": "half",
-          "protein": 0
-        }
+      "slot": [
+        "dinner",
+        "lunch"
       ],
-      "buy": [
-        {
-          "name": "Premier Protein Shake",
-          "note": "when even this is too much cooking",
-          "protein": 30
-        }
-      ],
-      "steps": [
-        "Warm the oil in a pan over a medium heat. Season the salmon and lay it in skin-side down.",
-        "Leave it four to five minutes without touching it, then turn and give it two more.",
-        "Lift the salmon out. Tip the chickpeas into the same pan with a squeeze of lemon and warm through.",
-        "Stir the spinach in until it just wilts, then put the salmon back on top."
-      ],
-      "tip": "On a nauseous day, serve it cold from the fridge the next morning. Cold fish is often easier than hot, and it loses nothing."
+      "tags": {
+        "protein": [
+          "fish",
+          "legume"
+        ],
+        "texture": [
+          "soft"
+        ],
+        "temperature": "either",
+        "aroma": "strong",
+        "diet": [
+          "dairy-free",
+          "gluten-free",
+          "pescatarian"
+        ],
+        "effort": [
+          "one-pan",
+          "stovetop"
+        ]
+      },
+      "delivered": null,
+      "prepared": {
+        "kind": "substitutes",
+        "products": [
+          {
+            "name": "Premier Protein Shake",
+            "note": "when even this is too much cooking",
+            "protein": 30
+          }
+        ],
+        "protein": null,
+        "calories": null,
+        "carbs": null,
+        "fat": null,
+        "fiber": null,
+        "sodium": null,
+        "reviewed": null
+      },
+      "made": {
+        "protein": 36,
+        "calories": 480,
+        "carbs": null,
+        "fat": null,
+        "fiber": null,
+        "handsOn": "15 min",
+        "serves": 1,
+        "ingredients": [
+          {
+            "name": "Salmon",
+            "qty": "1 fillet, about 140 g",
+            "protein": 28
+          },
+          {
+            "name": "Chickpeas",
+            "qty": "half a tin, drained",
+            "protein": 7
+          },
+          {
+            "name": "Baby spinach",
+            "qty": "two handfuls",
+            "protein": 1
+          },
+          {
+            "name": "Olive oil",
+            "qty": "1 tbsp",
+            "protein": 0
+          },
+          {
+            "name": "Lemon",
+            "qty": "half",
+            "protein": 0
+          }
+        ],
+        "steps": [
+          "Warm the oil in a pan over a medium heat. Season the salmon and lay it in skin-side down.",
+          "Leave it four to five minutes without touching it, then turn and give it two more.",
+          "Lift the salmon out. Tip the chickpeas into the same pan with a squeeze of lemon and warm through.",
+          "Stir the spinach in until it just wilts, then put the salmon back on top."
+        ],
+        "tip": "On a nauseous day, serve it cold from the fridge the next morning. Cold fish is often easier than hot, and it loses nothing.",
+        "reviewed": null
+      }
     },
     {
       "slug": "greek-yogurt-bowl",
       "title": "Cold protein bowl, no cooking",
       "short": "Cold yogurt bowl",
       "blurb": "For the mornings when the thought of cooking is worse than the thought of eating. Nothing here needs heat, and it takes about two minutes.",
-      "protein": 27,
-      "calories": 340,
-      "handsOn": "2 min",
-      "serves": 1,
-      "reviewed": null,
       "image": "greek-yogurt-bowl",
-      "make": [
-        {
-          "name": "Greek Yogurt",
-          "qty": "200 g, plain",
-          "protein": 20
-        },
-        {
-          "name": "Frozen berries",
-          "qty": "a small handful",
-          "protein": 1
-        },
-        {
-          "name": "Almonds",
-          "qty": "about 20 g",
-          "protein": 4
-        },
-        {
-          "name": "Chia seeds",
-          "qty": "1 tbsp",
-          "protein": 2
-        }
+      "slot": [
+        "breakfast",
+        "snack"
       ],
-      "buy": [
-        {
-          "name": "Fairlife Core Power",
-          "note": "the same idea in a bottle",
-          "protein": 26
-        },
-        {
-          "name": "Whey Protein Powder",
-          "note": "stir a scoop through the yogurt",
-          "protein": 25
-        }
-      ],
-      "steps": [
-        "Spoon the yogurt into a bowl.",
-        "Scatter the berries over — straight from frozen is fine, they thaw as you eat.",
-        "Add the almonds and chia and leave it a minute if you like it thicker."
-      ],
-      "tip": "Make it the night before. Half the battle on a bad morning is that nothing is ready."
+      "tags": {
+        "protein": [
+          "dairy",
+          "nut"
+        ],
+        "texture": [
+          "smooth",
+          "crunchy"
+        ],
+        "temperature": "cold",
+        "aroma": "none",
+        "diet": [
+          "gluten-free",
+          "vegetarian"
+        ],
+        "effort": [
+          "no-cook"
+        ]
+      },
+      "delivered": null,
+      "prepared": {
+        "kind": "substitutes",
+        "products": [
+          {
+            "name": "Fairlife Core Power",
+            "note": "the same idea in a bottle",
+            "protein": 26
+          },
+          {
+            "name": "Whey Protein Powder",
+            "note": "stir a scoop through the yogurt",
+            "protein": 25
+          }
+        ],
+        "protein": null,
+        "calories": null,
+        "carbs": null,
+        "fat": null,
+        "fiber": null,
+        "sodium": null,
+        "reviewed": null
+      },
+      "made": {
+        "protein": 27,
+        "calories": 340,
+        "carbs": null,
+        "fat": null,
+        "fiber": null,
+        "handsOn": "2 min",
+        "serves": 1,
+        "ingredients": [
+          {
+            "name": "Greek Yogurt",
+            "qty": "200 g, plain",
+            "protein": 20
+          },
+          {
+            "name": "Frozen berries",
+            "qty": "a small handful",
+            "protein": 1
+          },
+          {
+            "name": "Almonds",
+            "qty": "about 20 g",
+            "protein": 4
+          },
+          {
+            "name": "Chia seeds",
+            "qty": "1 tbsp",
+            "protein": 2
+          }
+        ],
+        "steps": [
+          "Spoon the yogurt into a bowl.",
+          "Scatter the berries over — straight from frozen is fine, they thaw as you eat.",
+          "Add the almonds and chia and leave it a minute if you like it thicker."
+        ],
+        "tip": "Make it the night before. Half the battle on a bad morning is that nothing is ready.",
+        "reviewed": null
+      }
     },
     {
       "slug": "chicken-lentil-traybake",
       "title": "Chicken and lentil traybake",
       "short": "Chicken & lentils",
       "blurb": "The highest-protein thing on this site for the least attention. Everything goes in one tin and the oven does the rest.",
-      "protein": 45,
-      "calories": 450,
-      "handsOn": "10 min",
-      "serves": 1,
-      "reviewed": null,
       "image": "chicken-lentil-traybake",
-      "make": [
-        {
-          "name": "Chicken Breast",
-          "qty": "1, about 150 g",
-          "protein": 34
-        },
-        {
-          "name": "Lentils",
-          "qty": "100 g cooked, or half a tin",
-          "protein": 9
-        },
-        {
-          "name": "Peppers and red onion",
-          "qty": "a couple of handfuls, chopped",
-          "protein": 2
-        },
-        {
-          "name": "Olive oil",
-          "qty": "1 tbsp",
-          "protein": 0
-        }
+      "slot": [
+        "dinner",
+        "lunch"
       ],
-      "buy": [
-        {
-          "name": "Quest Protein Bar",
-          "note": "for the days cooking is not happening",
-          "protein": 20
-        }
-      ],
-      "steps": [
-        "Heat the oven to 200 °C. Toss the vegetables with the oil in a roasting tin.",
-        "Sit the chicken on top, season, and give it 20 minutes.",
-        "Stir the lentils in around the chicken and return it for 5 minutes to warm through.",
-        "Check the chicken is cooked through before serving."
-      ],
-      "tip": "Cook two and keep one cold. A cooked chicken breast in the fridge is the difference between hitting your protein and giving up on it."
+      "tags": {
+        "protein": [
+          "chicken",
+          "legume"
+        ],
+        "texture": [
+          "soft",
+          "chewy"
+        ],
+        "temperature": "hot",
+        "aroma": "strong",
+        "diet": [
+          "dairy-free",
+          "gluten-free"
+        ],
+        "effort": [
+          "one-pan",
+          "oven"
+        ]
+      },
+      "delivered": null,
+      "prepared": {
+        "kind": "substitutes",
+        "products": [
+          {
+            "name": "Quest Protein Bar",
+            "note": "for the days cooking is not happening",
+            "protein": 20
+          }
+        ],
+        "protein": null,
+        "calories": null,
+        "carbs": null,
+        "fat": null,
+        "fiber": null,
+        "sodium": null,
+        "reviewed": null
+      },
+      "made": {
+        "protein": 45,
+        "calories": 450,
+        "carbs": null,
+        "fat": null,
+        "fiber": null,
+        "handsOn": "10 min",
+        "serves": 1,
+        "ingredients": [
+          {
+            "name": "Chicken Breast",
+            "qty": "1, about 150 g",
+            "protein": 34
+          },
+          {
+            "name": "Lentils",
+            "qty": "100 g cooked, or half a tin",
+            "protein": 9
+          },
+          {
+            "name": "Peppers and red onion",
+            "qty": "a couple of handfuls, chopped",
+            "protein": 2
+          },
+          {
+            "name": "Olive oil",
+            "qty": "1 tbsp",
+            "protein": 0
+          }
+        ],
+        "steps": [
+          "Heat the oven to 200 °C. Toss the vegetables with the oil in a roasting tin.",
+          "Sit the chicken on top, season, and give it 20 minutes.",
+          "Stir the lentils in around the chicken and return it for 5 minutes to warm through.",
+          "Check the chicken is cooked through before serving."
+        ],
+        "tip": "Cook two and keep one cold. A cooked chicken breast in the fridge is the difference between hitting your protein and giving up on it.",
+        "reviewed": null
+      }
     },
     {
       "slug": "cottage-cheese-scramble",
       "title": "Cottage cheese scramble",
       "short": "Cottage cheese scramble",
       "blurb": "Stirring cottage cheese through eggs adds protein without adding volume, which matters when a full plate is the problem.",
-      "protein": 30,
-      "calories": 330,
-      "handsOn": "8 min",
-      "serves": 1,
-      "reviewed": null,
       "image": "cottage-cheese-scramble",
-      "make": [
-        {
-          "name": "Whole Eggs",
-          "qty": "3 large",
-          "protein": 18
-        },
-        {
-          "name": "Cottage Cheese",
-          "qty": "100 g",
-          "protein": 11
-        },
-        {
-          "name": "Baby spinach",
-          "qty": "a handful",
-          "protein": 1
-        }
+      "slot": [
+        "breakfast",
+        "lunch"
       ],
-      "buy": [
-        {
-          "name": "Egg Whites",
-          "qty": "swap one egg for a splash",
-          "note": "more protein, less richness",
-          "protein": 4
-        }
-      ],
-      "steps": [
-        "Beat the eggs and season them.",
-        "Cook gently, stirring, and take the pan off the heat while they still look slightly underdone.",
-        "Fold the cottage cheese and spinach through — the residual heat finishes both."
-      ],
-      "tip": "Low and slow. Rushed scrambled eggs go rubbery, and rubbery eggs are very hard to eat on a bad day."
+      "tags": {
+        "protein": [
+          "egg",
+          "dairy"
+        ],
+        "texture": [
+          "soft"
+        ],
+        "temperature": "hot",
+        "aroma": "low",
+        "diet": [
+          "gluten-free",
+          "vegetarian"
+        ],
+        "effort": [
+          "one-pan",
+          "stovetop"
+        ]
+      },
+      "delivered": null,
+      "prepared": {
+        "kind": "substitutes",
+        "products": [
+          {
+            "name": "Egg Whites",
+            "qty": "swap one egg for a splash",
+            "note": "more protein, less richness",
+            "protein": 4
+          }
+        ],
+        "protein": null,
+        "calories": null,
+        "carbs": null,
+        "fat": null,
+        "fiber": null,
+        "sodium": null,
+        "reviewed": null
+      },
+      "made": {
+        "protein": 30,
+        "calories": 330,
+        "carbs": null,
+        "fat": null,
+        "fiber": null,
+        "handsOn": "8 min",
+        "serves": 1,
+        "ingredients": [
+          {
+            "name": "Whole Eggs",
+            "qty": "3 large",
+            "protein": 18
+          },
+          {
+            "name": "Cottage Cheese",
+            "qty": "100 g",
+            "protein": 11
+          },
+          {
+            "name": "Baby spinach",
+            "qty": "a handful",
+            "protein": 1
+          }
+        ],
+        "steps": [
+          "Beat the eggs and season them.",
+          "Cook gently, stirring, and take the pan off the heat while they still look slightly underdone.",
+          "Fold the cottage cheese and spinach through — the residual heat finishes both."
+        ],
+        "tip": "Low and slow. Rushed scrambled eggs go rubbery, and rubbery eggs are very hard to eat on a bad day.",
+        "reviewed": null
+      }
     }
   ]
 }

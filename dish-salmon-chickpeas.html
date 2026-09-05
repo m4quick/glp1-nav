@@ -43,19 +43,28 @@
             <h2>Seared salmon with lemony chickpeas</h2>
             <p class="dish-blurb">A whole meal in one pan, and one of the easier things to face when appetite is low — the lemon cuts the richness that puts people off fish on a bad day.</p>
 
+            <div class="dish-toggle">
+                <button type="button" data-tab="prepared">Buy it</button>
+                <button type="button" data-tab="made" class="on">Make it</button>
+            </div>
+            <section class="pane" data-pane="prepared" hidden>
+                <p class="pane-intro">Shortcuts for the days cooking is not going to happen. No pan, no washing up.</p>
+                <ul class="ings">
+                    <li class="ing" data-name="Premier Protein Shake" data-protein="30">
+                        <span class="ing-tx"><b>Premier Protein Shake</b><small>when even this is too much cooking</small></span>
+                        <span class="ing-g">30 g</span>
+                    </li>
+                </ul>
+                <button type="button" class="dish-cta" data-add-all="prepared">Add these to my list</button>
+            </section>
+
+            <section class="pane" data-pane="made">
             <div class="dish-macros">
                 <div><b>36 g</b><span>protein</span></div>
                 <div><b>480</b><span>calories</span></div>
                 <div><b>15 min</b><span>hands on</span></div>
                 <div><b>1</b><span>serves</span></div>
             </div>
-
-            <div class="dish-toggle">
-                <button type="button" data-tab="make" class="on">Make it</button>
-                <button type="button" data-tab="buy">Buy it</button>
-            </div>
-
-            <section class="pane" data-pane="make">
                 <ul class="ings">
                     <li class="ing" data-name="Salmon" data-protein="28">
                         <span class="ing-tx"><b>Salmon</b><small>1 fillet, about 140 g</small></span>
@@ -78,7 +87,7 @@
                         <span class="ing-g none">&mdash;</span>
                     </li>
                 </ul>
-                <button type="button" class="dish-cta" data-add-all="make">Add these to my list</button>
+                <button type="button" class="dish-cta" data-add-all="made">Add these to my list</button>
                 <h3>How</h3>
                 <ol class="steps">
                     <li>Warm the oil in a pan over a medium heat. Season the salmon and lay it in skin-side down.</li>
@@ -86,21 +95,8 @@
                     <li>Lift the salmon out. Tip the chickpeas into the same pan with a squeeze of lemon and warm through.</li>
                     <li>Stir the spinach in until it just wilts, then put the salmon back on top.</li>
                 </ol>
+                <div class="tip-box"><h4>&#128161; Worth knowing</h4><p>On a nauseous day, serve it cold from the fridge the next morning. Cold fish is often easier than hot, and it loses nothing.</p></div>
             </section>
-
-            <section class="pane" data-pane="buy" hidden>
-                <p class="pane-intro">Shortcuts for the days cooking is not going to happen. Similar protein, no pan.</p>
-                <ul class="ings">
-                    <li class="ing" data-name="Premier Protein Shake" data-protein="30">
-                        <span class="ing-tx"><b>Premier Protein Shake</b><small>when even this is too much cooking</small></span>
-                        <span class="ing-g">30 g</span>
-                    </li>
-                </ul>
-                <button type="button" class="dish-cta" data-add-all="buy">Add these to my list</button>
-            </section>
-
-            <div class="tip-box"><h4>&#128161; Worth knowing</h4><p>On a nauseous day, serve it cold from the fridge the next morning. Cold fish is often easier than hot, and it loses nothing.</p></div>
-
             <p class="dish-foot">Protein and calorie figures are estimates from standard food composition
             values for the quantities listed. They are not a nutrition prescription and your own portions
             will vary. Work out your daily target with the <a href="/protein-calculator.html">protein calculator</a>.</p>
@@ -129,6 +125,7 @@
             </p>
         </div>
     </footer>
+    <script src="/js/partners.js"></script>
     <script src="/js/dish.js"></script>
     <nav class="tabbar" aria-label="Sections">
         <a href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg><span class="lbl">Home</span></a>

@@ -178,3 +178,20 @@ test('the small controls keep a finger-sized tap area', () => {
   assert.match(read('protein-calculator.html'), /\.pp-buy \{[^}]*padding: 8px/,
     'the shelf Amazon link needs vertical padding to be tappable');
 });
+
+test('the published contact address is on a domain the business owns', () => {
+  // Affiliate networks and AdSense both read the contact page as evidence
+  // that a real business is behind the site. A free mail provider weakens
+  // that for no reason, and the m4quickstudios.com mailbox already works.
+  const FREE = /@(gmail|yahoo|hotmail|outlook|aol|icloud|proton(mail)?|gmx|mail)\./i;
+  const OWNED = /@(m4quickstudios\.com|glp1-nav\.com)$/i;
+  const found = [];
+  for (const p of pages) {
+    for (const m of read(p).matchAll(/mailto:([^"'?\s>]+)/g)) {
+      found.push([p, m[1]]);
+      assert.ok(!FREE.test(m[1]), `${p}: ${m[1]} is a free mail provider`);
+      assert.match(m[1], OWNED, `${p}: ${m[1]} is not on a domain M4Quick owns`);
+    }
+  }
+  assert.ok(found.length > 0, 'the site should publish a contact address somewhere');
+});

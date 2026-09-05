@@ -44,17 +44,70 @@ def nav(here):
     return "\n".join(rows)
 
 
-def banner(dish):
-    if dish.get("reviewed"):
+ROUTES = ("delivered", "prepared", "made")
+
+ROUTE_LABEL = {"delivered": "delivered", "prepared": "buy-it", "made": "recipe"}
+
+
+def routes_of(m):
+    """The routes this meal actually has, in display order."""
+    return [r for r in ROUTES if m.get(r)]
+
+
+def primary(m):
+    """The route the page opens on.
+
+    Display order is delivered, prepared, made — most convenience first, which
+    is the order people choose in. But the page should open on a route that can
+    actually tell you something: the four migrated meals carry only substitute
+    shakes under `prepared`, with no protein figure, so opening there would show
+    an empty macro strip. Primary is therefore the first route in display order
+    that has a protein figure, falling back to the first route present.
+
+    Once a real prepared entree is sourced with label nutrition, that meal opens
+    on `prepared` without any change here — which is the intended behaviour.
+    """
+    live = routes_of(m)
+    for r in live:
+        if m[r].get("protein"):
+            return r
+    return live[0]
+
+
+def is_live(m):
+    """A meal is publishable once any one of its routes has been reviewed.
+
+    Routes are reviewed separately because they are different judgements
+    arriving at different times: whether a product is a sensible choice is not
+    the same question as whether a recipe's arithmetic is right.
+    """
+    return any(m[r].get("reviewed") for r in routes_of(m))
+
+
+def banner(m):
+    live = routes_of(m)
+    unreviewed = [r for r in live if not m[r].get("reviewed")]
+
+    if not unreviewed:
+        dates = sorted({m[r]["reviewed"] for r in live})
         return ('    <div class="review-banner reviewed">\n'
                 '        <span class="rb-icon">&#9989;</span>\n'
-                f'        <span><strong>Reviewed by our staff dietitian on {e(dish["reviewed"])}.</strong>'
+                f'        <span><strong>Reviewed by our staff dietitian on {e(dates[-1])}.</strong>'
                 'General nutrition information, not personalised dietetic advice. '
                 '<a href="/about.html">Our editorial policy</a></span>\n'
                 '    </div>')
+
+    # Name what is unreviewed rather than damning the whole page. A meal whose
+    # product choice she has signed off but whose recipe she has not should say
+    # so, not carry a blanket warning that makes the reviewed half look unsafe.
+    what = " and ".join(ROUTE_LABEL[r] for r in unreviewed)
+    if len(unreviewed) == len(live):
+        lead = "Not yet reviewed by our dietitian."
+    else:
+        lead = f"The {what} on this page has not been reviewed yet."
     return ('    <div class="review-banner unreviewed">\n'
             '        <span class="rb-icon">&#9888;&#65039;</span>\n'
-            '        <span><strong>Not yet reviewed by our dietitian.</strong>'
+            f'        <span><strong>{e(lead)}</strong>'
             'Published as a draft while it waits for review. Protein and calorie figures are '
             'estimates from standard food composition values and may change. '
             '<a href="/about.html">How we source this</a></span>\n'
@@ -110,39 +163,8 @@ TEMPLATE = """<!DOCTYPE html>
             <h2>{title}</h2>
             <p class="dish-blurb">{blurb}</p>
 
-            <div class="dish-macros">
-                <div><b>{protein} g</b><span>protein</span></div>
-                <div><b>{calories}</b><span>calories</span></div>
-                <div><b>{hands_on}</b><span>hands on</span></div>
-                <div><b>{serves}</b><span>serves</span></div>
-            </div>
-
-            <div class="dish-toggle">
-                <button type="button" data-tab="make" class="on">Make it</button>
-                <button type="button" data-tab="buy">Buy it</button>
-            </div>
-
-            <section class="pane" data-pane="make">
-                <ul class="ings">
-{make_rows}
-                </ul>
-                <button type="button" class="dish-cta" data-add-all="make">Add these to my list</button>
-                <h3>How</h3>
-                <ol class="steps">
-{steps}
-                </ol>
-            </section>
-
-            <section class="pane" data-pane="buy" hidden>
-                <p class="pane-intro">Shortcuts for the days cooking is not going to happen. Similar protein, no pan.</p>
-                <ul class="ings">
-{buy_rows}
-                </ul>
-                <button type="button" class="dish-cta" data-add-all="buy">Add these to my list</button>
-            </section>
-
-            <div class="tip-box"><h4>&#128161; Worth knowing</h4><p>{tip}</p></div>
-
+{toggle}
+{panes}
             <p class="dish-foot">Protein and calorie figures are estimates from standard food composition
             values for the quantities listed. They are not a nutrition prescription and your own portions
             will vary. Work out your daily target with the <a href="/protein-calculator.html">protein calculator</a>.</p>
@@ -162,29 +184,133 @@ TEMPLATE = """<!DOCTYPE html>
             </p>
         </div>
     </footer>
+    <script src="/js/partners.js"></script>
     <script src="/js/dish.js"></script>
 </body>
 </html>
 """
 
 
+def macros(m, route):
+    """The macro strip for one route, rendered inside that route's pane.
+
+    It used to sit above the toggle and describe whichever route the page
+    opened on, which meant switching to "Buy it" left the recipe's protein
+    figure on screen above a completely different product. Per-pane is both
+    correct and free of JavaScript.
+
+    Only figures that exist are printed. A null carbs value renders as nothing
+    at all rather than a dash or a zero, because a zero is a claim.
+    """
+    r = m[route]
+    cells = []
+    if r.get("protein"):
+        cells.append(("%s g" % r["protein"], "protein"))
+    if r.get("calories"):
+        cells.append((str(r["calories"]), "calories"))
+    if r.get("handsOn"):
+        cells.append((r["handsOn"], "hands on"))
+    if r.get("serves"):
+        cells.append((str(r["serves"]), "serves"))
+    for key, label in (("carbs", "carbs"), ("fat", "fat"), ("fiber", "fibre")):
+        if r.get(key):
+            cells.append(("%s g" % r[key], label))
+    if not cells:
+        return ""
+    rows = "\n".join(f'                <div><b>{e(v)}</b><span>{label}</span></div>'
+                     for v, label in cells)
+    return '            <div class="dish-macros">\n' + rows + '\n            </div>\n'
+
+
+
+TAB_LABEL = {"delivered": "Have it delivered", "prepared": "Buy it", "made": "Make it"}
+
+
+def toggle(m):
+    live = routes_of(m)
+    if len(live) < 2:
+        return ""                      # one route is not a choice
+    first = primary(m)
+    out = ['            <div class="dish-toggle">']
+    for r in live:
+        on = ' class="on"' if r == first else ""
+        out.append(f'                <button type="button" data-tab="{r}"{on}>{TAB_LABEL[r]}</button>')
+    out.append("            </div>")
+    return "\n".join(out)
+
+
+PANE_INTRO = {
+    "prepared": "Shortcuts for the days cooking is not going to happen. No pan, no washing up.",
+    "delivered": "Cooked and sent to you. No shopping either.",
+}
+
+
+def pane(m, route, first):
+    r = m[route]
+    hidden = "" if first else " hidden"
+    out = [f'            <section class="pane" data-pane="{route}"{hidden}>']
+    strip = macros(m, route)
+    if strip:
+        out.append(strip.rstrip("\n"))
+
+    if route == "made":
+        out.append('                <ul class="ings">')
+        out.append(ingredient_rows(r["ingredients"]))
+        out.append('                </ul>')
+        out.append('                <button type="button" class="dish-cta" '
+                   'data-add-all="made">Add these to my list</button>')
+        out.append('                <h3>How</h3>')
+        out.append('                <ol class="steps">')
+        out.extend(f'                    <li>{e(step)}</li>' for step in r["steps"])
+        out.append('                </ol>')
+        if r.get("tip"):
+            out.append('                <div class="tip-box"><h4>&#128161; Worth knowing</h4>'
+                       f'<p>{e(r["tip"])}</p></div>')
+
+    elif route == "prepared":
+        out.append(f'                <p class="pane-intro">{PANE_INTRO["prepared"]}</p>')
+        if r.get("kind") == "substitutes" and len(r["products"]) > 1:
+            out.append('                <p class="pane-intro">Pick one — these are '
+                       'alternatives, not a shopping list.</p>')
+        out.append('                <ul class="ings">')
+        out.append(ingredient_rows(r["products"]))
+        out.append('                </ul>')
+        out.append('                <button type="button" class="dish-cta" '
+                   'data-add-all="prepared">Add these to my list</button>')
+
+    elif route == "delivered":
+        # Rendered but inert until Partners says the service is approved.
+        # dish.js removes it otherwise, so an unapproved link never appears.
+        out.append(f'                <p class="pane-intro">{PANE_INTRO["delivered"]}</p>')
+        out.append(f'                <div class="deliver" data-service="{e(r["service"])}" '
+                   f'data-plan="{e(r.get("plan", ""))}" hidden></div>')
+
+    out.append('            </section>')
+    return "\n".join(out)
+
+
+def panes(m):
+    first = primary(m)
+    return "\n\n".join(pane(m, r, r == first) for r in routes_of(m))
+
+
 def render(d):
     return shell.apply(_render(d), f'dish-{d["slug"]}.html')
 
 
-def _render(d):
+def _render(m):
+    first = m[primary(m)]
+    bits = [f'{first["protein"]} g protein' if first.get("protein") else None,
+            f'{first["calories"]} calories' if first.get("calories") else None,
+            f'{first["handsOn"]} hands on' if first.get("handsOn") else None]
+    summary = ", ".join(b for b in bits if b)
     return TEMPLATE.format(
-        slug=d["slug"], title=e(d["title"]), short=e(d["short"]),
-        desc=e(f'{d["title"]} — {d["protein"]} g protein, {d["calories"]} calories, '
-               f'{d["handsOn"]} hands on. Buy the shortcut or make it from fresh, for GLP-1 appetites.'),
-        blurb=e(d["blurb"]), protein=d["protein"], calories=d["calories"],
-        hands_on=e(d["handsOn"]), serves=d["serves"], image=e(d["image"]),
-        navlinks=nav("/dishes.html"), banner=banner(d),
-        make_rows=ingredient_rows(d["make"]),
-        buy_rows=ingredient_rows(d["buy"]),
-        steps="\n".join(f"                    <li>{e(s)}</li>" for s in d["steps"]),
-        tip=e(d["tip"]))
-
+        slug=m["slug"], title=e(m["title"]), short=e(m["short"]),
+        desc=e(f'{m["title"]} — {summary}. '
+               f'Buy the shortcut or make it from fresh, for GLP-1 appetites.'),
+        blurb=e(m["blurb"]), image=e(m["image"]),
+        navlinks=nav("/dishes.html"), banner=banner(m),
+        toggle=toggle(m), panes=panes(m))
 
 
 INDEX_TEMPLATE = """<!DOCTYPE html>
@@ -257,16 +383,24 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
 """
 
 
-def card(d):
-    draft = ' <span class="draft">draft</span>' if not d.get("reviewed") else ""
-    return (f'                <a class="dish-card" href="/dish-{d["slug"]}.html">\n'
-            f'                    <img src="/images/dishes/{e(d["image"])}.webp" alt="" '
+def card(m):
+    draft = ' <span class="draft">draft</span>' if not is_live(m) else ""
+    r = m[primary(m)]
+    meta = " &middot; ".join(x for x in (
+        f'{r["protein"]} g protein' if r.get("protein") else "",
+        f'{r["calories"]} cal' if r.get("calories") else "",
+        e(r["handsOn"]) if r.get("handsOn") else "",
+    ) if x)
+    ways = len(routes_of(m))
+    if ways > 1:
+        meta += f' &middot; {ways} ways'
+    return (f'                <a class="dish-card" href="/dish-{m["slug"]}.html">\n'
+            f'                    <img src="/images/dishes/{e(m["image"])}.webp" alt="" '
             f'loading="lazy" width="520" height="390">\n'
             f'                    <span class="c">\n'
-            f'                        <b>{e(d["title"])}{draft}</b>\n'
-            f'                        <small>{e(d["blurb"])}</small>\n'
-            f'                        <span class="meta">{d["protein"]} g protein &middot; '
-            f'{d["calories"]} cal &middot; {e(d["handsOn"])}</span>\n'
+            f'                        <b>{e(m["title"])}{draft}</b>\n'
+            f'                        <small>{e(m["blurb"])}</small>\n'
+            f'                        <span class="meta">{meta}</span>\n'
             f'                    </span>\n'
             f'                </a>')
 
@@ -278,11 +412,16 @@ def render_index(dishes):
 
 
 def update_sitemap(dishes):
-    """Only reviewed dishes go in. A draft should not be advertised to Google."""
+    """A meal enters once any one of its routes is reviewed.
+
+    A page whose product choice she has signed off is worth indexing even if
+    its recipe is still a draft — the page says which is which. A page with
+    nothing reviewed on it stays out.
+    """
     path = os.path.join(ROOT, "sitemap.xml")
     xml = open(path, encoding="utf-8").read()
     wanted = ["https://glp1-nav.com/dishes.html"] + [
-        f'https://glp1-nav.com/dish-{d["slug"]}.html' for d in dishes if d.get("reviewed")]
+        f'https://glp1-nav.com/dish-{d["slug"]}.html' for d in dishes if is_live(d)]
     existing = set(re.findall(r"<loc>\s*([^<\s]+)", xml))
     added = [u for u in wanted if u not in existing]
     if not added:
@@ -309,7 +448,7 @@ def main():
             print(f"  ~ dish-{d['slug']}.html STALE")
             continue
         open(path, "w", encoding="utf-8").write(out)
-        draft = "  (draft, awaiting review)" if not d.get("reviewed") else ""
+        draft = "  (draft, awaiting review)" if not is_live(d) else ""
         print(f"  {'+' if old is None else '~'} dish-{d['slug']}.html{draft}")
     idx = os.path.join(ROOT, "dishes.html")
     out = render_index(data)
@@ -326,7 +465,7 @@ def main():
         added = update_sitemap(data)
         for u in added:
             print(f"  + sitemap: {u}")
-        drafts = [d["slug"] for d in data if not d.get("reviewed")]
+        drafts = [d["slug"] for d in data if not is_live(d)]
         if drafts:
             print(f"  · {len(drafts)} draft(s) held back from sitemap.xml: {', '.join(drafts)}")
 

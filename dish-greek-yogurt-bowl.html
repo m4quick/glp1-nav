@@ -43,19 +43,33 @@
             <h2>Cold protein bowl, no cooking</h2>
             <p class="dish-blurb">For the mornings when the thought of cooking is worse than the thought of eating. Nothing here needs heat, and it takes about two minutes.</p>
 
+            <div class="dish-toggle">
+                <button type="button" data-tab="prepared">Buy it</button>
+                <button type="button" data-tab="made" class="on">Make it</button>
+            </div>
+            <section class="pane" data-pane="prepared" hidden>
+                <p class="pane-intro">Shortcuts for the days cooking is not going to happen. No pan, no washing up.</p>
+                <p class="pane-intro">Pick one — these are alternatives, not a shopping list.</p>
+                <ul class="ings">
+                    <li class="ing" data-name="Fairlife Core Power" data-protein="26">
+                        <span class="ing-tx"><b>Fairlife Core Power</b><small>the same idea in a bottle</small></span>
+                        <span class="ing-g">26 g</span>
+                    </li>
+                    <li class="ing" data-name="Whey Protein Powder" data-protein="25">
+                        <span class="ing-tx"><b>Whey Protein Powder</b><small>stir a scoop through the yogurt</small></span>
+                        <span class="ing-g">25 g</span>
+                    </li>
+                </ul>
+                <button type="button" class="dish-cta" data-add-all="prepared">Add these to my list</button>
+            </section>
+
+            <section class="pane" data-pane="made">
             <div class="dish-macros">
                 <div><b>27 g</b><span>protein</span></div>
                 <div><b>340</b><span>calories</span></div>
                 <div><b>2 min</b><span>hands on</span></div>
                 <div><b>1</b><span>serves</span></div>
             </div>
-
-            <div class="dish-toggle">
-                <button type="button" data-tab="make" class="on">Make it</button>
-                <button type="button" data-tab="buy">Buy it</button>
-            </div>
-
-            <section class="pane" data-pane="make">
                 <ul class="ings">
                     <li class="ing" data-name="Greek Yogurt" data-protein="20">
                         <span class="ing-tx"><b>Greek Yogurt</b><small>200 g, plain</small></span>
@@ -74,32 +88,15 @@
                         <span class="ing-g">2 g</span>
                     </li>
                 </ul>
-                <button type="button" class="dish-cta" data-add-all="make">Add these to my list</button>
+                <button type="button" class="dish-cta" data-add-all="made">Add these to my list</button>
                 <h3>How</h3>
                 <ol class="steps">
                     <li>Spoon the yogurt into a bowl.</li>
                     <li>Scatter the berries over — straight from frozen is fine, they thaw as you eat.</li>
                     <li>Add the almonds and chia and leave it a minute if you like it thicker.</li>
                 </ol>
+                <div class="tip-box"><h4>&#128161; Worth knowing</h4><p>Make it the night before. Half the battle on a bad morning is that nothing is ready.</p></div>
             </section>
-
-            <section class="pane" data-pane="buy" hidden>
-                <p class="pane-intro">Shortcuts for the days cooking is not going to happen. Similar protein, no pan.</p>
-                <ul class="ings">
-                    <li class="ing" data-name="Fairlife Core Power" data-protein="26">
-                        <span class="ing-tx"><b>Fairlife Core Power</b><small>the same idea in a bottle</small></span>
-                        <span class="ing-g">26 g</span>
-                    </li>
-                    <li class="ing" data-name="Whey Protein Powder" data-protein="25">
-                        <span class="ing-tx"><b>Whey Protein Powder</b><small>stir a scoop through the yogurt</small></span>
-                        <span class="ing-g">25 g</span>
-                    </li>
-                </ul>
-                <button type="button" class="dish-cta" data-add-all="buy">Add these to my list</button>
-            </section>
-
-            <div class="tip-box"><h4>&#128161; Worth knowing</h4><p>Make it the night before. Half the battle on a bad morning is that nothing is ready.</p></div>
-
             <p class="dish-foot">Protein and calorie figures are estimates from standard food composition
             values for the quantities listed. They are not a nutrition prescription and your own portions
             will vary. Work out your daily target with the <a href="/protein-calculator.html">protein calculator</a>.</p>
@@ -128,6 +125,7 @@
             </p>
         </div>
     </footer>
+    <script src="/js/partners.js"></script>
     <script src="/js/dish.js"></script>
     <nav class="tabbar" aria-label="Sections">
         <a href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg><span class="lbl">Home</span></a>
