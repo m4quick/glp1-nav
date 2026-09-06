@@ -148,13 +148,37 @@ def bullets(items, cls=""):
 
 
 def sources_block(sym):
+    """Each source states what it was checked as supporting, so a reader can
+    tell which sentence rests on which document."""
     rows = []
     for s in sym.get("sources", []):
         mark = "" if s.get("verified") else ' <em>(citation not yet verified)</em>'
         link = (f'<a href="{e(s["url"])}" target="_blank" rel="noopener">{e(s["label"])}</a>'
                 if s.get("url") else e(s["label"]))
-        rows.append(f"                    <li>{link}{mark}</li>")
+        sup = s.get("supports") or []
+        detail = (f'<br><span class="supports">Checked for: {e("; ".join(sup))}</span>'
+                  if sup else "")
+        rows.append(f"                    <li>{link}{mark}{detail}</li>")
     return "\n".join(rows)
+
+
+def not_in_label(sym):
+    """The parts of the explanation the labels do not cover.
+
+    Every article currently outranking this site states these as though they
+    were documented. Saying which half is patient experience rather than
+    prescribing information is the one thing here nobody else does."""
+    items = sym.get("notInLabel") or []
+    if not items:
+        return ""
+    lis = "\n".join(f"                    <li>{e(x)}</li>" for x in items)
+    return ('            <section class="sx caveat">\n'
+            '                <h3>What the label does not say</h3>\n'
+            '                <p>Some of this comes from what people taking these '
+            'medicines describe, not from the prescribing information. It is '
+            'worth knowing which is which.</p>\n'
+            f'                <ul>\n{lis}\n                </ul>\n'
+            '            </section>\n')
 
 
 TEMPLATE = """<!DOCTYPE html>
@@ -224,6 +248,7 @@ TEMPLATE = """<!DOCTYPE html>
                 </div>
             </section>
 
+{not_in_label}
             <div class="also">
                 <h3>People often have more than one of these</h3>
                 <div class="also-list">
@@ -279,6 +304,7 @@ def render(sym, matched, by_slug, siblings):
         helps=bullets(sym["helps"]), red_flags=bullets(sym["redFlags"], "flags"),
         meal_intro=intro, meals=meal_rows(matched, by_slug),
         sources=sources_block(sym), also=also_links(sym, siblings),
+        not_in_label=not_in_label(sym),
         navlinks=shell.nav(""), banner=banner(sym),
     ), f'symptom-{sym["slug"]}.html')
 

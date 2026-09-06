@@ -195,3 +195,18 @@ test('the published contact address is on a domain the business owns', () => {
   }
   assert.ok(found.length > 0, 'the site should publish a contact address somewhere');
 });
+
+test('every page carries the analytics beacon exactly once', () => {
+  // A rebuild silently stripped this from nine generated pages, because it had
+  // been hand-added to the HTML and the generators regenerate wholesale. It
+  // now has one definition in apply-shell.py. Twice on a page would also
+  // double-count every visit.
+  // The Google Search Console verification file is a bare token, not a page.
+  // Putting a script tag in it risks the verification itself.
+  const bad = [];
+  for (const p of pages.filter((f) => !f.startsWith('google'))) {
+    const n = (read(p).match(/cloudflareinsights\.com\/beacon/g) || []).length;
+    if (n !== 1) bad.push(`${p}: ${n} beacons`);
+  }
+  assert.deepEqual(bad, [], `beacon problems:\n  ${bad.join('\n  ')}`);
+});

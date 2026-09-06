@@ -143,8 +143,6 @@ TEMPLATE = """<!DOCTYPE html>
     <script src="/js/shopping-list.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8510922003408038"
      crossorigin="anonymous"></script>
-    <!-- Cloudflare Web Analytics -->
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "7357863b516646859f45fadbd7c656d4"}'></script>
 </head>
 <body>
     <header>
@@ -327,8 +325,6 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
     <link rel="stylesheet" href="/dishes.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8510922003408038"
      crossorigin="anonymous"></script>
-    <!-- Cloudflare Web Analytics -->
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "7357863b516646859f45fadbd7c656d4"}'></script>
 </head>
 <body>
     <header>

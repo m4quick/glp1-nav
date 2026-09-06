@@ -30,20 +30,39 @@
       "minMeals": 4,
       "sources": [
         {
-          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
-          "url": null,
-          "verified": false
+          "label": "FDA label, semaglutide (Ozempic) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=adec4fd2-6858-4c99-91d4-531f5f2a2d79",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 15.8-20.3% vs 6.1% placebo",
+            "constipation 3.1-5.0%",
+            "dysgeusia >0.4%",
+            "eructation 2.7%",
+            "fatigue >0.4%"
+          ]
         },
         {
-          "label": "FDA prescribing information, tirzepatide (Mounjaro/Zepbound)",
-          "url": null,
-          "verified": false
+          "label": "FDA label, tirzepatide (Zepbound) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=487cd7e7-434c-4925-99fa-aa80b1cc776b",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 8-29%",
+            "constipation 5-17%",
+            "dysgeusia 0.4%",
+            "eructation 1-5%",
+            "fatigue 3-7%"
+          ]
         }
       ],
       "reviewed": {
         "nutrition": null,
         "clinical": null
-      }
+      },
+      "notInLabel": []
     },
     {
       "slug": "meat-tastes-metallic",
@@ -74,15 +93,27 @@
       "minMeals": 4,
       "sources": [
         {
-          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
-          "url": null,
-          "verified": false
+          "label": "FDA label, semaglutide (Ozempic) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=adec4fd2-6858-4c99-91d4-531f5f2a2d79",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 15.8-20.3% vs 6.1% placebo",
+            "constipation 3.1-5.0%",
+            "dysgeusia >0.4%",
+            "eructation 2.7%",
+            "fatigue >0.4%"
+          ]
         }
       ],
       "reviewed": {
         "nutrition": null,
         "clinical": null
-      }
+      },
+      "notInLabel": [
+        "That the taste change affects red meat in particular. The labels record dysgeusia, an altered sense of taste, without saying which foods."
+      ]
     },
     {
       "slug": "cooking-smells-nausea",
@@ -111,20 +142,41 @@
       "minMeals": 4,
       "sources": [
         {
-          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
-          "url": null,
-          "verified": false
+          "label": "FDA label, semaglutide (Ozempic) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=adec4fd2-6858-4c99-91d4-531f5f2a2d79",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 15.8-20.3% vs 6.1% placebo",
+            "constipation 3.1-5.0%",
+            "dysgeusia >0.4%",
+            "eructation 2.7%",
+            "fatigue >0.4%"
+          ]
         },
         {
-          "label": "FDA prescribing information, tirzepatide (Mounjaro/Zepbound)",
-          "url": null,
-          "verified": false
+          "label": "FDA label, tirzepatide (Zepbound) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=487cd7e7-434c-4925-99fa-aa80b1cc776b",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 8-29%",
+            "constipation 5-17%",
+            "dysgeusia 0.4%",
+            "eructation 1-5%",
+            "fatigue 3-7%"
+          ]
         }
       ],
       "reviewed": {
         "nutrition": null,
         "clinical": null
-      }
+      },
+      "notInLabel": [
+        "That sensitivity to smell increases. Nausea is documented; heightened smell is widely described by people taking these medicines but is not a listed adverse reaction."
+      ]
     },
     {
       "slug": "cannot-cook-today",
@@ -153,15 +205,27 @@
       "minMeals": 4,
       "sources": [
         {
-          "label": "NIDDK, National Institute of Diabetes and Digestive and Kidney Diseases",
-          "url": null,
-          "verified": false
+          "label": "FDA label, semaglutide (Ozempic) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=adec4fd2-6858-4c99-91d4-531f5f2a2d79",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 15.8-20.3% vs 6.1% placebo",
+            "constipation 3.1-5.0%",
+            "dysgeusia >0.4%",
+            "eructation 2.7%",
+            "fatigue >0.4%"
+          ]
         }
       ],
       "reviewed": {
         "nutrition": null,
         "clinical": null
-      }
+      },
+      "notInLabel": [
+        "That protein protects muscle during rapid weight loss. That is nutrition guidance rather than anything in the medicine's label, and it sits under our dietitian's review, not this citation."
+      ]
     },
     {
       "slug": "constipation",
@@ -187,20 +251,25 @@
       "minMeals": 4,
       "sources": [
         {
-          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
-          "url": null,
-          "verified": false
-        },
-        {
-          "label": "NIDDK, National Institute of Diabetes and Digestive and Kidney Diseases",
-          "url": null,
-          "verified": false
+          "label": "FDA label, semaglutide (Ozempic) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=adec4fd2-6858-4c99-91d4-531f5f2a2d79",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 15.8-20.3% vs 6.1% placebo",
+            "constipation 3.1-5.0%",
+            "dysgeusia >0.4%",
+            "eructation 2.7%",
+            "fatigue >0.4%"
+          ]
         }
       ],
       "reviewed": {
         "nutrition": null,
         "clinical": null
-      }
+      },
+      "notInLabel": []
     },
     {
       "slug": "dairy-stopped-agreeing",
@@ -228,15 +297,27 @@
       "minMeals": 4,
       "sources": [
         {
-          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
-          "url": null,
-          "verified": false
+          "label": "FDA label, semaglutide (Ozempic) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=adec4fd2-6858-4c99-91d4-531f5f2a2d79",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 15.8-20.3% vs 6.1% placebo",
+            "constipation 3.1-5.0%",
+            "dysgeusia >0.4%",
+            "eructation 2.7%",
+            "fatigue >0.4%"
+          ]
         }
       ],
       "reviewed": {
         "nutrition": null,
         "clinical": null
-      }
+      },
+      "notInLabel": [
+        "That dairy in particular becomes harder to tolerate. Nothing in either label names a food group. This is what people report."
+      ]
     },
     {
       "slug": "only-cold-food",
@@ -264,15 +345,27 @@
       "minMeals": 4,
       "sources": [
         {
-          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
-          "url": null,
-          "verified": false
+          "label": "FDA label, semaglutide (Ozempic) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=adec4fd2-6858-4c99-91d4-531f5f2a2d79",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 15.8-20.3% vs 6.1% placebo",
+            "constipation 3.1-5.0%",
+            "dysgeusia >0.4%",
+            "eructation 2.7%",
+            "fatigue >0.4%"
+          ]
         }
       ],
       "reviewed": {
         "nutrition": null,
         "clinical": null
-      }
+      },
+      "notInLabel": [
+        "That cold food is easier than hot. There is no label support for this at all. It is reported often enough by people taking these medicines to be worth writing down, and that is the whole basis for it."
+      ]
     },
     {
       "slug": "sulphur-burps",
@@ -296,20 +389,42 @@
       "minMeals": 4,
       "sources": [
         {
-          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
-          "url": null,
-          "verified": false
+          "label": "FDA label, semaglutide (Ozempic) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=adec4fd2-6858-4c99-91d4-531f5f2a2d79",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 15.8-20.3% vs 6.1% placebo",
+            "constipation 3.1-5.0%",
+            "dysgeusia >0.4%",
+            "eructation 2.7%",
+            "fatigue >0.4%"
+          ]
         },
         {
-          "label": "FDA prescribing information, tirzepatide (Mounjaro/Zepbound)",
-          "url": null,
-          "verified": false
+          "label": "FDA label, tirzepatide (Zepbound) — DailyMed",
+          "url": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=487cd7e7-434c-4925-99fa-aa80b1cc776b",
+          "verified": true,
+          "checked": "2026-09-06",
+          "supports": [
+            "delays gastric emptying",
+            "nausea 8-29%",
+            "constipation 5-17%",
+            "dysgeusia 0.4%",
+            "eructation 1-5%",
+            "fatigue 3-7%"
+          ]
         }
       ],
       "reviewed": {
         "nutrition": null,
         "clinical": null
-      }
+      },
+      "notInLabel": [
+        "That the burps taste of sulphur. The labels record eructation — belching — without describing a taste."
+      ]
     }
-  ]
+  ],
+  "_claims": "sources carry what they actually support, checked against the label text rather than assumed. notInLabel carries the opposite: the parts of the explanation the labels do not cover. Verifying the citations produced that second list, and it is the most useful thing on these pages -- the articles currently outranking this site state all of it as though it were documented."
 }

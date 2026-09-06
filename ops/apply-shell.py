@@ -50,6 +50,22 @@ VIEWPORT_OLD = '<meta name="viewport" content="width=device-width, initial-scale
 VIEWPORT_NEW = ('<meta name="viewport" '
                 'content="width=device-width, initial-scale=1.0, viewport-fit=cover">')
 
+# Cloudflare Web Analytics.
+#
+# Added to the hand-written pages by another session working on the
+# monetisation question. It has to live here too, because build-dishes.py and
+# build-symptoms.py regenerate their pages wholesale -- a rebuild silently
+# stripped it from nine generated pages before this was added, and nothing
+# about those pages looked wrong afterwards.
+#
+# NOTE: Cloudflare also injects this beacon at the edge for these zones, which
+# is verified working. Carrying it in the HTML as well may mean two beacons on
+# one page. Worth checking a live page after the next deploy and switching the
+# zone setting to "Enable with JS Snippet installation" if it double-counts.
+CF_BEACON = ('    <!-- Cloudflare Web Analytics -->\n'
+             '    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"'
+             ' data-cf-beacon=\'{"token": "7357863b516646859f45fadbd7c656d4"}\'></script>\n')
+
 MOBILE_JS = '    <script defer src="/js/mobile.js"></script>\n'
 
 # Five tabs. Everything else lives one tap down, behind More.
@@ -135,6 +151,10 @@ def apply(text: str, name: str) -> str:
     # 2. mobile.js — last script in the head, after the page's own modules
     if "/js/mobile.js" not in text:
         text = text.replace("</head>", MOBILE_JS + "</head>", 1)
+
+    # 2b. the analytics beacon, on every managed page
+    if "cloudflareinsights" not in text:
+        text = text.replace("</head>", CF_BEACON + "</head>", 1)
 
     # 3. tab bar
     bar = tabbar(canonical_path(text, name))

@@ -145,6 +145,43 @@ test('nothing publishes without both reviews', () => {
   }
 });
 
+test('a source records what it was actually checked as supporting', () => {
+  // "Verified" has to mean somebody read the label and found the claim, not
+  // that a URL returned 200. The supports list is what makes that checkable.
+  for (const sym of symptoms) {
+    for (const src of sym.sources || []) {
+      if (!src.verified) continue;
+      assert.ok(src.url && /^https:\/\//.test(src.url), `${sym.slug}: no URL`);
+      assert.ok(Array.isArray(src.supports) && src.supports.length,
+        `${sym.slug}: "${src.label}" is marked verified but says nothing about what it supports`);
+      assert.ok(src.checked, `${sym.slug}: no date on the check`);
+    }
+  }
+});
+
+test('every symptom declares what its labels do not cover', () => {
+  // notInLabel may legitimately be empty -- constipation and early satiety are
+  // documented outright -- but the field has to be present and considered,
+  // because the default of leaving it out is what produces the confident
+  // articles this site is trying to be better than.
+  for (const sym of symptoms) {
+    assert.ok(Array.isArray(sym.notInLabel),
+      `${sym.slug}: notInLabel missing — has anyone checked what the label omits?`);
+  }
+});
+
+test('a published page carries its not-in-label caveats', () => {
+  for (const sym of symptoms) {
+    if (!published(sym) || !sym.notInLabel.length) continue;
+    const html = fs.readFileSync(page(sym), 'utf8');
+    assert.match(html, /class="sx caveat"/, `${sym.slug}: caveat section missing`);
+    for (const c of sym.notInLabel) {
+      assert.ok(html.includes(c.slice(0, 30)),
+        `${sym.slug}: a caveat was dropped from the page`);
+    }
+  }
+});
+
 test('nothing publishes on unverified citations', () => {
   // The clinical sections describe what a medicine does to a body. This site
   // has no clinician, so those sections stand on their sources or not at all.
