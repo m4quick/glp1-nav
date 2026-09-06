@@ -269,6 +269,8 @@
     <script src="/js/amazon-links.js"></script>
     <script src="/js/shopping-list.js"></script>
     <script defer src="/js/mobile.js"></script>
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "7357863b516646859f45fadbd7c656d4"}'></script>
 </head>
 <body>
     <header>
@@ -404,14 +406,15 @@
                     </div>
                 </div>
 
-                <div id="protein-products" class="pp-panel" style="display:none;">
+                <div id="protein-products" class="pp-panel">
                     <div class="pp-head">
-                        <b>Hitting <span id="pp-target">0</span>&nbsp;g a day</b>
-                        <span>Ready-made options, and what each covers of <em>your</em> target.
+                        <b id="pp-title">Ready-made protein options</b>
+                        <span id="pp-blurb">Protein per serving for each. Run the calculator above to see
+                        what each covers of <em>your</em> target.
                         Tap&nbsp;+ to build a list &mdash; nothing leaves this page until you are ready.</span>
                     </div>
                     <div id="pp-list"></div>
-                    <p id="pp-combo"></p>
+                    <p id="pp-combo" hidden></p>
                     <div class="pp-make">
                         <b>Or make it.</b> Four whole meals with the protein counted, each with the
                         ingredients ready to add to the same list.
@@ -594,19 +597,30 @@
            its own array with a second copy of all four ASINs, which is exactly
            how the last batch of dead links got in. */
         function renderProteinProducts(target) {
-            if (!target || target <= 0) return;
-            window.__proteinTarget = target;
-            document.getElementById('pp-target').textContent = target;
+            var hasTarget = !!(target && target > 0);
+            if (hasTarget) window.__proteinTarget = target;
+
+            document.getElementById('pp-title').innerHTML = hasTarget
+                ? 'Hitting <span id="pp-target">' + target + '</span>&nbsp;g a day'
+                : 'Ready-made protein options';
+            document.getElementById('pp-blurb').innerHTML = hasTarget
+                ? 'Ready-made options, and what each covers of <em>your</em> target. '
+                  + 'Tap&nbsp;+ to build a list \u2014 nothing leaves this page until you are ready.'
+                : 'Protein per serving for each. Run the calculator above to see what each covers '
+                  + 'of <em>your</em> target. Tap&nbsp;+ to build a list \u2014 nothing leaves this '
+                  + 'page until you are ready.';
 
             document.getElementById('pp-list').innerHTML = AmazonLinks.PRODUCTS.map(function (p) {
-                var pct = Math.round((p.g / target) * 100);
                 var url = AmazonLinks.url(p.key);
+                var stat = hasTarget
+                    ? Math.round((p.g / target) * 100) + '%<i>of target</i>'
+                    : p.g + '&nbsp;g<i>protein</i>';
                 return '<div class="pp-row">'
                      + AmazonLinks.mark(p)
                      + '<div class="pp-name">' + p.brand
                      +   '<span class="pp-sub">' + p.kind + ' &middot; ' + p.serving
                      +   ' &middot; ' + p.g + '&nbsp;g protein</span></div>'
-                     + '<div class="pp-pct">' + pct + '%<i>of target</i></div>'
+                     + '<div class="pp-pct">' + stat + '</div>'
                      + '<div class="pp-act">'
                      +   '<button type="button" class="pick" data-pick="' + p.key
                      +     '" data-protein="' + p.g + '" aria-pressed="false">+</button>'
@@ -617,9 +631,12 @@
             }).join('');
 
             // Make the target feel reachable rather than abstract.
+            var combo = document.getElementById('pp-combo');
+            combo.hidden = !hasTarget;
+            if (!hasTarget) { combo.innerHTML = ''; }
             var best = AmazonLinks.PRODUCTS[0];
-            var n = Math.max(1, Math.round((target * 0.4) / best.g));
-            document.getElementById('pp-combo').innerHTML =
+            var n = hasTarget ? Math.max(1, Math.round((target * 0.4) / best.g)) : 0;
+            if (hasTarget) combo.innerHTML =
                 'On a day when food is unappealing, <strong>' + n + '&nbsp;\u00d7 ' + best.brand
                 + '</strong> covers about ' + Math.round(((n * best.g) / target) * 100)
                 + '% of your target on its own \u2014 the rest is easier to make up. '
@@ -814,6 +831,10 @@
         // whole card when it already had a link, which silently denied the four
         // branded products both a tile and a picker.
         document.addEventListener('DOMContentLoaded', function () {
+            // The shelf is the only affiliate surface above the fold; showing it
+            // on load means it reaches every visitor, not just the ones who
+            // finish five fields. Percentages fill in once a target exists.
+            try { renderProteinProducts(null); } catch (e) {}
             document.querySelectorAll('.food-item').forEach(function (card) {
                 var nameEl = card.querySelector('.food-name');
                 var info = card.querySelector('.food-info');
