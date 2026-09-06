@@ -27,9 +27,9 @@ shell = importlib.util.module_from_spec(_shell_spec)
 _shell_spec.loader.exec_module(shell)
 
 
-NAV = [("/", "Home"), ("/dishes.html", "Dishes"), ("/medications.html", "Medications"),
-       ("/nutrition.html", "Nutrition"), ("/protein-foods.html", "Protein Foods"),
-       ("/protein-calculator.html", "Calculator"), ("/faq.html", "FAQ"), ("/about.html", "About")]
+# NAV and nav() live in apply-shell.py, with the tab bar and footer index.
+NAV = shell.NAV
+nav = shell.nav
 
 
 def e(s):

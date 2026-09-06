@@ -29,6 +29,23 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 # and no navigation, and a tab bar on a dead end is noise.
 SKIP = {"404.html", "googleed6289f13060e549.html"}
 
+# The header nav, shared by every generator. It lives here with the tab bar
+# and the footer index rather than in one generator, because three files each
+# holding their own copy of the site's navigation is how they drift apart.
+NAV = [("/", "Home"), ("/dishes.html", "Dishes"), ("/medications.html", "Medications"),
+       ("/nutrition.html", "Nutrition"), ("/protein-foods.html", "Protein Foods"),
+       ("/protein-calculator.html", "Calculator"), ("/faq.html", "FAQ"),
+       ("/about.html", "About")]
+
+
+def nav(here):
+    rows = []
+    for href, text in NAV:
+        cls = ' class="here"' if href == here else ""
+        rows.append(f'                <a href="{href}"{cls}>{text}</a>')
+    return "\n".join(rows)
+
+
 VIEWPORT_OLD = '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
 VIEWPORT_NEW = ('<meta name="viewport" '
                 'content="width=device-width, initial-scale=1.0, viewport-fit=cover">')

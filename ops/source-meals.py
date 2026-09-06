@@ -114,6 +114,25 @@ def amazon(asin):
     }
 
 
+def amazon_by_upc(upc):
+    """Recover the Amazon listing for a barcode, or establish there isn't one.
+
+    The USDA-first pipeline knows the product and its nutrition and needs the
+    ASIN. Amazon's own search resolves a barcode to its listing, so the ASIN
+    comes from Amazon rather than from a guess. No result means Amazon does
+    not stock it, which is a clean answer, not a failure.
+    """
+    html = fetch(f"https://www.amazon.com/s?k={upc}", amazon=False)
+    if not html:
+        return {"upc": upc, "error": "search fetch failed"}
+    if re.search(r"No results for", html[:400000], re.I):
+        return {"upc": upc, "asin": None, "note": "not stocked on Amazon"}
+    m = re.findall(r'data-asin="(B[A-Z0-9]{9})"', html)
+    if not m:
+        return {"upc": upc, "asin": None, "note": "no ASIN in search results"}
+    return {"upc": upc, "asin": m[0]}
+
+
 def usda(upc, key):
     """Nutrition per serving, scaled from USDA's per-100 g figures."""
     if not upc:
@@ -173,16 +192,55 @@ def reconcile(a, n):
     return {"claimed": claim, "fromLabel": got, "agree": ok}
 
 
+def verify_upcs(path, key):
+    """Take discovered records (UPC + nutrition), find and confirm the listing."""
+    recs = json.load(open(path))
+    out = []
+    for i, r in enumerate(recs, 1):
+        upc = r["upc"]
+        found = amazon_by_upc(upc)
+        asin, prod = found.get("asin"), None
+        if asin:
+            prod = amazon(asin)
+
+        if not asin:
+            flag = found.get("note") or found.get("error")
+        elif not prod or prod.get("error"):
+            flag = (prod or {}).get("error", "no product page")
+        elif prod.get("unavailable"):
+            flag = f"unavailable ({prod.get('availability')})"
+        else:
+            flag = f"OK  {asin}"
+        p = r["perServing"]
+        print(f"[{i:>2}/{len(recs)}] {upc}  {flag:<40} "
+              f"{p['protein']}g/{p['sodium']}mg  {r['description'][:34]}", flush=True)
+
+        out.append({**r, "amazonSearch": found, "amazonProduct": prod,
+                    "usable": bool(asin and prod and not prod.get("error")
+                                   and not prod.get("unavailable"))})
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("asins", nargs="*")
     ap.add_argument("--file")
     ap.add_argument("--out")
+    ap.add_argument("--verify-upcs", help="JSON from discover-meals.py")
     args = ap.parse_args()
 
     key = os.environ.get("USDA_API_KEY")
     if not key:
         sys.exit("USDA_API_KEY not set. Pipe it from OpenBao; do not paste it.")
+
+    if args.verify_upcs:
+        out = verify_upcs(args.verify_upcs, key)
+        ok = [r for r in out if r["usable"]]
+        print(f"\n{len(ok)} of {len(out)} are buyable on Amazon and in stock")
+        if args.out:
+            json.dump(out, open(args.out, "w"), indent=2)
+            print(f"wrote {args.out}")
+        return 0
 
     asins = list(args.asins)
     if args.file:

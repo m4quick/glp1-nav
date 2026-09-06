@@ -31,13 +31,20 @@ jobs:
     # catching wrong numbers by eye. These are golden-value tests: known
     # inputs, known outputs. A changed formula fails here, before review.
     - name: Test the maths, the links, the dishes, the shell and the whole site
-      run: node --test tests/protein-math.test.js tests/dishes.test.js tests/shell.test.js tests/site.test.js
+      run: node --test tests/protein-math.test.js tests/dishes.test.js tests/shell.test.js tests/site.test.js tests/symptoms.test.js
 
     # dishes.json is the source of truth; the pages are generated from it.
     # An edit that is not rebuilt would ship a page that disagrees with the
     # data every other check is reading.
     - name: Refuse stale dish pages
       run: python3 ops/build-dishes.py --check
+
+    # Symptom pages describe what a medicine does to a body. They publish only
+    # when the dietitian has read the food advice, the clinical sections carry
+    # checked citations, and the filter returns enough meals to be worth
+    # reading. This refuses a page that drifted from symptoms.json.
+    - name: Refuse stale symptom pages
+      run: python3 ops/build-symptoms.py --check
 
     # Below 768px the header nav is display:none, so a page that missed the
     # tab bar is a page nobody on a phone can reach — and it still looks

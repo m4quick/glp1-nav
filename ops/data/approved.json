@@ -1,0 +1,272 @@
+[
+  {
+    "fdcId": 2158865,
+    "upc": "076808009453",
+    "brand": "Barilla G & R F.Lli S.P.A.",
+    "description": "RED LENTIL SPAGHETTI, RED LENTIL",
+    "servingSize": 56.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 1.5,
+      "carbs": 34.0,
+      "calories": 180,
+      "fiber": 6.0,
+      "sodium": 0
+    },
+    "proteinDensity": 7.2,
+    "sodiumPer10gProtein": 0,
+    "foundBy": "lentil dal ready to eat"
+  },
+  {
+    "fdcId": 1888569,
+    "upc": "653849094947",
+    "brand": "Bumble Bee Foods, LLC",
+    "description": "AHI TUNA STEAK, AHI TUNA",
+    "servingSize": 113.0,
+    "perServing": {
+      "protein": 28.0,
+      "fat": 0.5,
+      "carbs": 0.0,
+      "calories": 124,
+      "fiber": 0.0,
+      "sodium": 51
+    },
+    "proteinDensity": 22.6,
+    "sodiumPer10gProtein": 18,
+    "foundBy": "tuna pouch ready to eat"
+  },
+  {
+    "fdcId": 2115246,
+    "upc": "017873705475",
+    "brand": "Conagra Brands, Inc.",
+    "description": "HEARTY BEEF STEW",
+    "servingSize": 227.0,
+    "perServing": {
+      "protein": 19.0,
+      "fat": 12.0,
+      "carbs": 13.0,
+      "calories": 241,
+      "fiber": 2.0,
+      "sodium": 400
+    },
+    "proteinDensity": 7.9,
+    "sodiumPer10gProtein": 210,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 2657373,
+    "upc": "072655555556",
+    "brand": "Conagra Brands, Inc.",
+    "description": "BURRITO BOWL",
+    "servingSize": 269.0,
+    "perServing": {
+      "protein": 20.0,
+      "fat": 6.0,
+      "carbs": 36.0,
+      "calories": 280,
+      "fiber": 5.9,
+      "sodium": 460
+    },
+    "proteinDensity": 7.1,
+    "sodiumPer10gProtein": 230,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 751728,
+    "upc": "00028989100450",
+    "brand": "Kellogg Company US",
+    "description": "Morningstar Farms Entrees Tuscan Greens & Beans 8.5oz",
+    "servingSize": 241.0,
+    "perServing": {
+      "protein": 14.2,
+      "fat": 15.2,
+      "carbs": 28.2,
+      "calories": 270,
+      "fiber": 9.2,
+      "sodium": 388
+    },
+    "proteinDensity": 5.3,
+    "sodiumPer10gProtein": 273,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 1993764,
+    "upc": "086600022000",
+    "brand": "Bumble Bee Foods, LLC",
+    "description": "MEDITERRANEAN TUNA + PASTA BOWL, MEDITERRANEAN",
+    "servingSize": 170.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 8.0,
+      "carbs": 20.1,
+      "calories": 211,
+      "fiber": 6.0,
+      "sodium": 420
+    },
+    "proteinDensity": 6.6,
+    "sodiumPer10gProtein": 300,
+    "foundBy": "pasta bowl ready to eat"
+  },
+  {
+    "fdcId": 519132,
+    "upc": "077958560467",
+    "brand": "Blount Seafood Corporation",
+    "description": "TURKEY CHILI WITH BEANS",
+    "servingSize": 340.0,
+    "perServing": {
+      "protein": 22.0,
+      "fat": 11.0,
+      "carbs": 29.0,
+      "calories": 299,
+      "fiber": 10.9,
+      "sodium": 700
+    },
+    "proteinDensity": 7.4,
+    "sodiumPer10gProtein": 318,
+    "foundBy": "turkey chili"
+  },
+  {
+    "fdcId": 2106738,
+    "upc": "077958585460",
+    "brand": "Blount Seafood Corporation ",
+    "description": "TURKEY CHILI WITH BEANS, TURKEY WITH BEANS",
+    "servingSize": 340.0,
+    "perServing": {
+      "protein": 22.0,
+      "fat": 11.0,
+      "carbs": 29.0,
+      "calories": 299,
+      "fiber": 10.9,
+      "sodium": 700
+    },
+    "proteinDensity": 7.4,
+    "sodiumPer10gProtein": 318,
+    "foundBy": "turkey chili"
+  },
+  {
+    "fdcId": 1960299,
+    "upc": "042272012213",
+    "brand": "Amy's Kitchen Inc.",
+    "description": "PESTO PENNE PASTA WITH VEGETABLES BOWLS, PESTO",
+    "servingSize": 255.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 15.0,
+      "carbs": 45.9,
+      "calories": 370,
+      "fiber": 4.1,
+      "sodium": 459
+    },
+    "proteinDensity": 3.5,
+    "sodiumPer10gProtein": 353,
+    "foundBy": "pasta bowl ready to eat"
+  },
+  {
+    "fdcId": 2338080,
+    "upc": "080000519306",
+    "brand": "StarKist Co.",
+    "description": "PREMIUM WHITE CHICKEN SALAD, WHITE CHICKEN",
+    "servingSize": 128.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 3.0,
+      "carbs": 7.0,
+      "calories": 120,
+      "fiber": 1.5,
+      "sodium": 620
+    },
+    "proteinDensity": 14.2,
+    "sodiumPer10gProtein": 364,
+    "foundBy": "chicken salad pouch"
+  },
+  {
+    "fdcId": 1902778,
+    "upc": "071106208645",
+    "brand": "Hormel Foods Corporation ",
+    "description": "BEEF CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 7.0,
+      "carbs": 24.9,
+      "calories": 220,
+      "fiber": 5.9,
+      "sodium": 561
+    },
+    "proteinDensity": 6.8,
+    "sodiumPer10gProtein": 374,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 1906064,
+    "upc": "041331091428",
+    "brand": "Goya Foods, Inc. ",
+    "description": "BEEF STEW WITH RICE",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 22.0,
+      "fat": 13.0,
+      "carbs": 52.1,
+      "calories": 431,
+      "fiber": 1.9,
+      "sodium": 839
+    },
+    "proteinDensity": 5.1,
+    "sodiumPer10gProtein": 381,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 2103434,
+    "upc": "717524772015",
+    "brand": "Del Monte Fresh Produce N.A., Inc.",
+    "description": "CAESAR SALAD WITH WHITE CHICKEN",
+    "servingSize": 220.0,
+    "perServing": {
+      "protein": 20.0,
+      "fat": 27.9,
+      "carbs": 22.0,
+      "calories": 409,
+      "fiber": 3.1,
+      "sodium": 770
+    },
+    "proteinDensity": 4.9,
+    "sodiumPer10gProtein": 385,
+    "foundBy": "chicken salad pouch"
+  },
+  {
+    "fdcId": 2468759,
+    "upc": "086600241210",
+    "brand": "Bumble Bee Foods, LLC",
+    "description": "TUNA SALAD, TUNA",
+    "servingSize": 100.0,
+    "perServing": {
+      "protein": 12.0,
+      "fat": 0.5,
+      "carbs": 7.0,
+      "calories": 80,
+      "fiber": 1.0,
+      "sodium": 470
+    },
+    "proteinDensity": 15.0,
+    "sodiumPer10gProtein": 391,
+    "foundBy": "tuna pouch ready to eat"
+  },
+  {
+    "fdcId": 2440883,
+    "upc": "080000505095",
+    "brand": "StarKist Co.",
+    "description": "ORIGINAL DELI STYLE READY-TO-EAT TUNA SALAD LUNCH TO-GO, ORIGINAL DELI STYLE",
+    "servingSize": 107.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 7.0,
+      "carbs": 19.0,
+      "calories": 200,
+      "fiber": 1.0,
+      "sodium": 590
+    },
+    "proteinDensity": 7.5,
+    "sodiumPer10gProtein": 393,
+    "foundBy": "ready to eat entree"
+  }
+]

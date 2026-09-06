@@ -1,0 +1,315 @@
+{
+  "_model": "A symptom page explains a change the medicine is causing, then offers meals that work around it. Six sections: what is happening, why, how long it usually lasts, what helps, when to stop and call someone, and what you can eat tonight. The last one is a live query against dishes.json; the rest is written. The point is navigation, not recipes.",
+  "_review": "Two gates, because these pages straddle two kinds of expertise and this site has only one of them. `nutrition` is the food advice and the meals -- the dietitian's call. `clinical` is the mechanism, the timeline and the red flags, which is a prescriber's territory, and there is no clinician on this site. Clinical sections are compiled from FDA labelling and NIH guidance and must carry their sources; the banner says plainly that they are not clinician-reviewed. Do not blur the two into one green tick.",
+  "_sources": "Every clinical claim needs a citable source before the page publishes. `verified: false` means the URL has not been fetched and checked yet -- the builder refuses to publish that page. Never write a citation from memory.",
+  "_minMeals": "A filtered list of two is thin content. The builder refuses to publish below minMeals and names which meal to write next to fix it.",
+  "symptoms": [
+    {
+      "slug": "early-satiety",
+      "title": "Why you feel full after two mouthfuls",
+      "short": "I fill up almost immediately",
+      "asked": "I feel full after a few bites and then stay full for hours. Is that normal?",
+      "happening": "Your stomach is emptying more slowly than it used to. Food that once left within an hour or two now sits there considerably longer, so the signal that you are full arrives early and stays.",
+      "why": "These medicines mimic a gut hormone your body already makes after eating. One of the things that hormone does is slow gastric emptying. That is not a side effect sitting alongside the appetite change -- it is a large part of how the appetite change happens.",
+      "timeline": "It is usually most pronounced in the first weeks after starting and after each dose increase, and often settles as your body adjusts. It rarely disappears entirely, and it is not supposed to.",
+      "helps": [
+        "Eat the protein on your plate first, before anything else.",
+        "Several small meals usually work better than three normal ones.",
+        "Drink between meals rather than during them -- liquid takes up room.",
+        "Stop when you are full. Pushing past it is what usually causes vomiting."
+      ],
+      "redFlags": [
+        "Vomiting that stops you keeping fluids down",
+        "Severe abdominal pain, particularly pain that goes through to your back",
+        "Feeling full for days rather than hours, with no bowel movements"
+      ],
+      "filter": {
+        "minProtein": 25,
+        "maxCalories": 450
+      },
+      "minMeals": 4,
+      "sources": [
+        {
+          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
+          "url": null,
+          "verified": false
+        },
+        {
+          "label": "FDA prescribing information, tirzepatide (Mounjaro/Zepbound)",
+          "url": null,
+          "verified": false
+        }
+      ],
+      "reviewed": {
+        "nutrition": null,
+        "clinical": null
+      }
+    },
+    {
+      "slug": "meat-tastes-metallic",
+      "title": "When meat starts tasting metallic",
+      "short": "Meat tastes metallic",
+      "asked": "Meat has started tasting metallic or just wrong. What do I eat instead?",
+      "happening": "Your sense of taste has changed. People most often notice it with red meat, which starts tasting metallic or faintly of blood, and it can arrive abruptly after a dose increase.",
+      "why": "Altered taste is a recognised effect of these medicines. It is not caused by the food, and it is not a sign that anything has spoiled. Some of it is the taste itself and some is a change in how strongly you smell things, which is most of what you experience as flavour.",
+      "timeline": "It commonly appears or worsens after a dose change and eases over following weeks. For some people it persists at a lower dose.",
+      "helps": [
+        "Cold or room-temperature food usually tastes less metallic than hot.",
+        "Acid cuts it -- lemon, vinegar, tomato.",
+        "Fish, eggs, dairy and pulses often stay palatable when red meat does not.",
+        "Some people find plastic or wooden cutlery makes a real difference."
+      ],
+      "redFlags": [
+        "A metallic taste with mouth ulcers, or a sore or swollen tongue",
+        "Losing taste entirely rather than having it altered"
+      ],
+      "filter": {
+        "protein": {
+          "exclude": [
+            "beef",
+            "pork"
+          ]
+        }
+      },
+      "minMeals": 4,
+      "sources": [
+        {
+          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
+          "url": null,
+          "verified": false
+        }
+      ],
+      "reviewed": {
+        "nutrition": null,
+        "clinical": null
+      }
+    },
+    {
+      "slug": "cooking-smells-nausea",
+      "title": "When the smell of cooking is worse than the food",
+      "short": "Cooking smells turn my stomach",
+      "asked": "The smell of cooking makes me feel sick before I have eaten anything.",
+      "happening": "Smells you never used to notice now turn your stomach, and the kitchen is the worst of it. The nausea starts before you have eaten a thing.",
+      "why": "Nausea is the most commonly reported effect of these medicines. Heightened sensitivity to smell often travels with it -- the same slowed digestion that keeps you full also keeps nausea lingering, and strong food smells make it markedly worse.",
+      "timeline": "Usually worst in the first weeks and after each increase, then eases. It is the single most common reason people stop taking these medicines.",
+      "helps": [
+        "Cook with a window open, or eat food you have not had to cook.",
+        "Cold assembly beats any amount of ventilation.",
+        "If you must cook, do it earlier in the day and eat it later cold.",
+        "Ginger and peppermint help some people; neither will hurt."
+      ],
+      "redFlags": [
+        "Nausea severe enough that you cannot keep fluids down",
+        "Vomiting that lasts more than a day or two",
+        "Nausea with severe abdominal pain"
+      ],
+      "filter": {
+        "aroma": {
+          "max": "low"
+        }
+      },
+      "minMeals": 4,
+      "sources": [
+        {
+          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
+          "url": null,
+          "verified": false
+        },
+        {
+          "label": "FDA prescribing information, tirzepatide (Mounjaro/Zepbound)",
+          "url": null,
+          "verified": false
+        }
+      ],
+      "reviewed": {
+        "nutrition": null,
+        "clinical": null
+      }
+    },
+    {
+      "slug": "cannot-cook-today",
+      "title": "Getting protein in on a day you cannot cook",
+      "short": "I have no energy to cook",
+      "asked": "I have no energy to cook. What can I put together that still has protein?",
+      "happening": "You are eating far less than you used to, and the tiredness that comes with that arrives on exactly the days you least want to stand at a hob.",
+      "why": "Rapid weight loss costs muscle as well as fat, and protein is the main thing that limits how much muscle you lose. The days you eat least are the days that matters most -- which is precisely when cooking is hardest.",
+      "timeline": "Fatigue tends to be worst during the steepest weight loss and after dose increases.",
+      "helps": [
+        "Assemble two or three of these before a dose increase, not after.",
+        "A no-cook meal counts. Nothing here needs a hob.",
+        "Protein first. If you manage only one thing, make it the protein."
+      ],
+      "redFlags": [
+        "Tiredness with dizziness on standing, or a racing heart",
+        "Being unable to eat or drink for a full day"
+      ],
+      "filter": {
+        "effort": {
+          "includes": [
+            "no-cook"
+          ]
+        }
+      },
+      "minMeals": 4,
+      "sources": [
+        {
+          "label": "NIDDK, National Institute of Diabetes and Digestive and Kidney Diseases",
+          "url": null,
+          "verified": false
+        }
+      ],
+      "reviewed": {
+        "nutrition": null,
+        "clinical": null
+      }
+    },
+    {
+      "slug": "constipation",
+      "title": "When everything has slowed right down",
+      "short": "Constipation",
+      "asked": "I am constipated and I do not know what to eat about it.",
+      "happening": "Your bowels have slowed along with your stomach, and eating much less food means much less fibre going through them.",
+      "why": "The same slowing of the gut that keeps you full for hours also slows what happens further down. It compounds: less appetite means less food, less food means less fibre and less fluid, and both of those make it worse.",
+      "timeline": "Often persists longer than the nausea does, and tends to need managing rather than waiting out.",
+      "helps": [
+        "Fluid matters as much as fibre, and is easy to forget when not hungry.",
+        "Increase fibre gradually -- a sudden jump makes bloating worse.",
+        "Movement helps more than most people expect.",
+        "Ask your prescriber or pharmacist before starting any laxative."
+      ],
+      "redFlags": [
+        "No bowel movement for several days with pain, bloating or vomiting",
+        "Blood in your stool"
+      ],
+      "filter": {
+        "minFiber": 6
+      },
+      "minMeals": 4,
+      "sources": [
+        {
+          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
+          "url": null,
+          "verified": false
+        },
+        {
+          "label": "NIDDK, National Institute of Diabetes and Digestive and Kidney Diseases",
+          "url": null,
+          "verified": false
+        }
+      ],
+      "reviewed": {
+        "nutrition": null,
+        "clinical": null
+      }
+    },
+    {
+      "slug": "dairy-stopped-agreeing",
+      "title": "When dairy stops agreeing with you",
+      "short": "Dairy has stopped agreeing with me",
+      "asked": "Yogurt and milk have started upsetting me, and every protein tip mentions them.",
+      "happening": "Foods you have eaten for years now sit badly, and dairy is one of the most commonly reported.",
+      "why": "Slower digestion changes how food is tolerated, and fattier dairy leaves the stomach slowest of all. Almost all high-protein advice for people on these medicines leans on Greek yogurt, cottage cheese and milk drinks, which makes that advice useless rather than merely difficult.",
+      "timeline": "Varies. Some people find lower-fat dairy is fine when full-fat is not.",
+      "helps": [
+        "Fish, eggs, pulses and soy cover the same ground.",
+        "Check ready-made shakes -- most are milk-based.",
+        "Lower-fat dairy is worth trying before giving it up entirely."
+      ],
+      "redFlags": [
+        "Reactions that include a rash, swelling or difficulty breathing -- that is not intolerance and needs urgent attention"
+      ],
+      "filter": {
+        "diet": {
+          "includes": [
+            "dairy-free"
+          ]
+        }
+      },
+      "minMeals": 4,
+      "sources": [
+        {
+          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
+          "url": null,
+          "verified": false
+        }
+      ],
+      "reviewed": {
+        "nutrition": null,
+        "clinical": null
+      }
+    },
+    {
+      "slug": "only-cold-food",
+      "title": "When only cold food will go down",
+      "short": "Only cold food will go down",
+      "asked": "Hot food is unbearable at the moment. Cold food I can manage.",
+      "happening": "Hot meals have become difficult while the same food cold is fine.",
+      "why": "Hot food releases far more smell, and smell is most of what you experience as flavour. When nausea and smell sensitivity are both raised, temperature alone can be the difference between a meal you can face and one you cannot.",
+      "timeline": "Tracks the nausea -- worst early and after dose increases.",
+      "helps": [
+        "Leftovers eaten cold are often easier than the same food reheated.",
+        "Cold does not mean less protein. None of these give anything up.",
+        "Cook when you feel well and eat it when you do not."
+      ],
+      "redFlags": [
+        "Being unable to eat anything at all, hot or cold, for more than a day"
+      ],
+      "filter": {
+        "temperature": {
+          "is": [
+            "cold"
+          ]
+        }
+      },
+      "minMeals": 4,
+      "sources": [
+        {
+          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
+          "url": null,
+          "verified": false
+        }
+      ],
+      "reviewed": {
+        "nutrition": null,
+        "clinical": null
+      }
+    },
+    {
+      "slug": "sulphur-burps",
+      "title": "Sulphur burps, and what they mean",
+      "short": "Burps that taste of rotten eggs",
+      "asked": "I keep getting burps that taste of rotten eggs. Is it something I am eating?",
+      "happening": "Burps that taste or smell of sulphur or rotten eggs, often with bloating.",
+      "why": "Widely reported by people taking these medicines and generally attributed to food remaining in the stomach considerably longer than it used to. Higher-fat meals leave the stomach slowest, which is why they are the most common trigger.",
+      "timeline": "Tends to follow dose increases and to ease as the dose settles.",
+      "helps": [
+        "Fatty and fried food is the most commonly reported trigger.",
+        "Smaller portions leave the stomach faster than large ones.",
+        "Eating more slowly reduces how much air you swallow."
+      ],
+      "redFlags": [
+        "Sulphur burps with severe or persistent abdominal pain, or with vomiting -- contact your prescriber rather than adjusting your diet"
+      ],
+      "filter": {
+        "maxCalories": 400
+      },
+      "minMeals": 4,
+      "sources": [
+        {
+          "label": "FDA prescribing information, semaglutide (Ozempic/Wegovy)",
+          "url": null,
+          "verified": false
+        },
+        {
+          "label": "FDA prescribing information, tirzepatide (Mounjaro/Zepbound)",
+          "url": null,
+          "verified": false
+        }
+      ],
+      "reviewed": {
+        "nutrition": null,
+        "clinical": null
+      }
+    }
+  ]
+}

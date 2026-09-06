@@ -25,10 +25,27 @@ import subprocess
 import sys
 
 SEARCHES = [
-    "ready to eat entree", "microwave meal bowl", "chili with beans",
-    "protein bowl rice", "hearty soup chicken", "lentil dal ready to eat",
-    "tuna pouch ready to eat", "chicken salad pouch", "protein oatmeal cup",
-    "beef stew ready to eat", "pasta bowl ready to eat", "turkey chili",
+    # entrees and bowls
+    "ready to eat entree", "microwave meal bowl", "shelf stable meal",
+    "protein bowl rice", "pasta bowl ready to eat", "burrito bowl",
+    "quinoa bowl", "grain bowl chicken", "rice and beans bowl",
+    "curry ready to eat", "lentil dal ready to eat", "indian entree",
+    "thai curry ready to eat", "chana masala", "black bean bowl",
+    # chili, stew, soup
+    "chili with beans", "turkey chili", "chicken chili white bean",
+    "beef stew ready to eat", "hearty soup chicken", "lentil soup",
+    "split pea soup ham", "minestrone soup", "chicken noodle soup",
+    "black bean soup", "clam chowder", "gumbo",
+    # fish and meat pouches, cans
+    "tuna pouch ready to eat", "chicken salad pouch", "salmon pouch",
+    "sardines in water", "canned chicken breast", "tuna salad kit",
+    "mackerel ready to eat", "chicken breast pouch",
+    # breakfast
+    "protein oatmeal cup", "overnight oats protein", "egg white bites",
+    "breakfast bowl protein",
+    # vegetarian
+    "vegetarian entree bowl", "tofu ready to eat", "hummus and pretzels",
+    "falafel ready to eat", "edamame ready to eat",
 ]
 
 # Things that match a meal search but are not a meal.
