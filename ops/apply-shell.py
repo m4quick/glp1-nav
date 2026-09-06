@@ -32,10 +32,10 @@ SKIP = {"404.html", "googleed6289f13060e549.html"}
 # The header nav, shared by every generator. It lives here with the tab bar
 # and the footer index rather than in one generator, because three files each
 # holding their own copy of the site's navigation is how they drift apart.
-NAV = [("/", "Home"), ("/dishes.html", "Dishes"), ("/medications.html", "Medications"),
-       ("/nutrition.html", "Nutrition"), ("/protein-foods.html", "Protein Foods"),
-       ("/protein-calculator.html", "Calculator"), ("/faq.html", "FAQ"),
-       ("/about.html", "About")]
+NAV = [("/", "Home"), ("/dishes", "Dishes"), ("/medications", "Medications"),
+       ("/nutrition", "Nutrition"), ("/protein-foods", "Protein Foods"),
+       ("/protein-calculator", "Calculator"), ("/faq", "FAQ"),
+       ("/about", "About")]
 
 
 def nav(here):
@@ -76,13 +76,13 @@ MOBILE_JS = '    <script defer src="/js/mobile.js"></script>\n'
 TABS = [
     ("/", "Home",
      '<path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/>'),
-    ("/dishes.html", "Dishes",
+    ("/dishes", "Dishes",
      '<path d="M3.5 11.5h17a8.5 8.5 0 0 1-17 0z"/><path d="M6 20h12"/>'
      '<path d="M9.3 8.2c0-1.5 1.1-1.9 1.1-3.2M13.6 8.4c0-1.6 1.2-2 1.2-3.4"/>'),
-    ("/protein-calculator.html", "Calculate",
+    ("/protein-calculator", "Calculate",
      '<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.3h7"/>'
      '<path d="M9 11.6h.01M12 11.6h.01M15 11.6h.01M9 15.6h.01M12 15.6h.01M15 15.6h.01"/>'),
-    ("/medications.html", "Meds",
+    ("/medications", "Meds",
      '<rect x="1.9" y="8.9" width="20.2" height="6.2" rx="3.1" '
      'transform="rotate(-45 12 12)"/><path d="M12 7.6 16.4 12"/>'),
 ]
@@ -109,18 +109,18 @@ def tabbar(here: str) -> str:
 # pages behind the More tab, and on desktop it costs nothing.
 FOOTER_LINKS = """            <p class="site-index">
                 <a href="/">Home</a>
-                <a href="/dishes.html">Dishes</a>
-                <a href="/protein-calculator.html">Protein calculator</a>
-                <a href="/protein-foods.html">Protein foods</a>
-                <a href="/nutrition.html">Nutrition</a>
-                <a href="/medications.html">Medications</a>
-                <a href="/faq.html">FAQ</a>
+                <a href="/dishes">Dishes</a>
+                <a href="/protein-calculator">Protein calculator</a>
+                <a href="/protein-foods">Protein foods</a>
+                <a href="/nutrition">Nutrition</a>
+                <a href="/medications">Medications</a>
+                <a href="/faq">FAQ</a>
             </p>
             <p style="margin-top:8px;">
-                <a href="/about.html">About</a>
-                <a href="/contact.html">Contact</a>
-                <a href="/privacy.html">Privacy Policy</a>
-                <a href="/terms.html">Terms of Service</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
             </p>"""
 
 FOOTER_OLD = re.compile(
@@ -140,7 +140,7 @@ def canonical_path(text: str, name: str) -> str:
         return "/"
     # A single dish is a child of the Dishes tab, not a tab of its own.
     if href.startswith("/dish-"):
-        return "/dishes.html"
+        return "/dishes"
     return href
 
 

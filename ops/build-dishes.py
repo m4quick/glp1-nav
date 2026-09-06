@@ -94,7 +94,7 @@ def banner(m):
                 '        <span class="rb-icon">&#9989;</span>\n'
                 f'        <span><strong>Reviewed by our staff dietitian on {e(dates[-1])}.</strong>'
                 'General nutrition information, not personalised dietetic advice. '
-                '<a href="/about.html">Our editorial policy</a></span>\n'
+                '<a href="/about">Our editorial policy</a></span>\n'
                 '    </div>')
 
     # Name what is unreviewed rather than damning the whole page. A meal whose
@@ -110,7 +110,7 @@ def banner(m):
             f'        <span><strong>{e(lead)}</strong>'
             'Published as a draft while it waits for review. Protein and calorie figures are '
             'estimates from standard food composition values and may change. '
-            '<a href="/about.html">How we source this</a></span>\n'
+            '<a href="/about">How we source this</a></span>\n'
             '    </div>')
 
 
@@ -136,7 +136,7 @@ TEMPLATE = """<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="{desc}">
     <title>{title} | GLP-1 Navigator</title>
-    <link rel="canonical" href="https://glp1-nav.com/dish-{slug}.html">
+    <link rel="canonical" href="https://glp1-nav.com/dish-{slug}">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/dishes.css">
     <script src="/js/amazon-links.js"></script>
@@ -167,7 +167,7 @@ TEMPLATE = """<!DOCTYPE html>
 {panes}
             <p class="dish-foot">Protein and calorie figures are estimates from standard food composition
             values for the quantities listed. They are not a nutrition prescription and your own portions
-            will vary. Work out your daily target with the <a href="/protein-calculator.html">protein calculator</a>.</p>
+            will vary. Work out your daily target with the <a href="/protein-calculator">protein calculator</a>.</p>
             <p class="dish-foot"><strong>Affiliate disclosure:</strong> product links are Amazon affiliate
             links and we may earn a small commission at no extra cost to you. It never changes what we list.</p>
         </article>
@@ -177,10 +177,10 @@ TEMPLATE = """<!DOCTYPE html>
         <div class="container">
             <p>&copy; 2026 GLP-1 Navigator</p>
             <p style="margin-top:15px;">
-                <a href="/about.html">About</a>
-                <a href="/contact.html">Contact</a>
-                <a href="/privacy.html">Privacy Policy</a>
-                <a href="/terms.html">Terms of Service</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
             </p>
         </div>
     </footer>
@@ -320,7 +320,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="High-protein meals for GLP-1 appetites. Every dish can be made from fresh ingredients or swapped for a no-cooking shortcut, with the protein counted either way.">
     <title>What to Eat on a GLP-1 &mdash; Dishes You Can Buy or Make</title>
-    <link rel="canonical" href="https://glp1-nav.com/dishes.html">
+    <link rel="canonical" href="https://glp1-nav.com/dishes">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/dishes.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8510922003408038"
@@ -341,7 +341,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
         <span class="rb-icon">&#9888;&#65039;</span>
         <span><strong>These recipes are drafts.</strong>They are published while they wait for review by our
         staff dietitian. Protein and calorie figures are estimates from standard food composition values.
-        <a href="/about.html">How we source this</a></span>
+        <a href="/about">How we source this</a></span>
     </div>
 
     <div class="container">
@@ -359,7 +359,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
             </div>
 
             <p style="margin-top:26px">Not sure how much protein you are aiming for? The
-            <a href="/protein-calculator.html">protein calculator</a> works it out from your height, weight
+            <a href="/protein-calculator">protein calculator</a> works it out from your height, weight
             and phase, and every dish here shows what it contributes.</p>
         </div>
     </div>
@@ -368,10 +368,10 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
         <div class="container">
             <p>&copy; 2026 GLP-1 Navigator</p>
             <p style="margin-top:15px;">
-                <a href="/about.html">About</a>
-                <a href="/contact.html">Contact</a>
-                <a href="/privacy.html">Privacy Policy</a>
-                <a href="/terms.html">Terms of Service</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
             </p>
             <p class="legal"><strong>Affiliate disclosure:</strong> some links on this site are Amazon
             affiliate links. If you buy through one we may earn a small commission at no additional cost
@@ -394,7 +394,7 @@ def card(m):
     ways = len(routes_of(m))
     if ways > 1:
         meta += f' &middot; {ways} ways'
-    return (f'                <a class="dish-card" href="/dish-{m["slug"]}.html">\n'
+    return (f'                <a class="dish-card" href="/dish-{m["slug"]}">\n'
             f'                    <img src="/images/dishes/{e(m["image"])}.webp" alt="" '
             f'loading="lazy" width="520" height="390">\n'
             f'                    <span class="c">\n'
@@ -420,8 +420,8 @@ def update_sitemap(dishes):
     """
     path = os.path.join(ROOT, "sitemap.xml")
     xml = open(path, encoding="utf-8").read()
-    wanted = ["https://glp1-nav.com/dishes.html"] + [
-        f'https://glp1-nav.com/dish-{d["slug"]}.html' for d in dishes if is_live(d)]
+    wanted = ["https://glp1-nav.com/dishes"] + [
+        f'https://glp1-nav.com/dish-{d["slug"]}' for d in dishes if is_live(d)]
     existing = set(re.findall(r"<loc>\s*([^<\s]+)", xml))
     added = [u for u in wanted if u not in existing]
     if not added:

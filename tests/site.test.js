@@ -136,7 +136,9 @@ test('every canonical points at its own page', () => {
   for (const p of pages) {
     const m = read(p).match(/<link rel="canonical" href="https:\/\/glp1-nav\.com(\/[^"]*)"/);
     if (!m) continue;
-    const want = p === 'index.html' ? '/' : `/${p}`;
+    // Cloudflare Pages serves these without the extension, so the canonical
+    // names the served URL rather than the file on disk.
+    const want = p === 'index.html' ? '/' : `/${p.replace(/\.html$/, '')}`;
     if (m[1] !== want) bad.push(`${p}: canonical says ${m[1]}`);
   }
   assert.deepEqual(bad, [], `wrong canonicals:\n  ${bad.join('\n  ')}`);
@@ -149,7 +151,7 @@ test('every page in the sitemap exists, and no draft is in it', () => {
   for (const l of locs) assert.ok(resolves(l), `sitemap lists ${l}, which does not exist`);
 
   const drafts = JSON.parse(read('dishes.json')).dishes
-    .filter((d) => !d.reviewed).map((d) => `/dish-${d.slug}.html`);
+    .filter((d) => !d.reviewed).map((d) => `/dish-${d.slug}`);
   for (const d of drafts) {
     assert.ok(!locs.includes(d), `${d} is unreviewed but is in the sitemap`);
   }

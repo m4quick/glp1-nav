@@ -92,7 +92,7 @@ def banner(sym):
                 '        <span class="rb-icon">&#9989;</span>\n'
                 f'        <span><strong>Reviewed on {e(c)}.</strong>'
                 'General information, not personalised advice. '
-                '<a href="/about.html">Our editorial policy</a></span>\n'
+                '<a href="/about">Our editorial policy</a></span>\n'
                 '    </div>')
     # Say which half is unreviewed. A page whose food advice she has checked
     # but whose physiology nobody has should not carry the same blanket
@@ -110,7 +110,7 @@ def banner(sym):
             'Compiled from FDA labelling and NIH guidance. It is general '
             'information and not medical advice, and it cannot tell you whether '
             'what you are experiencing is normal for you. '
-            '<a href="/about.html">How we source this</a></span>\n'
+            '<a href="/about">How we source this</a></span>\n'
             '    </div>')
 
 
@@ -188,7 +188,7 @@ TEMPLATE = """<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="{desc}">
     <title>{title} | GLP-1 Navigator</title>
-    <link rel="canonical" href="https://glp1-nav.com/symptom-{slug}.html">
+    <link rel="canonical" href="https://glp1-nav.com/symptom-{slug}">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/dishes.css">
     <link rel="stylesheet" href="/symptoms.css">
@@ -318,7 +318,7 @@ def update_sitemap(slugs):
     """
     path = os.path.join(ROOT, "sitemap.xml")
     xml = open(path, encoding="utf-8").read()
-    want = [f"https://glp1-nav.com/symptom-{s}.html" for s in slugs]
+    want = [f"https://glp1-nav.com/symptom-{s}" for s in slugs]
     have = set(re.findall(r"<loc>\s*([^<\s]+)", xml))
     add = [u for u in want if u not in have]
 
