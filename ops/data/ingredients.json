@@ -1,0 +1,158 @@
+{
+  "avocado": {
+    "dataType": "SR Legacy",
+    "description": "Avocados, raw, California",
+    "fdcId": 171706,
+    "per100g": {
+      "calories": 167.0,
+      "carbs": 8.64,
+      "fat": 15.41,
+      "fiber": 6.8,
+      "protein": 1.96,
+      "sodium": 8.0
+    }
+  },
+  "baby-spinach": {
+    "dataType": "SR Legacy",
+    "description": "Spinach, raw",
+    "fdcId": 168462,
+    "per100g": {
+      "calories": 23.0,
+      "carbs": 3.63,
+      "fat": 0.39,
+      "fiber": 2.2,
+      "protein": 2.86,
+      "sodium": 79.0
+    }
+  },
+  "chickpeas-tin": {
+    "dataType": "SR Legacy",
+    "description": "Chickpeas (garbanzo beans, bengal gram), mature seeds, canned, drained solids",
+    "fdcId": 173800,
+    "per100g": {
+      "calories": 139.0,
+      "carbs": 22.53,
+      "fat": 2.77,
+      "fiber": 6.4,
+      "protein": 7.05,
+      "sodium": 246.0
+    }
+  },
+  "cucumber": {
+    "dataType": "SR Legacy",
+    "description": "Cucumber, peeled, raw",
+    "fdcId": 169225,
+    "per100g": {
+      "calories": 10.0,
+      "carbs": 2.16,
+      "fat": 0.16,
+      "fiber": 0.7,
+      "protein": 0.59,
+      "sodium": 2.0
+    }
+  },
+  "edamame": {
+    "dataType": "SR Legacy",
+    "description": "Edamame, frozen, prepared",
+    "fdcId": 168411,
+    "per100g": {
+      "calories": 121.0,
+      "carbs": 8.91,
+      "fat": 5.2,
+      "fiber": 5.2,
+      "protein": 11.91,
+      "sodium": 6.0
+    }
+  },
+  "egg-boiled": {
+    "dataType": "SR Legacy",
+    "description": "Egg, whole, cooked, hard-boiled",
+    "fdcId": 173424,
+    "per100g": {
+      "calories": 155.0,
+      "carbs": 1.12,
+      "fat": 10.61,
+      "fiber": 0.0,
+      "protein": 12.58,
+      "sodium": 124.0
+    }
+  },
+  "lentils-cooked": {
+    "dataType": "SR Legacy",
+    "description": "Lentils, mature seeds, cooked, boiled, with salt",
+    "fdcId": 175254,
+    "per100g": {
+      "calories": 114.0,
+      "carbs": 19.54,
+      "fat": 0.38,
+      "fiber": 7.9,
+      "protein": 9.02,
+      "sodium": 238.0
+    }
+  },
+  "olive-oil": {
+    "dataType": "SR Legacy",
+    "description": "Oil, olive, salad or cooking",
+    "fdcId": 171413,
+    "per100g": {
+      "calories": 884.0,
+      "carbs": 0.0,
+      "fat": 100.0,
+      "fiber": 0.0,
+      "protein": 0.0,
+      "sodium": 2.0
+    }
+  },
+  "prawns-cooked": {
+    "dataType": "SR Legacy",
+    "description": "Crustaceans, shrimp, mixed species, cooked, moist heat (may contain additives to retain moisture)",
+    "fdcId": 171971,
+    "per100g": {
+      "calories": 119.0,
+      "carbs": 1.52,
+      "fat": 1.7,
+      "fiber": 0.0,
+      "protein": 22.78,
+      "sodium": 947.0
+    }
+  },
+  "smoked-salmon": {
+    "dataType": "SR Legacy",
+    "description": "Fish, salmon, chinook, smoked",
+    "fdcId": 173687,
+    "per100g": {
+      "calories": 117.0,
+      "carbs": 0.0,
+      "fat": 4.32,
+      "fiber": 0.0,
+      "protein": 18.28,
+      "sodium": 672.0
+    }
+  },
+  "tuna-water": {
+    "dataType": "SR Legacy",
+    "description": "Fish, tuna, light, canned in water, without salt, drained solids",
+    "fdcId": 171986,
+    "per100g": {
+      "calories": 116.0,
+      "carbs": 0.0,
+      "fat": 0.82,
+      "fiber": 0.0,
+      "protein": 25.51,
+      "sodium": 50.0
+    }
+  },
+  "white-beans": {
+    "dataType": "SR Legacy",
+    "description": "Beans, navy, mature seeds, canned",
+    "fdcId": 173747,
+    "per100g": {
+      "calories": 113.0,
+      "carbs": 20.45,
+      "fat": 0.43,
+      "fiber": 5.1,
+      "protein": 7.53,
+      "sodium": 336.0
+    }
+  }
+}

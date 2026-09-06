@@ -57,7 +57,15 @@
     'Frozen berries':           { q: 'frozen mixed berries' },
     'Olive oil':                { q: 'extra virgin olive oil' },
     'Peanut butter':            { q: 'natural peanut butter no sugar added' },
-    'Baby spinach':             { q: 'fresh baby spinach' }
+    'Baby spinach':             { q: 'fresh baby spinach' },
+
+    /* --- added for the cold, no-cook meals ---------------------------- */
+    'White beans (tinned)':     { q: 'canned cannellini white beans' },
+    'Edamame':                  { q: 'frozen shelled edamame' },
+    'Cooked prawns':            { q: 'cooked peeled prawns shrimp' },
+    'Smoked salmon':            { q: 'smoked salmon slices' },
+    'Boiled eggs':              { q: 'eggs grade a large', img: 'whole-eggs' },
+    'Tuna pouch':               { q: 'tuna pouch in water', img: 'tuna-canned' }
   };
 
   /* The ready-made shelf, in the order the calculator shows it.

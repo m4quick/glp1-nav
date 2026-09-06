@@ -54,14 +54,31 @@ test('aroma is a ceiling, not an equality test', () => {
   }
 });
 
-test('a numeric floor rejects a meal with no figure rather than assuming zero', () => {
-  // Every migrated meal has fiber null. Treating null as 0 would silently drop
-  // them; treating it as "good enough" would invent a number. It has to reject
-  // and say why.
+test('a numeric floor rejects an unknown figure rather than reading it as zero', () => {
+  // Written against synthetic meals on purpose. The first version asserted that
+  // minFiber:6 matched nothing, which was true only because no meal carried a
+  // fibre value yet; adding four meals that do broke a test whose point had
+  // nothing to do with how many meals exist.
+  const reviewed = { reviewed: '2026-01-01' };
+  const known = { slug: 'known', tags: {}, made: { ...reviewed, protein: 20, fiber: 9 } };
+  const unknown = { slug: 'unknown', tags: {}, made: { ...reviewed, protein: 20, fiber: null } };
+  const low = { slug: 'low', tags: {}, made: { ...reviewed, protein: 20, fiber: 2 } };
+
+  const r = F.select([known, unknown, low], { minFiber: 6 });
+  assert.deepEqual(r.matched.map((m) => m.slug), ['known']);
+
+  const why = Object.fromEntries(r.rejected.map((x) => [x.slug, x.why]));
+  assert.equal(why.unknown, 'fibre not known',
+    'an unknown figure must say so, not be treated as too low');
+  assert.equal(why.low, '2 g fibre', 'a known figure should report its value');
+});
+
+test('the real meals carry the fibre the constipation page depends on', () => {
+  // The page that needs this is the one filter no meal could satisfy for a
+  // while, so it is worth asserting the data caught up.
   const r = F.select(MEALS, { minFiber: 6 }, { includeDrafts: true });
-  assert.equal(r.matched.length, 0);
-  assert.ok(r.rejected.every((x) => x.why === 'fibre not known'),
-    'should say the figure is unknown, not that it is too low');
+  assert.ok(r.matched.length >= 4,
+    `only ${r.matched.length} meals carry 6 g fibre or more`);
 });
 
 test('the review gate is on by default', () => {
