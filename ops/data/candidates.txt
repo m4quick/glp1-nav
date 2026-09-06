@@ -1,0 +1,49 @@
+# Shelf-stable prepared meals, gathered from Amazon grocery search 2026-09-05.
+# Powders, bars, shakes and snacks deliberately excluded: they are not meals.
+# --- entrees: lunch / dinner ---
+B0055UBGX0  # HMR Chicken with Barbecue Sauce
+B07N8DC6DT  # HMR Turkey Chili with Beans
+B07N7P2FD4  # HMR Beef Stroganoff
+B07N8D9N73  # HMR Lasagna with Meat Sauce
+B0743J3RJL  # HMR Penne with Meatballs
+B09GBMGWMH  # HMR Creamy Mac & Cheese
+B0055UBIPG  # HMR Vegetable Stew with Beef
+B000V1JVAI  # Hormel Compleats Meatloaf & Gravy
+B004PEET4K  # Hormel Compleats Chicken Breast & Mashed Potatoes
+B000OU1Z5A  # Hormel Compleats Chicken Alfredo
+B0111Y7QR8  # Hormel Compleats Spaghetti & Meat Sauce
+B001E52XGO  # Hormel Compleats Turkey & Dressing
+B001E55YXS  # Hormel Compleats Beef Pot Roast
+B07BZQYXLW  # Hormel Compleats Beef Stroganoff
+B001E52XIC  # Hormel Compleats Salisbury Steak
+B010LWGRBW  # Hormel Compleats Chili with Beans
+B0035FAQQA  # Hormel Compleats Tender Beef & Mash
+B000V1JVCG  # Hormel Compleats Swedish Meatballs
+B093TNJY8D  # Tasty Bite Mexican Protein Bowl
+B093TLJXSS  # Tasty Bite Mediterranean Protein Bowl
+B0DMXFRZGF  # Seeds of Change Harvest Herb Protein Bowl
+B0DMXM8366  # Seeds of Change Garden Pesto Protein Bowl
+B0D51NZCGM  # Ben's Original Bean & Rice Burrito Bowl
+B0007R9L4M  # Tasty Bite Madras Lentils
+# --- soup and chili ---
+B0BZTLWZSF  # Progresso Mediterranean Lentil Protein Soup
+B0FQQP5Y3W  # Campbell's Chunky White Bean Chicken Chili
+B00LP36MZS  # Hormel Chunky Beef Chili with Beans
+B0CFV1RQJR  # Wendy's Chili with Beans
+B0G2ZZQJC2  # Proper Good Creamy Chicken Soup
+# --- pouches: high protein, low effort ---
+B00374WK4U  # Bumble Bee Chunk Light Tuna pouch
+B019JNHBGO  # StarKist Low Sodium Albacore
+B08P3SVWFR  # StarKist Premium White Chicken
+B0BK2N9T8W  # StarKist Chicken Creations Chicken Salad
+B06WLGLVTL  # StarKist Wild Pink Salmon
+B0846LDP4Z  # StarKist Smart Bowls Spicy Pepper Tuna
+B0FMLWVLWW  # Genova Tuna Mediterranean Lentil & Grain Salad
+B0H77XLYJP  # Wild Planet Tuna Pasta Salad
+# --- breakfast ---
+B0DFK2X63B  # ProDough High Protein Oatmeal Cup
+B0GZWTBRNR  # Magic Spoon High Protein Oatmeal
+B08CBWYJK6  # Quaker Protein Oatmeal Maple Brown Sugar
+B07GDLYFK1  # Kodiak Protein Oatmeal Cup
+B0GX2QF7GN  # Premier Protein Oatmeal
+B0BBKVPTKQ  # Kreatures of Habit Overnight Oats PB Banana

@@ -1,0 +1,2072 @@
+[
+  {
+    "fdcId": 2770800,
+    "upc": "00021131000417",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Classic Chicken Parmigiana Bowl, Frozen Meal, 12.5 oz.",
+    "servingSize": 354.0,
+    "perServing": {
+      "protein": 30.0,
+      "fat": 21.0,
+      "carbs": 55.9,
+      "calories": 531,
+      "fiber": 2.8,
+      "sodium": 1342
+    },
+    "proteinDensity": 5.6,
+    "sodiumPer10gProtein": 447,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 1888569,
+    "upc": "653849094947",
+    "brand": "Bumble Bee Foods, LLC",
+    "description": "AHI TUNA STEAK, AHI TUNA",
+    "servingSize": 113.0,
+    "perServing": {
+      "protein": 28.0,
+      "fat": 0.5,
+      "carbs": 0.0,
+      "calories": 124,
+      "fiber": 0.0,
+      "sodium": 51
+    },
+    "proteinDensity": 22.6,
+    "sodiumPer10gProtein": 18,
+    "foundBy": "tuna pouch ready to eat"
+  },
+  {
+    "fdcId": 2753456,
+    "upc": "00021131000226",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Cajun Style Chicken Alfredo Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 26.0,
+      "fat": 16.0,
+      "carbs": 44.0,
+      "calories": 431,
+      "fiber": 3.1,
+      "sodium": 1011
+    },
+    "proteinDensity": 6.0,
+    "sodiumPer10gProtein": 388,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2219929,
+    "upc": "00051000231840",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Slow Kettle Style Bold Beef Chili with Pinto Beans and Jalapenos, 15.5 Ounce Microwavable Bowl",
+    "servingSize": 440.0,
+    "perServing": {
+      "protein": 25.1,
+      "fat": 12.6,
+      "carbs": 59.4,
+      "calories": 449,
+      "fiber": 14.5,
+      "sodium": 1417
+    },
+    "proteinDensity": 5.6,
+    "sodiumPer10gProtein": 564,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2744272,
+    "upc": "00031000009236",
+    "brand": "Conagra Brands, Inc",
+    "description": "Banquet MEGA Bowls Chicken Bacon Alfredo, Frozen Meal, 13 oz.",
+    "servingSize": 368.0,
+    "perServing": {
+      "protein": 25.0,
+      "fat": 23.0,
+      "carbs": 58.9,
+      "calories": 541,
+      "fiber": 1.8,
+      "sodium": 1089
+    },
+    "proteinDensity": 4.6,
+    "sodiumPer10gProtein": 435,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2770805,
+    "upc": "00021131506643",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Roasted Garlic Chicken Bowl, Frozen Meal, 11.5 oz.",
+    "servingSize": 326.0,
+    "perServing": {
+      "protein": 25.0,
+      "fat": 10.0,
+      "carbs": 56.1,
+      "calories": 420,
+      "fiber": 3.9,
+      "sodium": 779
+    },
+    "proteinDensity": 6.0,
+    "sodiumPer10gProtein": 311,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2770801,
+    "upc": "00021131000400",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Fried Chicken Mac and Cheese Bowl, Frozen Meal, 11.85 oz.",
+    "servingSize": 336.0,
+    "perServing": {
+      "protein": 25.0,
+      "fat": 26.0,
+      "carbs": 63.2,
+      "calories": 591,
+      "fiber": 2.0,
+      "sodium": 1609
+    },
+    "proteinDensity": 4.2,
+    "sodiumPer10gProtein": 643,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2770802,
+    "upc": "00021131301354",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Grilled Chicken Pesto Pasta Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 25.0,
+      "fat": 8.0,
+      "carbs": 39.0,
+      "calories": 340,
+      "fiber": 3.1,
+      "sodium": 849
+    },
+    "proteinDensity": 7.4,
+    "sodiumPer10gProtein": 339,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2771048,
+    "upc": "00031000809430",
+    "brand": "Conagra Brands, Inc",
+    "description": "Banquet MEGA Bowls Dynamite Penne with Meatballs, Frozen Meal, 14 oz.",
+    "servingSize": 396.0,
+    "perServing": {
+      "protein": 24.0,
+      "fat": 27.0,
+      "carbs": 61.0,
+      "calories": 590,
+      "fiber": 5.1,
+      "sodium": 1148
+    },
+    "proteinDensity": 4.1,
+    "sodiumPer10gProtein": 478,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2770804,
+    "upc": "00021131506636",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Grilled Chicken Alfredo Bake Bowl, Frozen Meal, 11.6 oz.",
+    "servingSize": 329.0,
+    "perServing": {
+      "protein": 24.0,
+      "fat": 16.0,
+      "carbs": 36.8,
+      "calories": 392,
+      "fiber": 3.9,
+      "sodium": 780
+    },
+    "proteinDensity": 6.1,
+    "sodiumPer10gProtein": 325,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 1912283,
+    "upc": "014900011905",
+    "brand": "Conagra Brands, Inc.",
+    "description": "WOLF, CHILI, NO BEANS, WOLF, CHILI, NO BEANS",
+    "servingSize": 311.0,
+    "perServing": {
+      "protein": 24.0,
+      "fat": 36.1,
+      "carbs": 23.0,
+      "calories": 510,
+      "fiber": 7.2,
+      "sodium": 1200
+    },
+    "proteinDensity": 4.7,
+    "sodiumPer10gProtein": 500,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2774050,
+    "upc": "00031000670726",
+    "brand": "Conagra Brands, Inc",
+    "description": "P.F. Chang's Home Menu Dan Dan Noodle Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 22.0,
+      "fat": 20.0,
+      "carbs": 62.1,
+      "calories": 521,
+      "fiber": 3.1,
+      "sodium": 1051
+    },
+    "proteinDensity": 4.2,
+    "sodiumPer10gProtein": 477,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 1906064,
+    "upc": "041331091428",
+    "brand": "Goya Foods, Inc. ",
+    "description": "BEEF STEW WITH RICE",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 22.0,
+      "fat": 13.0,
+      "carbs": 52.1,
+      "calories": 431,
+      "fiber": 1.9,
+      "sodium": 839
+    },
+    "proteinDensity": 5.1,
+    "sodiumPer10gProtein": 381,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 519132,
+    "upc": "077958560467",
+    "brand": "Blount Seafood Corporation",
+    "description": "TURKEY CHILI WITH BEANS",
+    "servingSize": 340.0,
+    "perServing": {
+      "protein": 22.0,
+      "fat": 11.0,
+      "carbs": 29.0,
+      "calories": 299,
+      "fiber": 10.9,
+      "sodium": 700
+    },
+    "proteinDensity": 7.4,
+    "sodiumPer10gProtein": 318,
+    "foundBy": "turkey chili"
+  },
+  {
+    "fdcId": 2106738,
+    "upc": "077958585460",
+    "brand": "Blount Seafood Corporation ",
+    "description": "TURKEY CHILI WITH BEANS, TURKEY WITH BEANS",
+    "servingSize": 340.0,
+    "perServing": {
+      "protein": 22.0,
+      "fat": 11.0,
+      "carbs": 29.0,
+      "calories": 299,
+      "fiber": 10.9,
+      "sodium": 700
+    },
+    "proteinDensity": 7.4,
+    "sodiumPer10gProtein": 318,
+    "foundBy": "turkey chili"
+  },
+  {
+    "fdcId": 2775613,
+    "upc": "00031000126131",
+    "brand": "Conagra Brands, Inc",
+    "description": "Banquet MEGA Bowls Chicken Fajita, Frozen Meal, 14 oz.",
+    "servingSize": 396.0,
+    "perServing": {
+      "protein": 21.0,
+      "fat": 9.0,
+      "carbs": 61.0,
+      "calories": 420,
+      "fiber": 3.2,
+      "sodium": 958
+    },
+    "proteinDensity": 5.0,
+    "sodiumPer10gProtein": 456,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 756852,
+    "upc": "00051000181107",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "CAMPBELL'S SLOW KETTLE SOUP BEEF STEW",
+    "servingSize": 440.0,
+    "perServing": {
+      "protein": 21.0,
+      "fat": 9.0,
+      "carbs": 34.0,
+      "calories": 299,
+      "fiber": 4.0,
+      "sodium": 1421
+    },
+    "proteinDensity": 7.0,
+    "sodiumPer10gProtein": 676,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 2775067,
+    "upc": "00021131000394",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Classic Spaghetti and Meatballs Bowl, Frozen Meal, 12.4 oz.",
+    "servingSize": 352.0,
+    "perServing": {
+      "protein": 20.0,
+      "fat": 17.0,
+      "carbs": 52.1,
+      "calories": 461,
+      "fiber": 4.9,
+      "sodium": 1221
+    },
+    "proteinDensity": 4.3,
+    "sodiumPer10gProtein": 610,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2775565,
+    "upc": "00031000809478",
+    "brand": "Conagra Brands, Inc",
+    "description": "Banquet MEGA Bowls Nashville Hot Fried Chicken, Frozen Meal, 13 oz.",
+    "servingSize": 368.0,
+    "perServing": {
+      "protein": 20.0,
+      "fat": 19.0,
+      "carbs": 47.8,
+      "calories": 449,
+      "fiber": 4.0,
+      "sodium": 1380
+    },
+    "proteinDensity": 4.5,
+    "sodiumPer10gProtein": 690,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2775498,
+    "upc": "00031000003791",
+    "brand": "Conagra Brands, Inc",
+    "description": "Banquet MEGA Bowls Sesame Chicken Lo Mein, Frozen Meal, 13.5 oz.",
+    "servingSize": 382.0,
+    "perServing": {
+      "protein": 20.0,
+      "fat": 21.0,
+      "carbs": 87.9,
+      "calories": 630,
+      "fiber": 3.8,
+      "sodium": 1421
+    },
+    "proteinDensity": 3.2,
+    "sodiumPer10gProtein": 710,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2770821,
+    "upc": "00021131000288",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Savory Swedish Meatballs Bowl, Single Serve Frozen Meal, 11.5 oz.",
+    "servingSize": 326.0,
+    "perServing": {
+      "protein": 20.0,
+      "fat": 19.0,
+      "carbs": 46.9,
+      "calories": 440,
+      "fiber": 2.9,
+      "sodium": 1011
+    },
+    "proteinDensity": 4.5,
+    "sodiumPer10gProtein": 505,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2657373,
+    "upc": "072655555556",
+    "brand": "Conagra Brands, Inc.",
+    "description": "BURRITO BOWL",
+    "servingSize": 269.0,
+    "perServing": {
+      "protein": 20.0,
+      "fat": 6.0,
+      "carbs": 36.0,
+      "calories": 280,
+      "fiber": 5.9,
+      "sodium": 460
+    },
+    "proteinDensity": 7.1,
+    "sodiumPer10gProtein": 230,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2103434,
+    "upc": "717524772015",
+    "brand": "Del Monte Fresh Produce N.A., Inc.",
+    "description": "CAESAR SALAD WITH WHITE CHICKEN",
+    "servingSize": 220.0,
+    "perServing": {
+      "protein": 20.0,
+      "fat": 27.9,
+      "carbs": 22.0,
+      "calories": 409,
+      "fiber": 3.1,
+      "sodium": 770
+    },
+    "proteinDensity": 4.9,
+    "sodiumPer10gProtein": 385,
+    "foundBy": "chicken salad pouch"
+  },
+  {
+    "fdcId": 2770789,
+    "upc": "00021131500856",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Creamy Chicken and Dumplings Bowl, Frozen Meal, 12 oz.",
+    "servingSize": 340.0,
+    "perServing": {
+      "protein": 19.0,
+      "fat": 14.0,
+      "carbs": 38.1,
+      "calories": 360,
+      "fiber": 3.1,
+      "sodium": 1289
+    },
+    "proteinDensity": 5.3,
+    "sodiumPer10gProtein": 678,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2745128,
+    "upc": "00021131000936",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Savory Chicken Fried Rice Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 311.0,
+    "perServing": {
+      "protein": 19.0,
+      "fat": 11.0,
+      "carbs": 57.8,
+      "calories": 410,
+      "fiber": 3.1,
+      "sodium": 1051
+    },
+    "proteinDensity": 4.6,
+    "sodiumPer10gProtein": 553,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2773980,
+    "upc": "00031000100933",
+    "brand": "Conagra Brands, Inc",
+    "description": "P.F. Chang's Home Menu Beef and Broccoli Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 19.0,
+      "fat": 12.0,
+      "carbs": 56.2,
+      "calories": 409,
+      "fiber": 3.1,
+      "sodium": 739
+    },
+    "proteinDensity": 4.6,
+    "sodiumPer10gProtein": 388,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2773978,
+    "upc": "00031000100919",
+    "brand": "Conagra Brands, Inc",
+    "description": "P.F. Chang's Home Menu Chicken Fried Rice Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 19.0,
+      "fat": 13.0,
+      "carbs": 59.9,
+      "calories": 431,
+      "fiber": 3.1,
+      "sodium": 1089
+    },
+    "proteinDensity": 4.4,
+    "sodiumPer10gProtein": 573,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2671584,
+    "upc": "037600237857",
+    "brand": "Hormel Foods Corporation ",
+    "description": "NO BEANS CHILI",
+    "servingSize": 298.0,
+    "perServing": {
+      "protein": 19.0,
+      "fat": 18.0,
+      "carbs": 23.0,
+      "calories": 331,
+      "fiber": 3.0,
+      "sodium": 1249
+    },
+    "proteinDensity": 5.7,
+    "sodiumPer10gProtein": 657,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2115246,
+    "upc": "017873705475",
+    "brand": "Conagra Brands, Inc.",
+    "description": "HEARTY BEEF STEW",
+    "servingSize": 227.0,
+    "perServing": {
+      "protein": 19.0,
+      "fat": 12.0,
+      "carbs": 13.0,
+      "calories": 241,
+      "fiber": 2.0,
+      "sodium": 400
+    },
+    "proteinDensity": 7.9,
+    "sodiumPer10gProtein": 210,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 2634341,
+    "upc": "076397009285",
+    "brand": "Conservas La Costena S.A.",
+    "description": "MENUDO BEEF TRIPE AND HOMINY STEW, MENUDO",
+    "servingSize": 250.0,
+    "perServing": {
+      "protein": 19.0,
+      "fat": 7.0,
+      "carbs": 15.0,
+      "calories": 200,
+      "fiber": 3.0,
+      "sodium": 1120
+    },
+    "proteinDensity": 9.5,
+    "sodiumPer10gProtein": 589,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 2516933,
+    "upc": "00014900363080",
+    "brand": "Conagra Brands Inc",
+    "description": "WOLF Turkey Chili No Beans, 15 OZ",
+    "servingSize": 250.0,
+    "perServing": {
+      "protein": 19.0,
+      "fat": 8.0,
+      "carbs": 19.0,
+      "calories": 230,
+      "fiber": 5.0,
+      "sodium": 770
+    },
+    "proteinDensity": 8.3,
+    "sodiumPer10gProtein": 405,
+    "foundBy": "turkey chili"
+  },
+  {
+    "fdcId": 2770822,
+    "upc": "00021131000271",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Slow Simmered Rigatoni Bolognese Bowl, Frozen Meal, 12 oz.",
+    "servingSize": 340.0,
+    "perServing": {
+      "protein": 18.0,
+      "fat": 12.0,
+      "carbs": 64.9,
+      "calories": 449,
+      "fiber": 4.1,
+      "sodium": 1119
+    },
+    "proteinDensity": 4.0,
+    "sodiumPer10gProtein": 621,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2747070,
+    "upc": "00041196136333",
+    "brand": "GENERAL MILLS SALES INC.",
+    "description": "Progresso Protein Hearty Grain Vegetable Soup",
+    "servingSize": 538.0,
+    "perServing": {
+      "protein": 18.0,
+      "fat": 2.5,
+      "carbs": 44.0,
+      "calories": 269,
+      "fiber": 8.1,
+      "sodium": 1490
+    },
+    "proteinDensity": 6.7,
+    "sodiumPer10gProtein": 827,
+    "foundBy": "hearty soup chicken"
+  },
+  {
+    "fdcId": 753346,
+    "upc": "00028989101815",
+    "brand": "Kellogg Company US",
+    "description": "Morningstar Farms Entrees Indian Chik'N Tikka 9oz",
+    "servingSize": 255.0,
+    "perServing": {
+      "protein": 17.3,
+      "fat": 12.5,
+      "carbs": 45.4,
+      "calories": 342,
+      "fiber": 9.2,
+      "sodium": 569
+    },
+    "proteinDensity": 5.1,
+    "sodiumPer10gProtein": 328,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 2773768,
+    "upc": "00051000081612",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "CAMPBELL'S FROZEN ENTREE LASAGNA CLASSIC WITH MEAT",
+    "servingSize": 227.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 12.0,
+      "carbs": 32.9,
+      "calories": 311,
+      "fiber": 3.0,
+      "sodium": 990
+    },
+    "proteinDensity": 5.5,
+    "sodiumPer10gProtein": 582,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 2741689,
+    "upc": "00031000005450",
+    "brand": "Conagra Brands, Inc",
+    "description": "Banquet MEGA Bowls Spicy Chicken Queso Burrito Bowl, Frozen Meal, 13 oz. Bowl",
+    "servingSize": 368.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 10.0,
+      "carbs": 48.9,
+      "calories": 361,
+      "fiber": 4.0,
+      "sodium": 1008
+    },
+    "proteinDensity": 4.7,
+    "sodiumPer10gProtein": 592,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2722714,
+    "upc": "00051000286291",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Chunky Soup, Chili Mac Soup, 15.25 oz Microwavable Bowl",
+    "servingSize": 432.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 12.0,
+      "carbs": 48.0,
+      "calories": 372,
+      "fiber": 6.9,
+      "sodium": 989
+    },
+    "proteinDensity": 4.6,
+    "sodiumPer10gProtein": 581,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2754258,
+    "upc": "00031000009793",
+    "brand": "Conagra Brands, Inc",
+    "description": "Banquet MEGA Bowls Bacon Mac 'N Cheese, Frozen Meal, 13 oz.",
+    "servingSize": 368.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 15.0,
+      "carbs": 58.9,
+      "calories": 442,
+      "fiber": 2.9,
+      "sodium": 1398
+    },
+    "proteinDensity": 3.8,
+    "sodiumPer10gProtein": 822,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2770823,
+    "upc": "00021131000264",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Four Cheese Fettuccini Alfredo Bowl, Frozen Meal, 11.3 oz.",
+    "servingSize": 320.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 22.0,
+      "carbs": 47.0,
+      "calories": 461,
+      "fiber": 2.9,
+      "sodium": 950
+    },
+    "proteinDensity": 3.7,
+    "sodiumPer10gProtein": 558,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2773979,
+    "upc": "00031000100926",
+    "brand": "Conagra Brands, Inc",
+    "description": "P.F. Chang's Home Menu Chicken Teriyaki Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 4.0,
+      "carbs": 56.2,
+      "calories": 331,
+      "fiber": 1.9,
+      "sodium": 880
+    },
+    "proteinDensity": 5.1,
+    "sodiumPer10gProtein": 517,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2774018,
+    "upc": "00031000620455",
+    "brand": "Conagra Brands, Inc",
+    "description": "P.F. Chang's Home Menu, Orange Chicken Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 11.0,
+      "carbs": 69.9,
+      "calories": 449,
+      "fiber": 3.1,
+      "sodium": 920
+    },
+    "proteinDensity": 3.8,
+    "sodiumPer10gProtein": 541,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2758014,
+    "upc": "00072655001053",
+    "brand": "Conagra Brands, Inc",
+    "description": "Healthy Choice Cafe Steamers Chicken Margherita With Balsamic, Frozen Meal, 9.5 oz. Bowl",
+    "servingSize": 269.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 6.0,
+      "carbs": 36.0,
+      "calories": 269,
+      "fiber": 5.1,
+      "sodium": 360
+    },
+    "proteinDensity": 6.3,
+    "sodiumPer10gProtein": 211,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 1861431,
+    "upc": "037600178709",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 9.0,
+      "carbs": 31.1,
+      "calories": 269,
+      "fiber": 6.9,
+      "sodium": 990
+    },
+    "proteinDensity": 6.3,
+    "sodiumPer10gProtein": 582,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2145416,
+    "upc": "037600438902",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 9.0,
+      "carbs": 31.1,
+      "calories": 269,
+      "fiber": 6.9,
+      "sodium": 990
+    },
+    "proteinDensity": 6.3,
+    "sodiumPer10gProtein": 582,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2019858,
+    "upc": "037600034210",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 283.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 8.0,
+      "carbs": 33.1,
+      "calories": 269,
+      "fiber": 7.9,
+      "sodium": 990
+    },
+    "proteinDensity": 6.3,
+    "sodiumPer10gProtein": 582,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2022363,
+    "upc": "037600236133",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 9.0,
+      "carbs": 31.1,
+      "calories": 269,
+      "fiber": 6.9,
+      "sodium": 990
+    },
+    "proteinDensity": 6.3,
+    "sodiumPer10gProtein": 582,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2619137,
+    "upc": "037600827867",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 7.0,
+      "carbs": 31.1,
+      "calories": 259,
+      "fiber": 6.9,
+      "sodium": 990
+    },
+    "proteinDensity": 6.6,
+    "sodiumPer10gProtein": 582,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2070130,
+    "upc": "037600222259",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 9.0,
+      "carbs": 31.1,
+      "calories": 269,
+      "fiber": 6.9,
+      "sodium": 990
+    },
+    "proteinDensity": 6.3,
+    "sodiumPer10gProtein": 582,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2338080,
+    "upc": "080000519306",
+    "brand": "StarKist Co.",
+    "description": "PREMIUM WHITE CHICKEN SALAD, WHITE CHICKEN",
+    "servingSize": 128.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 3.0,
+      "carbs": 7.0,
+      "calories": 120,
+      "fiber": 1.5,
+      "sodium": 620
+    },
+    "proteinDensity": 14.2,
+    "sodiumPer10gProtein": 364,
+    "foundBy": "chicken salad pouch"
+  },
+  {
+    "fdcId": 1913551,
+    "upc": "077958570466",
+    "brand": "Blount Seafood Corporation ",
+    "description": "TURKEY CHILI WITH BEANS",
+    "servingSize": 340.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 10.0,
+      "carbs": 29.0,
+      "calories": 258,
+      "fiber": 6.1,
+      "sodium": 680
+    },
+    "proteinDensity": 6.6,
+    "sodiumPer10gProtein": 400,
+    "foundBy": "turkey chili"
+  },
+  {
+    "fdcId": 2516935,
+    "upc": "00014900363615",
+    "brand": "Conagra Brands Inc",
+    "description": "WOLF Turkey Chili With Beans, 15 OZ",
+    "servingSize": 254.0,
+    "perServing": {
+      "protein": 17.0,
+      "fat": 5.0,
+      "carbs": 35.1,
+      "calories": 259,
+      "fiber": 8.9,
+      "sodium": 1021
+    },
+    "proteinDensity": 6.6,
+    "sodiumPer10gProtein": 600,
+    "foundBy": "turkey chili"
+  },
+  {
+    "fdcId": 753348,
+    "upc": "00028989101839",
+    "brand": "Kellogg Company US",
+    "description": "Morningstar Farms Entrees Japanese Soba Noodle 8.5oz",
+    "servingSize": 241.0,
+    "perServing": {
+      "protein": 16.9,
+      "fat": 3.1,
+      "carbs": 36.9,
+      "calories": 239,
+      "fiber": 4.8,
+      "sodium": 665
+    },
+    "proteinDensity": 7.1,
+    "sodiumPer10gProtein": 393,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 2775621,
+    "upc": "00031000126124",
+    "brand": "Conagra Brands, Inc",
+    "description": "Banquet MEGA Bowls Country Fried Chicken, Frozen Meal, 14 oz.",
+    "servingSize": 396.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 21.0,
+      "carbs": 45.9,
+      "calories": 440,
+      "fiber": 3.2,
+      "sodium": 1461
+    },
+    "proteinDensity": 3.6,
+    "sodiumPer10gProtein": 913,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2741626,
+    "upc": "00031000126872",
+    "brand": "Conagra Brands, Inc",
+    "description": "Banquet MEGA Bowls Kung Pao Chicken, Frozen Meal, 13.5 oz.",
+    "servingSize": 382.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 19.0,
+      "carbs": 71.8,
+      "calories": 520,
+      "fiber": 3.1,
+      "sodium": 1291
+    },
+    "proteinDensity": 3.1,
+    "sodiumPer10gProtein": 806,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2758013,
+    "upc": "00072655001046",
+    "brand": "Conagra Brands, Inc",
+    "description": "Healthy Choice Cafe Steamers Sweet Sesame Chicken, Frozen Meal, 9.75 oz. Bowl",
+    "servingSize": 276.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 6.0,
+      "carbs": 43.1,
+      "calories": 301,
+      "fiber": 3.0,
+      "sodium": 461
+    },
+    "proteinDensity": 5.3,
+    "sodiumPer10gProtein": 288,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2773992,
+    "upc": "00031000620301",
+    "brand": "Conagra Brands, Inc",
+    "description": "P.F. Chang's Home Menu, General Chang's Chicken Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 13.0,
+      "carbs": 69.9,
+      "calories": 459,
+      "fiber": 1.9,
+      "sodium": 839
+    },
+    "proteinDensity": 3.5,
+    "sodiumPer10gProtein": 524,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 1798797,
+    "upc": "071106182341",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 17.0,
+      "carbs": 28.9,
+      "calories": 331,
+      "fiber": 6.9,
+      "sodium": 780
+    },
+    "proteinDensity": 4.8,
+    "sodiumPer10gProtein": 487,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 1782382,
+    "upc": "071106028830",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 17.0,
+      "carbs": 27.9,
+      "calories": 331,
+      "fiber": 5.9,
+      "sodium": 1020
+    },
+    "proteinDensity": 4.8,
+    "sodiumPer10gProtein": 637,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2286985,
+    "upc": "037600215862",
+    "brand": "Hormel Foods Corporation ",
+    "description": "NO BEANS CHILI",
+    "servingSize": 236.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 10.0,
+      "carbs": 20.0,
+      "calories": 229,
+      "fiber": 3.1,
+      "sodium": 970
+    },
+    "proteinDensity": 7.0,
+    "sodiumPer10gProtein": 606,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 1919436,
+    "upc": "077958630429",
+    "brand": "Blount Seafood Corporation ",
+    "description": "BEEF CHILI WITH BEANS",
+    "servingSize": 245.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 13.0,
+      "carbs": 21.0,
+      "calories": 250,
+      "fiber": 8.1,
+      "sodium": 691
+    },
+    "proteinDensity": 6.4,
+    "sodiumPer10gProtein": 431,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2314196,
+    "upc": "071106720000",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS, CLASSIC",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 13.0,
+      "carbs": 25.9,
+      "calories": 289,
+      "fiber": 4.9,
+      "sodium": 990
+    },
+    "proteinDensity": 5.5,
+    "sodiumPer10gProtein": 618,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 1955491,
+    "upc": "037600787000",
+    "brand": "Hormel Foods Corporation ",
+    "description": "BEEF STEW",
+    "servingSize": 354.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 17.0,
+      "carbs": 29.0,
+      "calories": 329,
+      "fiber": 2.8,
+      "sodium": 1572
+    },
+    "proteinDensity": 4.9,
+    "sodiumPer10gProtein": 982,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 2633609,
+    "upc": "042272001781",
+    "brand": "Amy's Kitchen Inc.",
+    "description": "STUFFED PASTA SHELLS BOWLS, STUFFED PASTA SHELLS",
+    "servingSize": 284.0,
+    "perServing": {
+      "protein": 16.0,
+      "fat": 14.0,
+      "carbs": 38.9,
+      "calories": 349,
+      "fiber": 5.1,
+      "sodium": 781
+    },
+    "proteinDensity": 4.6,
+    "sodiumPer10gProtein": 488,
+    "foundBy": "pasta bowl ready to eat"
+  },
+  {
+    "fdcId": 2440883,
+    "upc": "080000505095",
+    "brand": "StarKist Co.",
+    "description": "ORIGINAL DELI STYLE READY-TO-EAT TUNA SALAD LUNCH TO-GO, ORIGINAL DELI STYLE",
+    "servingSize": 107.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 7.0,
+      "carbs": 19.0,
+      "calories": 200,
+      "fiber": 1.0,
+      "sodium": 590
+    },
+    "proteinDensity": 7.5,
+    "sodiumPer10gProtein": 393,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 2774576,
+    "upc": "00051000148803",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Chunky Classic Chicken Noodle Soup, 15.25 oz Microwavable Bowl",
+    "servingSize": 432.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 5.0,
+      "carbs": 23.0,
+      "calories": 199,
+      "fiber": 2.2,
+      "sodium": 1102
+    },
+    "proteinDensity": 7.5,
+    "sodiumPer10gProtein": 734,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2695310,
+    "upc": "00051000288868",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Chunky Soup, Classic Chicken Noodle Soup, 15.25 oz Microwavable Bowl (Pack of 8)",
+    "servingSize": 432.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 5.0,
+      "carbs": 23.0,
+      "calories": 199,
+      "fiber": 2.2,
+      "sodium": 1102
+    },
+    "proteinDensity": 7.5,
+    "sodiumPer10gProtein": 734,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 1940914,
+    "upc": "037600178785",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI BOWL",
+    "servingSize": 236.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 12.0,
+      "carbs": 19.0,
+      "calories": 250,
+      "fiber": 3.1,
+      "sodium": 989
+    },
+    "proteinDensity": 6.0,
+    "sodiumPer10gProtein": 659,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 1983007,
+    "upc": "046900732092",
+    "brand": "Conagra Brands, Inc.",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 253.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 24.0,
+      "carbs": 33.9,
+      "calories": 410,
+      "fiber": 9.1,
+      "sodium": 1020
+    },
+    "proteinDensity": 3.7,
+    "sodiumPer10gProtein": 680,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2671588,
+    "upc": "037600366212",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI NO BEANS, NO BEANS",
+    "servingSize": 236.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 14.0,
+      "carbs": 19.0,
+      "calories": 260,
+      "fiber": 3.1,
+      "sodium": 989
+    },
+    "proteinDensity": 5.8,
+    "sodiumPer10gProtein": 659,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2121513,
+    "upc": "037600446150",
+    "brand": "Hormel Foods Corporation ",
+    "description": "NO BEANS CHILI, NO BEANS",
+    "servingSize": 236.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 14.0,
+      "carbs": 19.0,
+      "calories": 260,
+      "fiber": 3.1,
+      "sodium": 989
+    },
+    "proteinDensity": 5.8,
+    "sodiumPer10gProtein": 659,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2121817,
+    "upc": "037600408639",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI NO BEANS",
+    "servingSize": 236.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 14.0,
+      "carbs": 19.0,
+      "calories": 260,
+      "fiber": 3.1,
+      "sodium": 989
+    },
+    "proteinDensity": 5.8,
+    "sodiumPer10gProtein": 659,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2615288,
+    "upc": "0037600493307",
+    "brand": "Hormel Foods Corporation ",
+    "description": "NO BEANS CHILI",
+    "servingSize": 236.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 14.0,
+      "carbs": 19.0,
+      "calories": 260,
+      "fiber": 3.1,
+      "sodium": 989
+    },
+    "proteinDensity": 5.8,
+    "sodiumPer10gProtein": 659,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 1902778,
+    "upc": "071106208645",
+    "brand": "Hormel Foods Corporation ",
+    "description": "BEEF CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 7.0,
+      "carbs": 24.9,
+      "calories": 220,
+      "fiber": 5.9,
+      "sodium": 561
+    },
+    "proteinDensity": 6.8,
+    "sodiumPer10gProtein": 374,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2752254,
+    "upc": "00041196914016",
+    "brand": "GENERAL MILLS SALES INC.",
+    "description": "Progresso Rich & Hearty Chicken & Homestyle Noodle Canned Soup",
+    "servingSize": 538.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 5.0,
+      "carbs": 31.0,
+      "calories": 231,
+      "fiber": 2.2,
+      "sodium": 1512
+    },
+    "proteinDensity": 6.5,
+    "sodiumPer10gProtein": 1008,
+    "foundBy": "hearty soup chicken"
+  },
+  {
+    "fdcId": 2739602,
+    "upc": "00041196914160",
+    "brand": "GENERAL MILLS SALES INC.",
+    "description": "Progresso Rich & Hearty Chicken Corn Chowder Flavored with Bacon Gluten-Free Soup",
+    "servingSize": 524.0,
+    "perServing": {
+      "protein": 15.0,
+      "fat": 15.0,
+      "carbs": 50.0,
+      "calories": 388,
+      "fiber": 3.1,
+      "sodium": 1750
+    },
+    "proteinDensity": 3.9,
+    "sodiumPer10gProtein": 1166,
+    "foundBy": "hearty soup chicken"
+  },
+  {
+    "fdcId": 751770,
+    "upc": "00028989101525",
+    "brand": "Kellogg Company US",
+    "description": "Morningstar Farms Entrees Mushroom Orzo 9oz",
+    "servingSize": 255.0,
+    "perServing": {
+      "protein": 14.3,
+      "fat": 8.9,
+      "carbs": 37.7,
+      "calories": 247,
+      "fiber": 10.2,
+      "sodium": 607
+    },
+    "proteinDensity": 5.8,
+    "sodiumPer10gProtein": 424,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 753352,
+    "upc": "00028989101877",
+    "brand": "Kellogg Company US",
+    "description": "Morningstar Farms Entrees Chicken Pot Pie 8.5oz",
+    "servingSize": 241.0,
+    "perServing": {
+      "protein": 14.2,
+      "fat": 15.2,
+      "carbs": 36.6,
+      "calories": 328,
+      "fiber": 3.1,
+      "sodium": 781
+    },
+    "proteinDensity": 4.3,
+    "sodiumPer10gProtein": 550,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 751728,
+    "upc": "00028989100450",
+    "brand": "Kellogg Company US",
+    "description": "Morningstar Farms Entrees Tuscan Greens & Beans 8.5oz",
+    "servingSize": 241.0,
+    "perServing": {
+      "protein": 14.2,
+      "fat": 15.2,
+      "carbs": 28.2,
+      "calories": 270,
+      "fiber": 9.2,
+      "sodium": 388
+    },
+    "proteinDensity": 5.3,
+    "sodiumPer10gProtein": 273,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 2771711,
+    "upc": "00051000277848",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "SYSCO FROZEN ENTREE WHITE CHEDDAR",
+    "servingSize": 220.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 21.0,
+      "carbs": 27.1,
+      "calories": 350,
+      "fiber": 1.1,
+      "sodium": 970
+    },
+    "proteinDensity": 4.0,
+    "sodiumPer10gProtein": 692,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 2771601,
+    "upc": "00051000286338",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Chunky Spicy Chicken Noodle Soup, 15.25 oz Microwavable Bowl",
+    "servingSize": 432.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 5.0,
+      "carbs": 25.0,
+      "calories": 199,
+      "fiber": 2.2,
+      "sodium": 989
+    },
+    "proteinDensity": 7.0,
+    "sodiumPer10gProtein": 706,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2758116,
+    "upc": "00072655001107",
+    "brand": "Conagra Brands, Inc",
+    "description": "Healthy Choice Cafe Steamers Beef Teriyaki, Frozen Meal, 9.5 oz. Bowl",
+    "servingSize": 269.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 4.0,
+      "carbs": 43.0,
+      "calories": 269,
+      "fiber": 1.9,
+      "sodium": 449
+    },
+    "proteinDensity": 5.2,
+    "sodiumPer10gProtein": 320,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2745106,
+    "upc": "00021131000981",
+    "brand": "Conagra Brands, Inc",
+    "description": "Marie Callender's Sweet & Citrusy Orange Chicken Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 311.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 12.0,
+      "carbs": 98.9,
+      "calories": 560,
+      "fiber": 3.1,
+      "sodium": 569
+    },
+    "proteinDensity": 2.5,
+    "sodiumPer10gProtein": 406,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2774056,
+    "upc": "00031000674328",
+    "brand": "Conagra Brands, Inc",
+    "description": "P.F. Chang's Home Menu, Sweet and Sour Chicken Bowl, Frozen Meal, 11 oz.",
+    "servingSize": 312.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 12.0,
+      "carbs": 72.1,
+      "calories": 449,
+      "fiber": 1.9,
+      "sodium": 671
+    },
+    "proteinDensity": 3.1,
+    "sodiumPer10gProtein": 479,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 1861432,
+    "upc": "037600281836",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 209.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 7.0,
+      "carbs": 27.0,
+      "calories": 230,
+      "fiber": 6.1,
+      "sodium": 840
+    },
+    "proteinDensity": 6.1,
+    "sodiumPer10gProtein": 600,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 1957378,
+    "upc": "037600829649",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 213.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 9.0,
+      "carbs": 31.1,
+      "calories": 260,
+      "fiber": 7.0,
+      "sodium": 990
+    },
+    "proteinDensity": 5.4,
+    "sodiumPer10gProtein": 707,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 1893464,
+    "upc": "071106720406",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 14.0,
+      "carbs": 30.1,
+      "calories": 299,
+      "fiber": 5.9,
+      "sodium": 810
+    },
+    "proteinDensity": 4.7,
+    "sodiumPer10gProtein": 578,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 596736,
+    "upc": "037600829656",
+    "brand": "Hormel Foods Corporation",
+    "description": "CHILI NO BEANS",
+    "servingSize": 213.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 13.0,
+      "carbs": 18.0,
+      "calories": 249,
+      "fiber": 1.9,
+      "sodium": 990
+    },
+    "proteinDensity": 5.6,
+    "sodiumPer10gProtein": 707,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 1633918,
+    "upc": "041196422047",
+    "brand": "General Mills, Inc.",
+    "description": "HEARTY VEGETABLE STEW WITH BEEF",
+    "servingSize": 258.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 4.0,
+      "carbs": 26.1,
+      "calories": 191,
+      "fiber": 2.1,
+      "sodium": 720
+    },
+    "proteinDensity": 7.3,
+    "sodiumPer10gProtein": 514,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 2521183,
+    "upc": "00094643416663",
+    "brand": "Conagra Brands Inc",
+    "description": "Hearty Beef Stew, 72 OZ",
+    "servingSize": 227.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 4.0,
+      "carbs": 14.0,
+      "calories": 150,
+      "fiber": 3.0,
+      "sodium": 590
+    },
+    "proteinDensity": 9.3,
+    "sodiumPer10gProtein": 421,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 1993764,
+    "upc": "086600022000",
+    "brand": "Bumble Bee Foods, LLC",
+    "description": "MEDITERRANEAN TUNA + PASTA BOWL, MEDITERRANEAN",
+    "servingSize": 170.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 8.0,
+      "carbs": 20.1,
+      "calories": 211,
+      "fiber": 6.0,
+      "sodium": 420
+    },
+    "proteinDensity": 6.6,
+    "sodiumPer10gProtein": 300,
+    "foundBy": "pasta bowl ready to eat"
+  },
+  {
+    "fdcId": 2519879,
+    "upc": "00064144021833",
+    "brand": "Conagra Brands Inc",
+    "description": "DENNISONS Turkey Chili",
+    "servingSize": 240.0,
+    "perServing": {
+      "protein": 14.0,
+      "fat": 3.5,
+      "carbs": 31.9,
+      "calories": 221,
+      "fiber": 10.1,
+      "sodium": 821
+    },
+    "proteinDensity": 6.3,
+    "sodiumPer10gProtein": 586,
+    "foundBy": "turkey chili"
+  },
+  {
+    "fdcId": 1935706,
+    "upc": "072655405301",
+    "brand": "Conagra Brands, Inc.",
+    "description": "ALL NATURAL ENTREES, TOMATO BASIL PENNE",
+    "servingSize": 283.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 6.0,
+      "carbs": 44.1,
+      "calories": 280,
+      "fiber": 7.1,
+      "sodium": 600
+    },
+    "proteinDensity": 4.6,
+    "sodiumPer10gProtein": 461,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 1935421,
+    "upc": "072655405455",
+    "brand": "Conagra Brands, Inc.",
+    "description": "HEALTHY CHOICE, STEAMING ENTREES, HONEY BASALMIC CHICKEN",
+    "servingSize": 255.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 3.0,
+      "carbs": 32.1,
+      "calories": 209,
+      "fiber": 5.1,
+      "sodium": 459
+    },
+    "proteinDensity": 6.2,
+    "sodiumPer10gProtein": 353,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 2769945,
+    "upc": "00031000126117",
+    "brand": "Conagra Brands, Inc",
+    "description": "Banquet MEGA Bowls Chicken Fried Beef Steak Bowl, Frozen Meal, 14 oz. Bowl",
+    "servingSize": 396.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 30.0,
+      "carbs": 47.1,
+      "calories": 511,
+      "fiber": 3.2,
+      "sodium": 1370
+    },
+    "proteinDensity": 2.5,
+    "sodiumPer10gProtein": 1053,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2774505,
+    "upc": "00072655001022",
+    "brand": "Conagra Brands, Inc",
+    "description": "Healthy Choice Cafe Steamers Beef Merlot, Frozen Meal, 9.5 oz. Bowl",
+    "servingSize": 269.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 3.5,
+      "carbs": 24.0,
+      "calories": 180,
+      "fiber": 4.0,
+      "sodium": 576
+    },
+    "proteinDensity": 7.2,
+    "sodiumPer10gProtein": 443,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2699985,
+    "upc": "00051000215864",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Chunky Soup, Pub-Style Chicken Pot Pie Soup, 15.25 Oz Microwavable Bowl",
+    "servingSize": 432.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 15.0,
+      "carbs": 30.0,
+      "calories": 311,
+      "fiber": 3.0,
+      "sodium": 1391
+    },
+    "proteinDensity": 4.2,
+    "sodiumPer10gProtein": 1070,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2437163,
+    "upc": "037600615334",
+    "brand": "Hormel Foods Corporation ",
+    "description": "CHILI WITH BEANS",
+    "servingSize": 247.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 15.0,
+      "carbs": 33.1,
+      "calories": 321,
+      "fiber": 6.9,
+      "sodium": 990
+    },
+    "proteinDensity": 4.0,
+    "sodiumPer10gProtein": 761,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2209478,
+    "upc": "037600292092",
+    "brand": "Hormel Foods Corporation ",
+    "description": "NO BEANS CHILI, NO BEANS",
+    "servingSize": 213.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 12.0,
+      "carbs": 16.0,
+      "calories": 219,
+      "fiber": 1.9,
+      "sodium": 901
+    },
+    "proteinDensity": 5.9,
+    "sodiumPer10gProtein": 693,
+    "foundBy": "chili with beans"
+  },
+  {
+    "fdcId": 2419921,
+    "upc": "077958794411",
+    "brand": "Blount Seafood Corporation ",
+    "description": "CHICKEN NOODLE SOUP, CHICKEN",
+    "servingSize": 284.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 4.5,
+      "carbs": 15.0,
+      "calories": 150,
+      "fiber": 2.0,
+      "sodium": 900
+    },
+    "proteinDensity": 8.7,
+    "sodiumPer10gProtein": 692,
+    "foundBy": "hearty soup chicken"
+  },
+  {
+    "fdcId": 2747049,
+    "upc": "00041196914085",
+    "brand": "GENERAL MILLS SALES INC.",
+    "description": "Progresso Rich & Hearty Savory Beef Barley Vegetable Soup",
+    "servingSize": 527.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 2.5,
+      "carbs": 36.0,
+      "calories": 211,
+      "fiber": 4.2,
+      "sodium": 1491
+    },
+    "proteinDensity": 6.2,
+    "sodiumPer10gProtein": 1146,
+    "foundBy": "hearty soup chicken"
+  },
+  {
+    "fdcId": 2745498,
+    "upc": "00041196914078",
+    "brand": "GENERAL MILLS SALES INC.",
+    "description": "Progresso Rich & Hearty Slow Cooked Vegetable Beef Soup",
+    "servingSize": 538.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 2.0,
+      "carbs": 40.0,
+      "calories": 231,
+      "fiber": 3.8,
+      "sodium": 1501
+    },
+    "proteinDensity": 5.6,
+    "sodiumPer10gProtein": 1154,
+    "foundBy": "hearty soup chicken"
+  },
+  {
+    "fdcId": 2158865,
+    "upc": "076808009453",
+    "brand": "Barilla G & R F.Lli S.P.A.",
+    "description": "RED LENTIL SPAGHETTI, RED LENTIL",
+    "servingSize": 56.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 1.5,
+      "carbs": 34.0,
+      "calories": 180,
+      "fiber": 6.0,
+      "sodium": 0
+    },
+    "proteinDensity": 7.2,
+    "sodiumPer10gProtein": 0,
+    "foundBy": "lentil dal ready to eat"
+  },
+  {
+    "fdcId": 2274802,
+    "upc": "709355468083",
+    "brand": "Health Management Resources Corporation",
+    "description": "VEGETABLE STEW WITH BEEF FULL-FLAVORED STEW WITH FARM-FRESH VEGETABLES AND TENDER CHUNKS OF BEEF, VEGETABLE STEW WITH BEEF",
+    "servingSize": 213.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 3.0,
+      "carbs": 21.0,
+      "calories": 160,
+      "fiber": 3.0,
+      "sodium": 571
+    },
+    "proteinDensity": 8.1,
+    "sodiumPer10gProtein": 439,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 1855501,
+    "upc": "041331021333",
+    "brand": "Goya Foods, Inc. ",
+    "description": "GOYA, BEEF TRIPE STEW WITH VEGETABLES MONDOGO",
+    "servingSize": 252.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 2.0,
+      "carbs": 14.0,
+      "calories": 121,
+      "fiber": 5.0,
+      "sodium": 930
+    },
+    "proteinDensity": 10.7,
+    "sodiumPer10gProtein": 715,
+    "foundBy": "beef stew ready to eat"
+  },
+  {
+    "fdcId": 1960299,
+    "upc": "042272012213",
+    "brand": "Amy's Kitchen Inc.",
+    "description": "PESTO PENNE PASTA WITH VEGETABLES BOWLS, PESTO",
+    "servingSize": 255.0,
+    "perServing": {
+      "protein": 13.0,
+      "fat": 15.0,
+      "carbs": 45.9,
+      "calories": 370,
+      "fiber": 4.1,
+      "sodium": 459
+    },
+    "proteinDensity": 3.5,
+    "sodiumPer10gProtein": 353,
+    "foundBy": "pasta bowl ready to eat"
+  },
+  {
+    "fdcId": 751730,
+    "upc": "00028989100474",
+    "brand": "Kellogg Company US",
+    "description": "Morningstar Farms Entrees Spicy Black Bean 9oz",
+    "servingSize": 255.0,
+    "perServing": {
+      "protein": 12.5,
+      "fat": 13.5,
+      "carbs": 42.1,
+      "calories": 321,
+      "fiber": 5.6,
+      "sodium": 709
+    },
+    "proteinDensity": 3.9,
+    "sodiumPer10gProtein": 567,
+    "foundBy": "ready to eat entree"
+  },
+  {
+    "fdcId": 2696033,
+    "upc": "00051000278562",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Well Yes! Power Soup Bowl Veggie Chili Soup, 11.1 Oz Microwavable Bowl",
+    "servingSize": 315.0,
+    "perServing": {
+      "protein": 12.0,
+      "fat": 1.5,
+      "carbs": 34.0,
+      "calories": 198,
+      "fiber": 9.1,
+      "sodium": 598
+    },
+    "proteinDensity": 6.1,
+    "sodiumPer10gProtein": 498,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2696030,
+    "upc": "00051000278524",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Well Yes! Power Soup Bowl Cajun Style Chicken Soup, 11.1 Oz Microwavable Bowl",
+    "servingSize": 315.0,
+    "perServing": {
+      "protein": 12.0,
+      "fat": 2.5,
+      "carbs": 27.0,
+      "calories": 180,
+      "fiber": 6.9,
+      "sodium": 598
+    },
+    "proteinDensity": 6.7,
+    "sodiumPer10gProtein": 498,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2696032,
+    "upc": "00051000278555",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Well Yes! Power Soup Bowl Southwest Style Chicken Soup, 11.1 Oz Microwavable Bowl",
+    "servingSize": 315.0,
+    "perServing": {
+      "protein": 12.0,
+      "fat": 2.0,
+      "carbs": 25.0,
+      "calories": 170,
+      "fiber": 6.0,
+      "sodium": 598
+    },
+    "proteinDensity": 7.1,
+    "sodiumPer10gProtein": 498,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2722468,
+    "upc": "00051000148780",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Chunky Soup, Beef Soup with Country Vegetables, 15.25 oz Microwavable Bowl",
+    "servingSize": 432.0,
+    "perServing": {
+      "protein": 12.0,
+      "fat": 3.0,
+      "carbs": 29.0,
+      "calories": 190,
+      "fiber": 3.0,
+      "sodium": 1102
+    },
+    "proteinDensity": 6.3,
+    "sodiumPer10gProtein": 918,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2695347,
+    "upc": "00051000289711",
+    "brand": "CAMPBELL SOUP COMPANY",
+    "description": "Campbell's Chunky Soup, Spicy Chicken & Sausage Gumbo Soup, 15.25 oz Microwavable Bowl",
+    "servingSize": 432.0,
+    "perServing": {
+      "protein": 12.0,
+      "fat": 5.0,
+      "carbs": 26.0,
+      "calories": 199,
+      "fiber": 2.2,
+      "sodium": 1102
+    },
+    "proteinDensity": 6.0,
+    "sodiumPer10gProtein": 918,
+    "foundBy": "microwave meal bowl"
+  },
+  {
+    "fdcId": 2081319,
+    "upc": "042272001606",
+    "brand": "Amy's Kitchen Inc.",
+    "description": "TERIYAKI MADE WITH ORGANIC TOFU, BROWN RICE AND BROCCOLI BOWLS, TERIYAKI",
+    "servingSize": 269.0,
+    "perServing": {
+      "protein": 12.0,
+      "fat": 5.0,
+      "carbs": 65.9,
+      "calories": 360,
+      "fiber": 4.0,
+      "sodium": 780
+    },
+    "proteinDensity": 3.3,
+    "sodiumPer10gProtein": 650,
+    "foundBy": "protein bowl rice"
+  },
+  {
+    "fdcId": 2752222,
+    "upc": "00041196453843",
+    "brand": "GENERAL MILLS SALES INC.",
+    "description": "Progresso Rich & Hearty Chicken Pot Pie Style with Dumplings Soup",
+    "servingSize": 524.0,
+    "perServing": {
+      "protein": 12.0,
+      "fat": 7.0,
+      "carbs": 34.0,
+      "calories": 241,
+      "fiber": 3.1,
+      "sodium": 1803
+    },
+    "proteinDensity": 5.0,
+    "sodiumPer10gProtein": 1502,
+    "foundBy": "hearty soup chicken"
+  },
+  {
+    "fdcId": 2598964,
+    "upc": "0077958690416",
+    "brand": "Blount Seafood Corporation ",
+    "description": "CHICKEN NOODLE  SOUP, CHICKEN",
+    "servingSize": 453.0,
+    "perServing": {
+      "protein": 12.0,
+      "fat": 4.0,
+      "carbs": 13.0,
+      "calories": 131,
+      "fiber": 0.9,
+      "sodium": 779
+    },
+    "proteinDensity": 9.2,
+    "sodiumPer10gProtein": 649,
+    "foundBy": "hearty soup chicken"
+  },
+  {
+    "fdcId": 2468759,
+    "upc": "086600241210",
+    "brand": "Bumble Bee Foods, LLC",
+    "description": "TUNA SALAD, TUNA",
+    "servingSize": 100.0,
+    "perServing": {
+      "protein": 12.0,
+      "fat": 0.5,
+      "carbs": 7.0,
+      "calories": 80,
+      "fiber": 1.0,
+      "sodium": 470
+    },
+    "proteinDensity": 15.0,
+    "sodiumPer10gProtein": 391,
+    "foundBy": "tuna pouch ready to eat"
+  }
+]
