@@ -494,3 +494,30 @@ button.chip { border: 1px dashed #b9bfe4; cursor: pointer; font: inherit; }
     footer { padding: 26px 18px 30px; }
     footer a { display: inline-block; padding: 7px 0; margin: 0 10px; }
 }
+
+/* ---- ad slots ------------------------------------------------------
+   Height is reserved before the ad arrives so that filling one cannot
+   push the page around under someone mid-sentence. The label is there
+   because an ad that is obviously an ad is the honest arrangement, and
+   it keeps ads visually separate from the content they sit beside. */
+.ad-slot {
+    margin: 28px auto;
+    max-width: 1000px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.ad-slot > .ad-label {
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #9aa0a6;
+    margin-bottom: 6px;
+    align-self: flex-start;
+}
+.ad-slot ins.adsbygoogle { display: block; width: 100%; }
+@media (max-width: 600px) {
+    .ad-slot { margin: 22px 14px; min-height: 250px; }
+}
