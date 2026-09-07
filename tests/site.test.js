@@ -150,11 +150,30 @@ test('every page in the sitemap exists, and no draft is in it', () => {
   assert.ok(locs.length > 0, 'sitemap is empty');
   for (const l of locs) assert.ok(resolves(l), `sitemap lists ${l}, which does not exist`);
 
-  const drafts = JSON.parse(read('dishes.json')).dishes
-    .filter((d) => !d.reviewed).map((d) => `/dish-${d.slug}`);
-  for (const d of drafts) {
-    assert.ok(!locs.includes(d), `${d} is unreviewed but is in the sitemap`);
+  // Listing a page and asserting it was clinically reviewed are separate
+  // decisions. `publish` controls the sitemap; the banner reports review
+  // status honestly either way. What must never happen is a page appearing
+  // in the sitemap that nobody chose to publish.
+  const held = JSON.parse(read('dishes.json')).dishes
+    .filter((d) => !d.publish).map((d) => `/dish-${d.slug}`);
+  for (const d of held) {
+    assert.ok(!locs.includes(d), `${d} is not published but is in the sitemap`);
   }
+});
+
+test('no page claims a review it has not had', () => {
+  const bad = [];
+  for (const p of pages) {
+    const t = read(p);
+    if (!/review-banner reviewed/.test(t)) continue;
+    // A green banner is only legitimate on a dish whose routes are all reviewed.
+    const m = p.match(/^dish-(.+)\.html$/);
+    if (!m) continue;
+    const dish = JSON.parse(read('dishes.json')).dishes.find((d) => d.slug === m[1]);
+    const routes = ['delivered', 'prepared', 'made'].filter((r) => dish && dish[r]);
+    if (routes.some((r) => !dish[r].reviewed)) bad.push(p);
+  }
+  assert.deepEqual(bad, [], `pages claiming an unearned review:\n  ${bad.join('\n  ')}`);
 });
 
 test('the shared scripts parse and export what the pages call', () => {

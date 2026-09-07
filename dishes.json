@@ -155,7 +155,8 @@
         ],
         "tip": "On a nauseous day, serve it cold from the fridge the next morning. Cold fish is often easier than hot, and it loses nothing.",
         "reviewed": null
-      }
+      },
+      "publish": true
     },
     {
       "slug": "greek-yogurt-bowl",
@@ -246,7 +247,8 @@
         ],
         "tip": "Make it the night before. Half the battle on a bad morning is that nothing is ready.",
         "reviewed": null
-      }
+      },
+      "publish": true
     },
     {
       "slug": "chicken-lentil-traybake",
@@ -334,7 +336,8 @@
         ],
         "tip": "Cook two and keep one cold. A cooked chicken breast in the fridge is the difference between hitting your protein and giving up on it.",
         "reviewed": null
-      }
+      },
+      "publish": true
     },
     {
       "slug": "cottage-cheese-scramble",
@@ -416,7 +419,8 @@
         ],
         "tip": "Low and slow. Rushed scrambled eggs go rubbery, and rubbery eggs are very hard to eat on a bad day.",
         "reviewed": null
-      }
+      },
+      "publish": true
     },
     {
       "slug": "tuna-white-bean-plate",
@@ -494,7 +498,8 @@
         ],
         "tip": "Rinsing the beans is worth the thirty seconds -- it takes most of the tinned taste away, which matters more than usual when your sense of taste has changed.",
         "reviewed": null
-      }
+      },
+      "publish": true
     },
     {
       "slug": "prawn-edamame-avocado",
@@ -566,7 +571,8 @@
         ],
         "tip": "Frozen edamame thaw in a sieve under cold water in about a minute, which is the only reason this is a four-minute meal rather than a twenty-minute one.",
         "reviewed": null
-      }
+      },
+      "publish": true
     },
     {
       "slug": "chickpea-egg-plate",
@@ -644,7 +650,8 @@
         ],
         "tip": "Boil six eggs at once on a good day. Cold hard-boiled eggs keep about a week and turn several bad days into a two-minute meal.",
         "reviewed": null
-      }
+      },
+      "publish": true
     },
     {
       "slug": "smoked-salmon-lentils",
@@ -723,7 +730,8 @@
         ],
         "tip": "Smoked salmon is salty, which is often welcome when nothing tastes of much -- but it is the saltiest thing on this site, so it is not an everyday meal.",
         "reviewed": null
-      }
+      },
+      "publish": true
     }
   ],
   "_nutrition": "Meals added from September 2026 derive their figures rather than stating them. Each ingredient names a pinned USDA FoodData Central id and a weight in grams (ops/data/ingredients.json), and ops/nutrition.py sums them. The id is pinned, not searched at build time, so a search returning a different food next month cannot silently change a published number. The first four dishes still carry hand-worked figures and should be converted."

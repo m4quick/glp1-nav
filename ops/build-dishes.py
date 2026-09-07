@@ -75,13 +75,16 @@ def primary(m):
 
 
 def is_live(m):
-    """A meal is publishable once any one of its routes has been reviewed.
+    """Whether a meal is listed in sitemap.xml.
 
-    Routes are reviewed separately because they are different judgements
-    arriving at different times: whether a product is a sensible choice is not
-    the same question as whether a recipe's arithmetic is right.
+    Two independent things used to be one. A route being *reviewed* is a
+    clinical judgement; a page being *published* is an editorial one. Coupling
+    them meant the only way to list a page was to assert a dietitian had signed
+    it off, which is a claim the About page makes explicitly and which has to
+    stay true. `publish` lists the page; the banner still reports, accurately,
+    what has and has not been reviewed.
     """
-    return any(m[r].get("reviewed") for r in routes_of(m))
+    return m.get("publish") or any(m[r].get("reviewed") for r in routes_of(m))
 
 
 def banner(m):
@@ -90,7 +93,8 @@ def banner(m):
 
     if not unreviewed:
         dates = sorted({m[r]["reviewed"] for r in live})
-        return ('    <div class="review-banner reviewed">\n'
+        return ('BOTTOM'
+                '    <div class="review-banner reviewed">\n'
                 '        <span class="rb-icon">&#9989;</span>\n'
                 f'        <span><strong>Reviewed by our staff dietitian on {e(dates[-1])}.</strong>'
                 'General nutrition information, not personalised dietetic advice. '
@@ -112,6 +116,19 @@ def banner(m):
             'estimates from standard food composition values and may change. '
             '<a href="/about">How we source this</a></span>\n'
             '    </div>')
+
+
+def banner_slots(m):
+    """Where the banner goes.
+
+    An amber banner is a warning about the content below it, so it sits above
+    that content. A green banner is a credential, and reads better at the end
+    of the page it vouches for -- which is also where the owner asked for it.
+    """
+    b = banner(m)
+    if b.startswith("BOTTOM"):
+        return {"banner": "", "banner_bottom": b[len("BOTTOM"):]}
+    return {"banner": b, "banner_bottom": ""}
 
 
 def ingredient_rows(items):
@@ -173,6 +190,7 @@ TEMPLATE = """<!DOCTYPE html>
         </article>
     </div>
 
+{banner_bottom}
     <footer>
         <div class="container">
             <p>&copy; 2026 GLP-1 Navigator</p>
@@ -309,7 +327,7 @@ def _render(m):
         desc=e(f'{m["title"]} — {summary}. '
                f'Buy the shortcut or make it from fresh, for GLP-1 appetites.'),
         blurb=e(m["blurb"]), image=e(m["image"]),
-        navlinks=nav("/dishes.html"), banner=banner(m),
+        navlinks=nav("/dishes.html"), **banner_slots(m),
         toggle=toggle(m), panes=panes(m))
 
 
