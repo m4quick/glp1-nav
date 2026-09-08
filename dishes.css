@@ -86,3 +86,55 @@
     .dish-hero { width: calc(100% + 36px); margin: -22px -18px 18px; height: 200px; }
     .dish-macros { grid-template-columns: repeat(2, 1fr); gap: 14px 10px; }
 }
+
+/* ---- what the dietitian said -------------------------------------------
+   Deliberately not a pull-quote or a testimonial box. It is somebody's
+   professional opinion sitting in the flow of the page, and it should read
+   like a note in the margin rather than marketing. */
+.dietitian {
+    margin: 30px 0 0; padding: 18px 20px;
+    background: #f4f8f5; border: 1px solid #dcebe1; border-radius: 12px;
+}
+.dietitian h3 {
+    font-size: 1em; color: #2d6a4a; margin: 0 0 12px;
+    letter-spacing: .01em;
+}
+.dietitian ul { list-style: none; margin: 0; padding: 0; }
+.dietitian li { margin-bottom: 16px; }
+.dietitian li:last-child { margin-bottom: 0; }
+.dietitian p { color: #33403a; line-height: 1.7; margin: 0; font-size: 0.96em; }
+.dietitian .by {
+    margin-top: 5px; font-size: 0.82em; color: #6f8078;
+    display: flex; gap: 9px; flex-wrap: wrap; align-items: baseline;
+}
+.dietitian .by .on::before { content: "· "; }
+.dietitian .by time { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+/* ---- her own page ---- */
+.reviewer-page h2 { border-bottom: 0; padding-bottom: 0; margin-bottom: 4px; }
+.reviewer-page .reg {
+    font-size: 0.9em; color: #7d8482; margin: 0 0 20px;
+    font-variant-numeric: tabular-nums;
+}
+.reviewer-page .bio { color: #3f4650; line-height: 1.75; margin-bottom: 26px; }
+.reviewer-page .scope {
+    background: #f7f8fa; border: 1px solid #e2e5ea; border-radius: 11px;
+    padding: 16px 19px; margin-bottom: 28px;
+}
+.reviewer-page .scope h3 { font-size: 1em; color: #56606d; margin: 0 0 9px; }
+.reviewer-page .scope p { font-size: 0.94em; color: #5c6470; line-height: 1.7; margin: 0 0 9px; }
+.reviewer-page .scope p:last-child { margin-bottom: 0; }
+.reviewer-page .record h3 { font-size: 1.15em; color: #26292a; margin: 0 0 4px; }
+.reviewer-page .record .lead { font-size: 0.92em; color: #7d8482; margin-bottom: 18px; }
+.reviewer-page .rec { border-top: 1px solid #eceff0; padding: 16px 0; }
+.reviewer-page .rec h4 { font-size: 1em; margin: 0 0 10px; }
+.reviewer-page .rec h4 a { color: #2d6a4a; text-decoration: none; font-weight: 700; }
+.reviewer-page .rec h4 a:hover { text-decoration: underline; }
+.reviewer-page .rec ul { list-style: none; margin: 0; padding: 0; }
+.reviewer-page .rec li { margin-bottom: 14px; }
+.reviewer-page .rec p { color: #3f4650; line-height: 1.7; margin: 0; font-size: 0.95em; }
+.reviewer-page .rec .by {
+    margin-top: 4px; font-size: 0.82em; color: #8b938f;
+    display: flex; gap: 9px; align-items: baseline;
+}
+.reviewer-page .rec .by time { margin-left: auto; font-variant-numeric: tabular-nums; }

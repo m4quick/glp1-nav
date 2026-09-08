@@ -162,16 +162,34 @@ test('every page in the sitemap exists, and no draft is in it', () => {
 });
 
 test('no page claims a review it has not had', () => {
+  // Rewritten 8 Sept. This originally required every route to be reviewed
+  // before a green banner was legitimate, which was right under the model at
+  // the time. It is not any more: a dietitian cannot sign off a manufacturer's
+  // product, only whether the nutrition it claims is plausible, so the
+  // prepared route carries no review date by design.
+  //
+  // The rule is now: everything that is hers to review must be reviewed, and
+  // anything that is not hers must be disclosed on the page rather than
+  // quietly ridden in under her name.
   const bad = [];
   for (const p of pages) {
     const t = read(p);
     if (!/review-banner reviewed/.test(t)) continue;
-    // A green banner is only legitimate on a dish whose routes are all reviewed.
     const m = p.match(/^dish-(.+)\.html$/);
     if (!m) continue;
     const dish = JSON.parse(read('dishes.json')).dishes.find((d) => d.slug === m[1]);
-    const routes = ['delivered', 'prepared', 'made'].filter((r) => dish && dish[r]);
-    if (routes.some((r) => !dish[r].reviewed)) bad.push(p);
+    if (!dish) continue;
+
+    for (const r of ['delivered', 'prepared', 'made']) {
+      const route = dish[r];
+      if (!route) continue;
+      if (route.figuresFrom) {
+        // Not hers. The page must say so, and must not claim she reviewed it.
+        if (!/manufacturer/i.test(t)) bad.push(`${p} (hides that ${r} is not hers)`);
+      } else if (!route.reviewed) {
+        bad.push(`${p} (green banner, ${r} unreviewed)`);
+      }
+    }
   }
   assert.deepEqual(bad, [], `pages claiming an unearned review:\n  ${bad.join('\n  ')}`);
 });

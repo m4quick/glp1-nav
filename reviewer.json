@@ -1,0 +1,22 @@
+{
+  "_model": "Our dietitian reviews pages and comments on them in public. Her comments are content, not notes passed back privately and then thrown away: a named professional saying in her own words why a meal works, or where she would be careful, is worth more to a reader than a green tick, and it is the one thing on this site no competitor can copy.",
+
+  "_scope": "What she can speak to and what she cannot. She can judge whether a meal suits somebody whose appetite has collapsed, whether the nutrition arithmetic holds, and whether advice is safe. She cannot review a product: for a packet she can only say whether the nutrition it claims is plausible and whether the food suits the reader. She is not vouching for a manufacturer, a supply chain, or what is actually in the tin.",
+
+  "_naming": "name, credentials and registration are null until she has agreed in writing to be named. Being named as the reviewer on a health site is a professional liability she carries, not a marketing decision we make. ops/build-reviewer.py refuses to render her page, and refuses to attribute any comment to her, until consented is a real date. Until then comments render as 'our staff dietitian'.",
+
+  "reviewer": {
+    "id": "staff-dietitian",
+    "name": null,
+    "credentials": null,
+    "registration": null,
+    "registrationBody": null,
+    "bio": null,
+    "photo": null,
+    "consented": null
+  },
+
+  "_comments": "One entry per comment. `page` is a page slug (dish-<slug>, symptom-<slug>, or a bare page name). `on` says which part she is talking about, so a comment about the ready-made option is not mistaken for a comment about the recipe. Nothing is edited for tone; if a comment needs shortening, ask her.",
+
+  "comments": []
+}

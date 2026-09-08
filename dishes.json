@@ -110,7 +110,8 @@
         "fat": null,
         "fiber": null,
         "sodium": null,
-        "reviewed": "2026-09-08"
+        "reviewed": null,
+        "figuresFrom": "manufacturer label"
       },
       "made": {
         "protein": 36,
@@ -208,7 +209,8 @@
         "fat": null,
         "fiber": null,
         "sodium": null,
-        "reviewed": "2026-09-08"
+        "reviewed": null,
+        "figuresFrom": "manufacturer label"
       },
       "made": {
         "protein": 27,
@@ -296,7 +298,8 @@
         "fat": null,
         "fiber": null,
         "sodium": null,
-        "reviewed": "2026-09-08"
+        "reviewed": null,
+        "figuresFrom": "manufacturer label"
       },
       "made": {
         "protein": 45,
@@ -385,7 +388,8 @@
         "fat": null,
         "fiber": null,
         "sodium": null,
-        "reviewed": "2026-09-08"
+        "reviewed": null,
+        "figuresFrom": "manufacturer label"
       },
       "made": {
         "protein": 30,
@@ -734,5 +738,6 @@
       "publish": true
     }
   ],
-  "_nutrition": "Meals added from September 2026 derive their figures rather than stating them. Each ingredient names a pinned USDA FoodData Central id and a weight in grams (ops/data/ingredients.json), and ops/nutrition.py sums them. The id is pinned, not searched at build time, so a search returning a different food next month cannot silently change a published number. The first four dishes still carry hand-worked figures and should be converted."
+  "_nutrition": "Meals added from September 2026 derive their figures rather than stating them. Each ingredient names a pinned USDA FoodData Central id and a weight in grams (ops/data/ingredients.json), and ops/nutrition.py sums them. The id is pinned, not searched at build time, so a search returning a different food next month cannot silently change a published number. The first four dishes still carry hand-worked figures and should be converted.",
+  "_preparedReview": "A dietitian cannot review a product. She can say whether the nutrition a packet claims is plausible and whether the food suits somebody on a GLP-1; she cannot vouch for a manufacturer, a supply chain, or what is actually in the tin. So the prepared route carries no `reviewed` date at all. Its figures are the manufacturer's, stated as such, and the page says so rather than implying she signed them off."
 }

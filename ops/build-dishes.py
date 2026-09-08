@@ -16,6 +16,7 @@ import html, importlib.util, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "dishes.json")
+REVIEWER = os.path.join(ROOT, "reviewer.json")
 
 # The mobile app shell (viewport-fit, tab bar, mobile.js, footer index) is
 # owned by apply-shell.py. Generated pages run through the same function the
@@ -89,14 +90,22 @@ def is_live(m):
 
 def banner(m):
     live = routes_of(m)
-    unreviewed = [r for r in live if not m[r].get("reviewed")]
+    # A route whose figures come off a manufacturer's packet is not awaiting
+    # review -- it is not hers to review at all. Treating it as unreviewed made
+    # the page warn about content nobody was ever going to sign.
+    unreviewed = [r for r in live
+                  if not m[r].get("reviewed") and not m[r].get("figuresFrom")]
+    manufacturer = [r for r in live if m[r].get("figuresFrom")]
 
     if not unreviewed:
-        dates = sorted({m[r]["reviewed"] for r in live})
+        dates = sorted(m[r]["reviewed"] for r in live if m[r].get("reviewed"))
+        extra = ("Figures for the ready-made options are the manufacturer's, "
+                 "taken from the packet, and are not hers. " if manufacturer else "")
         return ('BOTTOM'
                 '    <div class="review-banner reviewed">\n'
                 '        <span class="rb-icon">&#9989;</span>\n'
-                f'        <span><strong>Reviewed by our staff dietitian on {e(dates[-1])}.</strong>'
+                f'        <span><strong>Recipe reviewed by our staff dietitian on {e(dates[-1])}.</strong>'
+                f'{extra}'
                 'General nutrition information, not personalised dietetic advice. '
                 '<a href="/about">Our editorial policy</a></span>\n'
                 '    </div>')
@@ -129,6 +138,46 @@ def banner_slots(m):
     if b.startswith("BOTTOM"):
         return {"banner": "", "banner_bottom": b[len("BOTTOM"):]}
     return {"banner": b, "banner_bottom": ""}
+
+
+def reviewer_data():
+    with open(REVIEWER, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def attribution(rv):
+    """Her name only once she has agreed in writing to carry it."""
+    r = rv["reviewer"]
+    if r.get("consented") and r.get("name"):
+        cred = ", " + r["credentials"] if r.get("credentials") else ""
+        return r["name"] + cred
+    return "our staff dietitian"
+
+
+def comment_block(rv, page):
+    """Her comments, published on the page she made them about.
+
+    A green tick tells a reader nothing. A named professional saying, in her
+    own words, why a meal works or where she would be careful is the whole
+    argument for trusting the page -- and it is the one thing a site built
+    without a dietitian cannot copy.
+    """
+    cs = [c for c in rv.get("comments", []) if c.get("page") == page]
+    if not cs:
+        return ""
+    who = attribution(rv)
+    rows = []
+    for c in cs:
+        on = ('<span class="on">on the ' + e(c["on"]) + "</span>") if c.get("on") else ""
+        rows.append("                <li>\n"
+                    "                    <p>" + e(c["text"]) + "</p>\n"
+                    '                    <p class="by">' + e(who) + on
+                    + "<time>" + e(c.get("date", "")) + "</time></p>\n"
+                    "                </li>")
+    return ('            <section class="dietitian">\n'
+            "                <h3>From " + e(who) + "</h3>\n"
+            "                <ul>\n" + "\n".join(rows) + "\n                </ul>\n"
+            "            </section>\n")
 
 
 def ingredient_rows(items):
@@ -182,6 +231,7 @@ TEMPLATE = """<!DOCTYPE html>
 
 {toggle}
 {panes}
+{comments}
             <p class="dish-foot">Protein and calorie figures are estimates from standard food composition
             values for the quantities listed. They are not a nutrition prescription and your own portions
             will vary. Work out your daily target with the <a href="/protein-calculator">protein calculator</a>.</p>
@@ -338,6 +388,7 @@ def _render(m):
                f'Buy the shortcut or make it from fresh, for GLP-1 appetites.'),
         blurb=e(m["blurb"]), image=e(m["image"]),
         navlinks=nav("/dishes.html"), **banner_slots(m),
+        comments=comment_block(reviewer_data(), 'dish-' + m['slug']),
         toggle=toggle(m), panes=panes(m))
 
 

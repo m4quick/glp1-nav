@@ -31,7 +31,7 @@ jobs:
     # catching wrong numbers by eye. These are golden-value tests: known
     # inputs, known outputs. A changed formula fails here, before review.
     - name: Test the maths, the links, the dishes, the shell and the whole site
-      run: node --test tests/protein-math.test.js tests/dishes.test.js tests/shell.test.js tests/site.test.js tests/symptoms.test.js
+      run: node --test tests/protein-math.test.js tests/dishes.test.js tests/shell.test.js tests/site.test.js tests/symptoms.test.js tests/reviewer.test.js
 
     # dishes.json is the source of truth; the pages are generated from it.
     # An edit that is not rebuilt would ship a page that disagrees with the
@@ -45,6 +45,10 @@ jobs:
     # reading. This refuses a page that drifted from symptoms.json.
     - name: Refuse stale symptom pages
       run: python3 ops/build-symptoms.py --check
+
+    # Her page must not exist before she has agreed to be named on it.
+    - name: Refuse a reviewer page she has not consented to
+      run: python3 ops/build-reviewer.py --check
 
     # Below 768px the header nav is display:none, so a page that missed the
     # tab bar is a page nobody on a phone can reach — and it still looks
