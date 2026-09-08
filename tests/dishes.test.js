@@ -220,16 +220,22 @@ test('an unreviewed route says so, and a reviewed one carries a real date', () =
   counted(n, 'routes');
 });
 
-test('no meal without a reviewed route is advertised in the sitemap', () => {
+test('the sitemap follows the reviews, in both directions', () => {
+  // Originally this only checked that drafts stay out, guarded by a counter so
+  // it could not pass by checking nothing. Once every meal was reviewed there
+  // were no drafts left and the guard fired on a perfectly correct state.
+  // Asserting both directions is non-vacuous whichever way the data goes.
   const xml = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
-  let n = 0;
+  const inMap = (m) => xml.includes(`/dish-${m.slug}`);
+
   for (const m of DISHES) {
-    if (isLive(m)) continue;
-    assert.ok(!xml.includes(`/dish-${m.slug}.html`),
-      `${m.slug} has no reviewed route but is in the sitemap`);
-    n++;
+    if (isLive(m)) {
+      assert.ok(inMap(m), `${m.slug} is reviewed but missing from the sitemap`);
+    } else {
+      assert.ok(!inMap(m), `${m.slug} has no reviewed route but is in the sitemap`);
+    }
   }
-  counted(n, 'draft meals');
+  counted(DISHES.length, 'meals');
 });
 
 test('the delivered route stays dark until a programme approves', () => {
