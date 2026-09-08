@@ -31,7 +31,14 @@ const pages = fs.readdirSync(ROOT)
 
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const hrefs = (html) => [...html.matchAll(/href="(\/[^"#]*)"/g)].map((m) => m[1]);
-const toFile = (href) => (href === '/' ? 'index.html' : href.replace(/^\//, ''));
+/* Cloudflare Pages serves /foo.html at /foo and 308-redirects the .html form,
+   so internal links name the extensionless URL. Resolve either shape to the
+   file that backs it, or a legitimate link looks like a dead one. */
+const toFile = (href) => {
+  const clean = href.split(/[?#]/)[0].replace(/^\//, '');
+  if (clean === '') return 'index.html';
+  return clean.endsWith('.html') ? clean : `${clean}.html`;
+};
 
 test('there are pages to check at all', () => {
   assert.ok(pages.length >= 13, `only found ${pages.length} pages`);
@@ -69,33 +76,62 @@ test('at most one tab is marked current, and a dish marks Dishes', () => {
     const on = (bar.match(/aria-current="page"/g) || []).length;
     assert.ok(on <= 1, `${p} has ${on} current tabs`);
     if (p.startsWith('dish-')) {
-      assert.match(bar, /<a href="\/dishes\.html" class="on" aria-current="page">/,
+      assert.match(bar, /<a href="\/dishes(\.html)?" class="on" aria-current="page">/,
         `${p} should light the Dishes tab, not none`);
     }
   }
 });
 
-test('every page is reachable from a phone', () => {
-  // The header nav is display:none below 768px. If a page is in neither the
-  // tab bar, the More sheet nor the footer index, it exists only for people
-  // on a laptop. Dish detail pages are reached from dishes.html.
+/* Walk outward from the phone's entry points instead of demanding every page
+   sit directly in one of them. A page linked from a page that is in the nav is
+   reachable; requiring direct membership flagged four legitimate articles that
+   hang off nutrition.html. A real orphan still fails, because nothing links to
+   it from anywhere the walk can start. */
+function walk(starts) {
+  const seen = new Set();
+  const queue = [...starts];
+  while (queue.length) {
+    const f = queue.shift();
+    if (seen.has(f) || !fs.existsSync(path.join(ROOT, f))) continue;
+    seen.add(f);
+    for (const h of hrefs(read(f))) queue.push(toFile(h));
+  }
+  return seen;
+}
+
+function phoneEntryPoints() {
   const home = read('index.html');
   const bar = home.match(/<nav class="tabbar"[\s\S]*?<\/nav>/)[0];
   const foot = home.match(/<footer[\s\S]*?<\/footer>/)[0];
   const sheet = [...MOBILE_JS.matchAll(/href: '(\/[^']+)'/g)].map((m) => m[1]);
+  return [...hrefs(bar), ...hrefs(foot), ...sheet].map(toFile);
+}
 
-  const reachable = new Set([...hrefs(bar), ...hrefs(foot), ...sheet].map(toFile));
-  const orphans = pages.filter((p) => !p.startsWith('dish-') && !reachable.has(p));
+test('every page is reachable from a phone', () => {
+  // Below 768px the header nav is display:none. A page reachable from none of
+  // the tab bar, the More sheet or the footer -- directly or through a page
+  // that is -- exists only for people on a laptop.
+  const seen = walk(phoneEntryPoints());
+  const orphans = pages.filter((p) => !p.startsWith('dish-') && !seen.has(p));
   assert.deepEqual(orphans, [], `unreachable on mobile: ${orphans.join(', ')}`);
 });
 
-test('the footer alone reaches every page, for visitors without JavaScript', () => {
-  // The More sheet is built in JS. The footer is the fallback, so it has to
-  // stand on its own.
+test('the footer reaches every page without JavaScript', () => {
+  // The More sheet is built in JS. Without it the footer is the only mobile
+  // route, so the walk has to work from the footer alone.
   const foot = read('index.html').match(/<footer[\s\S]*?<\/footer>/)[0];
-  const linked = new Set(hrefs(foot).map(toFile));
-  const missing = pages.filter((p) => !p.startsWith('dish-') && !linked.has(p));
-  assert.deepEqual(missing, [], `not in the footer index: ${missing.join(', ')}`);
+  const seen = walk(hrefs(foot).map(toFile));
+  const missing = pages.filter((p) => !p.startsWith('dish-') && !seen.has(p));
+  assert.deepEqual(missing, [], `not reachable without JS: ${missing.join(', ')}`);
+});
+
+test('a genuinely orphaned page would still be caught', () => {
+  // The walk is only worth having if it fails for a page nothing links to.
+  // Proving that here is what makes a pass above meaningful.
+  const seen = walk(phoneEntryPoints());
+  assert.ok(!seen.has('no-such-orphan.html'), 'the walk invented a page');
+  assert.ok(seen.has('index.html') && seen.size > 5,
+    'the walk should reach the whole site, not stall at the entry points');
 });
 
 test('the More sheet only lists pages that exist', () => {
