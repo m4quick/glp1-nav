@@ -227,22 +227,68 @@ footer .legal {
 :root { --tray-h: 0px; --tabbar-h: 0px; }
 body { padding-bottom: calc(var(--tray-h) + var(--tabbar-h)); }
 
+/* Two parts: a handle that is always there, and a body that folds away.
+   Shut, the tray costs one 48px row instead of 265px — which with the 56px
+   tab bar under it was 40% of an iPhone viewport and 48% of an SE, held
+   permanently over the page the visitor came to read. */
 .tray {
     position: fixed; left: 0; right: 0; bottom: var(--tabbar-h); z-index: 60;
     background: #fff; border-top: 2px solid #667eea;
     box-shadow: 0 -6px 24px rgba(40,30,90,.18);
-    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
     font-size: 14px;
-    max-height: 42vh; overflow-y: auto;
+    max-height: 62vh; display: flex; flex-direction: column;
 }
 .tray[hidden] { display: none; }
-.tray-top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; padding-right: 52px; }
+
+.tray-handle {
+    flex: none; display: flex; align-items: center; gap: 10px; width: 100%;
+    min-height: 48px; padding: 11px 16px;
+    background: none; border: 0; font: inherit; text-align: left; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.tray[data-open="1"] .tray-handle { border-bottom: 1px solid #ecedf6; }
+.tray-handle:focus-visible { outline: 3px solid #667eea; outline-offset: -3px; }
+.tray-n {
+    flex: none; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px;
+    background: #667eea; color: #fff; font-size: 12.5px; font-weight: 700;
+    display: grid; place-items: center;
+}
+/* The count is the receipt for an add made while the tray is shut. */
+.tray-n.bump { animation: tray-bump .34s ease; }
+@keyframes tray-bump {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.35); background: #ff9900; }
+    100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .tray-n.bump { animation: none; }
+    .tray-chev { transition: none; }
+}
+.tray-sum {
+    flex: 1 1 auto; min-width: 0; color: #26263a;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.tray-chev {
+    flex: none; width: 20px; height: 20px; fill: none; stroke: #8b8b99;
+    stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+    transform: rotate(180deg); transition: transform .18s ease;
+}
+.tray[data-open="1"] .tray-chev { transform: rotate(0deg); }
+.tray-hint { flex: none; color: #8b8b99; font-size: 12.5px; }
+
+/* Only the body scrolls, so the handle stays reachable at any list length. */
+.tray-body {
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 2px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+}
+.tray-body[hidden] { display: none; }
+
+.tray-top { display: flex; align-items: baseline; gap: 10px; }
 .tray-top b { font-size: 15px; color: #26263a; }
-.tray-top .goal { color: #666; font-size: 13px; }
-/* Pinned rather than floated: with margin-left:auto it wrapped onto its own
-   line the moment the summary text got long, then centred itself there. */
+.tray-top .goal { flex: 1 1 auto; min-width: 0; color: #666; font-size: 13px; }
+/* Was pinned to the tray corner; the handle owns that corner now. */
 .tray-top .clear {
-    position: absolute; top: 12px; right: 16px;
+    flex: none; margin-left: auto;
     background: none; border: 0; color: #8b8b99;
     font-size: 12.5px; cursor: pointer; text-decoration: underline;
 }

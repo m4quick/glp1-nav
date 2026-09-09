@@ -188,3 +188,67 @@ test('the header nav is hidden on phones but still served to every client', () =
 test('pages are not stale against ops/apply-shell.py', () => {
   execFileSync('python3', [path.join(ROOT, 'ops', 'apply-shell.py'), '--check'], { cwd: ROOT });
 });
+
+/* ------------------------------------------------------------------
+ * The tray folds
+ *
+ * Reported from a phone: the list covered most of the page and moved
+ * around while typing. Measured at 375x812 before the fix: tray 265px
+ * + tab bar 56px = 321px, 40% of the viewport, held there permanently
+ * (48% on an SE). With the keyboard up, iOS pins both to the shrinking
+ * visual viewport, so together they covered the field being typed into.
+ * ------------------------------------------------------------------ */
+
+const SL = fs.readFileSync(path.join(ROOT, 'js', 'shopping-list.js'), 'utf8');
+
+test('the tray is a handle plus a body that folds away', () => {
+  assert.match(CSS, /\.tray-handle\s*\{/, 'styles.css must define the always-visible handle');
+  assert.match(CSS, /\.tray-body\s*\{/, 'styles.css must define the foldable body');
+  assert.match(CSS, /\.tray-body\[hidden\]\s*\{\s*display:\s*none/,
+    'the folded body must take no height');
+
+  assert.ok(SL.includes('class="tray-handle"'), 'render() must emit a handle');
+  assert.ok(SL.includes('class="tray-body"'), 'render() must emit a body');
+
+  // The old rule capped the whole tray and scrolled it, which meant the
+  // handle scrolled away with everything else.
+  const tray = CSS.match(/(^|\n)\.tray \{[^}]*\}/);
+  assert.ok(tray, 'styles.css should define a bare .tray');
+  assert.ok(!/overflow-y/.test(tray[0]),
+    '.tray must not scroll as a whole — only .tray-body scrolls, so the handle stays put');
+  assert.match(CSS, /\.tray-body\s*\{[^}]*overflow-y:\s*auto/,
+    '.tray-body must scroll so a long list cannot push the handle off screen');
+});
+
+test('the handle is a real touch target and says which way it goes', () => {
+  const h = CSS.match(/\.tray-handle \{[^}]*\}/)[0];
+  const min = h.match(/min-height:\s*(\d+)px/);
+  assert.ok(min && Number(min[1]) >= 44,
+    `.tray-handle needs min-height >= 44px for a thumb, got ${min && min[1]}`);
+  assert.ok(SL.includes('aria-expanded'), 'the handle must report its state to a screen reader');
+  assert.ok(SL.includes('aria-controls="tray-body"'), 'the handle must name what it folds');
+});
+
+test('Clear lives inside the body, not over the handle', () => {
+  // It used to be position:absolute against the tray, which is now the
+  // handle's corner — a mis-tap reaching for "expand" would wipe the list.
+  const clear = CSS.match(/\.tray-top \.clear \{[^}]*\}/)[0];
+  assert.ok(!/position:\s*absolute/.test(clear),
+    'Clear must not be pinned to the tray corner any more');
+  const body = SL.slice(SL.indexOf('class="tray-body"'));
+  assert.ok(body.includes('data-clear'), 'Clear must be rendered inside the folding body');
+});
+
+test('the keyboard fold is a reaction, not a preference', () => {
+  // Folding for the keyboard must never be written to localStorage: if it
+  // were, typing your weight once would leave the tray shut for good and
+  // the visitor would have no idea why.
+  const fold = SL.slice(SL.indexOf("addEventListener('focusin'"),
+                        SL.indexOf("addEventListener('click'"));
+  assert.ok(fold.length > 0, 'the focus handlers must exist');
+  assert.ok(/applyOpen\(/.test(fold), 'the fold must go through applyOpen');
+  assert.ok(!/setOpen\(/.test(fold),
+    'the fold must not persist — setOpen would make a keyboard tap permanent');
+  assert.ok(/isField\(document\.activeElement\)/.test(fold),
+    'moving between two fields must not flap the tray open and shut');
+});
